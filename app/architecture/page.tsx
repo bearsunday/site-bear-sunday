@@ -69,6 +69,25 @@ const flow = [
   "Renderer: HTML、JSON、HAL、CLIへ表現を変換",
 ];
 
+const resourceDiscipline = [
+  {
+    title: "意味はResourceに置く",
+    text: "機能の意味をResourceに置きます。表現、依存、遷移、キャッシュ、ドキュメントは、そこから外側へ展開されます。",
+  },
+  {
+    title: "他者を操作せず、自分を律する",
+    text: "Resource methodは外側のresponse objectを操作する場所ではありません。自分の状態を決め、返すのも自分自身です。",
+  },
+  {
+    title: "表現に関心を持たない",
+    text: "Resourceが持つのは値、状態、リンクです。HTML、JSON、CLIへの表現はrendererの関心で、Resourceは表現を知りません。",
+  },
+  {
+    title: "In / Outを制約で宣言する",
+    text: "入力はmethod signature、型、属性、schemaで宣言されます。出力もbody、headers、links、schemaとして残り、暗黙の表示都合に埋もれません。",
+  },
+];
+
 export default function ArchitecturePage() {
   return (
     <PageShell>
@@ -89,6 +108,31 @@ export default function ArchitecturePage() {
               <p className="mt-4 leading-8 text-[#465148]">{pillar.text}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Resource discipline
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Resourceは、何でも書ける場所ではない。
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-[#3b463d]">
+              BEAR.Sundayのリソース志向は、URLで呼べる部品を作ることではありません。
+              アプリケーションの意味を置く場所を定め、そこから外側へ表現と接続を展開するための制約です。
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {resourceDiscipline.map((item) => (
+              <article className="rounded-lg border border-black/10 bg-[#f4f7f3] p-6" key={item.title}>
+                <h3 className="text-2xl font-black">{item.title}</h3>
+                <p className="mt-4 leading-8 text-[#465148]">{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
