@@ -208,6 +208,16 @@ export default function BusinessPage() {
               BEAR.Sundayは、機能をリソースとして分け、依存を外側で組み立て、変更理由を追える形で残します。
               日々の変更と継続的な更新で破綻しにくい構造を保つためのフレームワークです。
             </p>
+            <div className="mt-8 border-l-4 border-[#b3262d] pl-5">
+              <h3 className="text-2xl font-black">
+                2011年から続く、変えないための設計。
+              </h3>
+              <p className="mt-4 text-lg leading-8 text-[#3b463d]">
+                BEAR.Sundayは、流行に合わせて前提を壊すのではなく、1.xの互換性を守りながら進化してきました。
+                長く運用されるアプリケーションにとって、フレームワークの都合で作り直しを迫られないことは、
+                技術的にもビジネス的にも大きな価値です。
+              </p>
+            </div>
           </div>
           <div className="rounded-lg border border-black/10 bg-white p-6 shadow-[0_12px_36px_rgba(17,22,17,0.07)]">
             <p className="font-mono text-xs uppercase text-[#667068]">
