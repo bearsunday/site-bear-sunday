@@ -43,7 +43,7 @@ const boundaries = [
 ];
 
 const longTerm = [
-  "2011年から続く、1.xを壊さない進化",
+  "後方互換性を壊さない、予測可能な進化",
   "HTTP、HAL、JSON Schema、PSR など標準技術への接続",
   "context string による環境差分の注入",
   "CDN、ETag、304を含む Web本来のキャッシュ設計",
