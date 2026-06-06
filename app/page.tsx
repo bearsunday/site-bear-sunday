@@ -123,7 +123,7 @@ export default function Home() {
             </p>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-[#283229] sm:text-2xl sm:leading-10">
               一つの ResourceObject が、Web API・HTML・コンソール・AIの道具・ドキュメントになる。
-              書く場所は一つ、出口は Web の数だけ。DIとAOPを制約に、CDNまで届く Read Model として。
+              書く場所は一つ。出口ごとに、作り直さない。
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <a
@@ -147,9 +147,14 @@ export default function Home() {
             <p className="mt-4 text-3xl font-black leading-tight">
               Because Everything is a Resource.
             </p>
+            <div className="mt-5 rounded-md border border-black/10 bg-white/80 p-4 font-mono text-sm">
+              <p className="font-bold text-[#111611]">GET app://self/article?id=42</p>
+              <p className="mt-2 text-[#3c463e]">
+                → HTML ・ JSON(HAL) ・ CLI ・ Tool Use ・ OpenAPI
+              </p>
+            </div>
             <p className="mt-4 text-sm leading-7 text-[#3c463e]">
-              同じリソースを Web、CLI、テスト、ドキュメント、AI-readable
-              context へ接続する。境界を越えても意味を失わない設計です。
+              同じ URI から、表現だけが変わる。
             </p>
           </div>
         </div>
