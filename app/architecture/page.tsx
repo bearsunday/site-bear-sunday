@@ -83,6 +83,10 @@ const resourceDiscipline = [
     text: "Resourceが持つのは値、状態、リンクです。HTML、JSON、CLIへの表現はrendererの関心で、Resourceは表現を知りません。",
   },
   {
+    title: "Viewは横に並ばない",
+    text: "View componentはcontrollerと並列の入口ではなく、Resourceへ注入される協調オブジェクトです。Resourceは表現を探しに行かず、値とリンクを表現へ接続する依存を受け取ります。",
+  },
+  {
     title: "In / Outを制約で宣言する",
     text: "入力はmethod signature、型、属性、schemaで宣言されます。出力もbody、headers、links、schemaとして残り、暗黙の表示都合に埋もれません。",
   },
