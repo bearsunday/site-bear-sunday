@@ -118,9 +118,12 @@ export default function Home() {
             <h1 className="break-words text-5xl font-black leading-none text-[#111611] sm:text-7xl lg:text-8xl">
               BEAR.Sunday
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#283229] sm:mt-7 sm:text-2xl sm:leading-10">
-              Webの原則を、アプリケーションの内側まで。ROA、コンパイル時DI、AOP、
-              CDN中心のRead Modelを制約として使い、長く変わらない構造でPHPアプリケーションを育てるフレームワーク。
+            <p className="mt-4 text-base font-semibold text-[#3c463e] sm:text-lg">
+              Webの原則を、アプリケーションの内側まで。
+            </p>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-[#283229] sm:text-2xl sm:leading-10">
+              一つの ResourceObject が、Web API・HTML・コンソール・AIの道具・ドキュメントになる。
+              書く場所は一つ、出口は Web の数だけ。DIとAOPを制約に、CDNまで届く Read Model として。
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <a
