@@ -200,6 +200,9 @@ export default function TechPage() {
                 タイミングが読めない静的コンテンツ。
               </h2>
               <p className="mt-6 text-lg leading-8 text-white/76">
+                キャッシュのTTLを短くして、まだ古いかもしれないと祈る。多くのアプリで、これが「キャッシュ戦略」と呼ばれています。
+              </p>
+              <p className="mt-5 text-lg leading-8 text-white/76">
                 Event-driven contentの要点は、変化の時刻が予測できないことと、内容が常に揺らぐことを
                 混同しないところにあります。記事はいつ編集されるか分かりません。コメントはいつ追加されるか
                 分かりません。それでも、イベントが起きていない間、その表現は静的です。
@@ -234,6 +237,25 @@ export default function TechPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="mt-10 rounded-lg border border-white/16 bg-white/[0.04] p-6 sm:p-8">
+            <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+              An actual exchange
+            </p>
+            <pre className="mt-5 overflow-x-auto font-mono text-xs leading-7 text-white/85 sm:text-sm">
+              <code>{`1  GET /article/42                          200  ETag:"a1"  Surrogate-Key: article-42 profile-7
+   → CDNが保存
+
+2  GET /article/42                          CDN HIT          ← PHPもDBも動かない
+
+3  著者が profile-7 を編集
+   → PURGE  Surrogate-Key: profile-7        ← 依存する article-42 も連鎖で破棄
+
+4  GET /article/42                          200  ETag:"b9"   ← この時だけ再生成
+
+5  GET /article/42  If-None-Match:"b9"       304 Not Modified ← 本文を送らない`}</code>
+            </pre>
           </div>
         </div>
       </section>
@@ -431,6 +453,20 @@ export default function TechPage() {
             </p>
           </div>
           <div className="rounded-lg border border-black/10 bg-white p-6 shadow-[0_18px_60px_rgba(17,22,17,0.08)]">
+            <p className="font-mono text-xs uppercase text-[#667068]">
+              same independence, no network
+            </p>
+            <pre className="mt-4 overflow-x-auto rounded-md bg-[#101820] p-5 font-mono text-xs leading-7 text-[#d9f7e7] sm:text-sm">
+              <code>{`// マイクロサービスなら：ネットワーク越し
+$post = $http->get('https://blog.internal/posts/42');
+// → タイムアウト・リトライ・直列化・別デプロイ
+
+// BEAR.Sunday：別アプリを vendor に取り込み、URI で呼ぶだけ
+composer require acme/blog
+$post = $this->resource->get('app://blog/post', ['id' => 42]);
+// → 同一プロセス・ネットワーク無し`}</code>
+            </pre>
+            <div className="my-6 h-px bg-black/10" />
             <p className="font-mono text-xs uppercase text-[#667068]">
               without an HTTP wall
             </p>

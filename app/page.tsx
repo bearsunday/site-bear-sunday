@@ -43,7 +43,7 @@ const boundaries = [
 ];
 
 const longTerm = [
-  "2011年から続く、1.xを壊さない進化",
+  "後方互換性を壊さない、予測可能な進化",
   "HTTP、HAL、JSON Schema、PSR など標準技術への接続",
   "context string による環境差分の注入",
   "CDN、ETag、304を含む Web本来のキャッシュ設計",
@@ -118,9 +118,12 @@ export default function Home() {
             <h1 className="break-words text-5xl font-black leading-none text-[#111611] sm:text-7xl lg:text-8xl">
               BEAR.Sunday
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#283229] sm:mt-7 sm:text-2xl sm:leading-10">
-              Webの原則を、アプリケーションの内側まで。ROA、コンパイル時DI、AOP、
-              CDN中心のRead Modelを制約として使い、長く変わらない構造でPHPアプリケーションを育てるフレームワーク。
+            <p className="mt-4 text-base font-semibold text-[#3c463e] sm:text-lg">
+              Webの原則を、アプリケーションの内側まで。
+            </p>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-[#283229] sm:text-2xl sm:leading-10">
+              一つの ResourceObject が、Web API・HTML・コンソール・AIの道具・ドキュメントになる。
+              書く場所は一つ。出口ごとに、作り直さない。
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <a
@@ -144,9 +147,14 @@ export default function Home() {
             <p className="mt-4 text-3xl font-black leading-tight">
               Because Everything is a Resource.
             </p>
+            <div className="mt-5 rounded-md border border-black/10 bg-white/80 p-4 font-mono text-sm">
+              <p className="font-bold text-[#111611]">GET app://self/article?id=42</p>
+              <p className="mt-2 text-[#3c463e]">
+                → HTML ・ JSON(HAL) ・ CLI ・ Tool Use ・ OpenAPI
+              </p>
+            </div>
             <p className="mt-4 text-sm leading-7 text-[#3c463e]">
-              同じリソースを Web、CLI、テスト、ドキュメント、AI-readable
-              context へ接続する。境界を越えても意味を失わない設計です。
+              同じ URI から、表現だけが変わる。
             </p>
           </div>
         </div>
