@@ -21,7 +21,7 @@ export default function RootPage() {
       </div>
       <script
         dangerouslySetInnerHTML={{
-          __html: `(function(){var l=navigator.language||'';location.replace(l.startsWith('ja')?'ja/':'en/')})()`,
+          __html: `(function(){var l=navigator.language||'';location.replace(l.startsWith('ja')?'ja':'en')})()`,
         }}
       />
     </main>
