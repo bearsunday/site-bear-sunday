@@ -110,6 +110,9 @@ jobs:
         run: |
           mkdir -p _site/learn
           cp -r learn-src/snapshot/. _site/learn/
+          echo "== _site/learn (top) =="; ls -la _site/learn | head -40
+          echo "== _site (top) =="; ls -la _site | head -40
+          test -f _site/learn/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
