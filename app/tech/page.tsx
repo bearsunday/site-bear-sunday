@@ -402,13 +402,13 @@ export default function TechPage() {
                   sequential vs parallel
                 </p>
                 <pre className="mt-4 overflow-x-auto font-mono text-xs leading-6 text-[#d9f7e7] sm:text-sm">
-                  <code>{`[逐次]                  [並列]
-Request                 Request
- ├ Embed 1 ── 50ms       ├ Embed 1 ─┐
- ├ Embed 2 ── 50ms       ├ Embed 2 ─┤
- ├ Embed 3 ── 50ms       ├ Embed 3 ─┤
- └ Embed 4 ── 50ms       └ Embed 4 ─┘
-Response 200ms          Response 50ms`}</code>
+                  <code>{`Sequential               Parallel
+Request                  Request
+ ├ Embed 1 ── 50ms        ├ Embed 1 ─┐
+ ├ Embed 2 ── 50ms        ├ Embed 2 ─┤
+ ├ Embed 3 ── 50ms        ├ Embed 3 ─┤
+ └ Embed 4 ── 50ms        └ Embed 4 ─┘
+Response 200ms           Response 50ms`}</code>
                 </pre>
               </div>
               <div className="rounded-lg border border-black/10 bg-white p-6">

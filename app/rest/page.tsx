@@ -160,7 +160,7 @@ export default function RestPage() {
               Hypermedia
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              リンクは、次にできることの宣言。
+              クライアントは、推測せずリンクをたどる。
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
               ハイパーメディアでは、リソースは状態だけでなく、次にどんな操作ができるか(affordance)を
