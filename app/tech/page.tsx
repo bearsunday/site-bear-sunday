@@ -147,6 +147,25 @@ const sqlFirstClass = [
   },
 ];
 
+const flowTestPoints = [
+  {
+    title: "テストが、リンクを辿る",
+    text: "URIをベタ書きせず、レスポンスが差し出す _links や Location(=affordance)を辿ります。クライアントと同じ歩き方。HATEOASを、実行できるテストにしたものです。",
+  },
+  {
+    title: "spec(ALPS)に整列する",
+    text: "各ステップを #[Alps('goCheckout')] のようにALPSの遷移へ束縛します。テスト手順が、そのまま意味の状態遷移の走査になります。",
+  },
+  {
+    title: "トランスポートはDIで差し替える",
+    text: "in-processのリソースでも実HTTPでも、リソースは同じものです。newResource()をHttpResourceに変えるだけで、同じ筋書きが実HTTP/JSONを通ります。",
+  },
+  {
+    title: "E2Eは、得意分野に絞れる",
+    text: "「APIが正しく振る舞うか」はリソース層へ降ろせます。ブラウザのE2Eは、視覚回帰・実ブラウザのJS・認証フローという本来の領分に縮められます。",
+  },
+];
+
 export default function TechPage() {
   return (
     <PageShell>
@@ -511,6 +530,96 @@ Response 200ms           Response 50ms`}</code>
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#111611] px-5 py-20 text-white sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#9ee0bb]">
+              Tests that follow links
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              一つのストーリーが、リソースからHTTPまで、同じコードで通る。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-white/76">
+              これは便利機能ではありません。クライアントは次の操作を推測せず、リソースが差し出すリンクを辿る——
+              そのWebの原則(HATEOAS)を、そのまま実行できるテストにしたものです。ユーザーストーリーを
+              リンクを辿るフローとして書き、トランスポートをDIで差し替えれば、同じ筋書きが実HTTP/JSONを通り、
+              さらにHTMLのlink/formへ続きます。
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
+            <div>
+              <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+                in-process — follows the affordances
+              </p>
+              <pre className="mt-3 overflow-x-auto rounded-lg bg-[#101820] p-6 text-xs leading-7 text-[#d9f7e7] sm:text-sm">
+                <code>{`class PurchaseFlowTest extends AbstractWorkflowTest
+{
+    #[Alps('goProduct')]
+    public function testProduct(): ResourceObject
+    {
+        return $this->resource->get('page://self/product', ['id' => 1]);
+    }
+
+    #[Alps('doAddCartItem')]
+    #[Depends('testProduct')]
+    public function testAddToCart(ResourceObject $product): ResourceObject
+    {
+        // ベタ書きURIではなく、差し出されたリンクを辿る
+        $cart = $this->resource->post(
+            $this->linkHref($product, 'doAddCartItem'),
+            ['qty' => 2],
+        );
+        $this->assertSame(Code::CREATED, $cart->code);
+
+        return $cart;
+    }
+
+    #[Alps('goCheckout')]
+    #[Depends('testAddToCart')]
+    public function testCheckout(ResourceObject $cart): ResourceObject
+    {
+        return $this->follow($cart, 'goCheckout');
+    }
+}`}</code>
+              </pre>
+            </div>
+            <div>
+              <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+                real HTTP/JSON — swap newResource() only
+              </p>
+              <pre className="mt-3 overflow-x-auto rounded-lg bg-[#101820] p-6 text-xs leading-7 text-[#d9f7e7] sm:text-sm">
+                <code>{`// 全工程を、実HTTP/JSONで再実行。
+// 変えるのは newResource() だけ。筋書きは継承する。
+final class HttpPurchaseFlowTest extends PurchaseFlowTest
+{
+    protected function newResource(): ResourceInterface
+    {
+        return new HttpResource(
+            '127.0.0.1:8080',
+            __DIR__ . '/index.php',
+        );
+    }
+}`}</code>
+              </pre>
+              <p className="mt-4 leading-7 text-white/70">
+                同じテストが、in-processのリソースグラフ(ミリ秒・ブラウザ無し)でも、実HTTP境界(cookie・リダイレクト込み)でも走ります。
+              </p>
+            </div>
+          </div>
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {flowTestPoints.map((item) => (
+              <article className="rounded-lg border border-white/16 bg-white/[0.06] p-6" key={item.title}>
+                <h3 className="text-xl font-black text-[#9ee0bb]">{item.title}</h3>
+                <p className="mt-3 leading-7 text-white/76">{item.text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-8 max-w-4xl text-sm leading-7 text-white/54">
+            ※ 同じ仕組みで、Fake実装とSQL実装を同じアサーションの“双子”にすれば、移行を「祈り」ではなく等価性の確認にできます——これは「すべてが注入される」ことの一例です。
+          </p>
         </div>
       </section>
 
