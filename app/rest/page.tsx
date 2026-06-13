@@ -18,7 +18,7 @@ const methodRows = [
     method: "POST",
     safe: "—",
     idempotent: "—",
-    note: "処理を要求する。連続実行で結果が変わりうる。",
+    note: "状態を変える操作。冪等でなく、連続実行で結果が変わりうる。",
   },
   {
     method: "PUT",
@@ -48,20 +48,20 @@ const methodRows = [
 
 const classicPillars = [
   {
-    title: "URIは、場所ではなく意図を指す",
-    text: "app://self/user は「ユーザー情報が欲しい」という意図だけを表します。MySQLかRedisか、どう取得するかはアプリケーションから隠れています。URIはリソースを識別し、同時にリソース間のリンクを表します。",
+    title: "リソースの識別",
+    text: "すべてをURIで識別します。app://self/user は「ユーザー情報が欲しい」という意図を指し、MySQLかRedisか、どう取得するか(How)はアプリケーションから隠れています。",
   },
   {
-    title: "メソッドは、CRUDではなく意味の分類",
-    text: "GET / POST / PUT / PATCH / DELETE は操作名ではなく、安全(状態を変えない)か、冪等(何度実行しても同じ)かという意味の分類です。この分類が、キャッシュの無効化にも、AIに渡す道具の安全性判定にも、同じ根拠として効いてきます。",
+    title: "表現を通じた操作",
+    text: "クライアントはリソースを直接いじらず、表現(representation)を介して操作します。状態は表現と分離され、同じ状態からHTML・JSON・HAL・CLIが生まれます。",
   },
   {
-    title: "状態と表現を分ける",
-    text: "リソースは状態(code・headers・body)を決めるだけです。HTML、JSON、HAL、CLIへの変換はrendererの関心で、リソースは表現を知りません。だから同じコードのまま、contextの束縛を変えれば表現が変わります。",
+    title: "自己記述メッセージ",
+    text: "メソッドの安全性・冪等性、メディアタイプ、ステータスコードが、メッセージ自身に意味を載せます。受け手は隠れた文脈を推測せず、メッセージだけで解釈できます。",
   },
   {
-    title: "リンクは、次にできることの宣言",
-    text: "各リソースは _links で、クライアントが次に取れる操作(affordance)を提示します。relが関係の種類を示すのは、HTMLの a 要素や link 要素と同じ発想です。",
+    title: "ハイパーメディア(HATEOAS)",
+    text: "リソースは次にできること(affordance)をリンクとして差し出します。クライアントは次の遷移を推測せず、差し出されたリンクをたどってアプリケーションの状態を進めます。",
   },
 ];
 
@@ -78,16 +78,16 @@ export default function RestPage() {
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
             <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
-              The classic, foregrounded
+              Uniform interface
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
               Webは、最初から正しかった。
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
               RESTは新しい技術ではありません。リンクでつながるリソースの集合という考え方は、
-              Webが1990年代から持っていたものです。BEAR.Sundayがしているのは、その原則を
-              外部APIに限らず、アプリケーションの内側にも一貫して適用することです。
-              MVCのように役割名で分けるのではなく、URIで識別できるリソースに意味を置きます。
+              Webが1990年代から持っていたものです。その核にある統一インターフェース(uniform
+              interface)は、メソッドのことではなく、次の4つの制約を指します。BEAR.Sundayは、
+              この制約を外部APIに限らず、アプリケーションの内側にも一貫して適用します。
             </p>
           </div>
           <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -108,16 +108,17 @@ export default function RestPage() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
             <p className="text-sm font-semibold uppercase text-[#245c7a]">
-              Uniform interface
+              Method semantics
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
               6つの動詞に、意味が宿っている。
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#36434c]">
-              RESTのメソッドはCRUDへの写像ではありません。「安全」か「冪等」かという性質の分類です。
-              この一覧は単なる作法ではなく、後で効く根拠になります。GETが安全だから自由にキャッシュでき、
-              AIにも自由に呼ばせられる。状態を変える操作は冪等性に応じて扱いを変える。
-              同じ意味論が、キャッシュ戦略でもAIの安全設計でも使われます。
+              自己記述メッセージの中心が、メソッドの意味論です。RESTのメソッドは、テーブルのCRUDではなく、
+              アプリケーションの状態に対する操作です。それぞれが「安全(状態を変えない)」か
+              「冪等(何度実行しても同じ)」かという性質を持ちます。この性質は単なる作法ではなく、
+              後で効く根拠になります。GETは安全だから自由にキャッシュでき、AIにも自由に呼ばせられる。
+              状態を変える操作は、冪等性に応じて扱いを変える。同じ意味論が、キャッシュ戦略でもAIの安全設計でも使われます。
             </p>
           </div>
           <div className="overflow-x-auto rounded-lg border border-black/10 bg-white p-2 shadow-[0_12px_36px_rgba(17,22,17,0.07)]">
