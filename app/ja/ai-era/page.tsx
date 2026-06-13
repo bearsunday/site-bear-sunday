@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "AI時代 | BEAR.Sunday",
@@ -284,7 +284,7 @@ export default function AiEraPage() {
               </p>
               <a
                 className="mt-4 inline-flex text-sm font-semibold text-[#1f7a5a] underline"
-                href="/alps"
+                href="/ja/alps"
               >
                 ALPSをもっと知る →
               </a>

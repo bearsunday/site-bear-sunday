@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "ALPS — 意味を一箇所に置く | BEAR.Sunday",
@@ -257,7 +257,7 @@ export default function AlpsPage() {
             </a>
             <a
               className="rounded-lg border border-black/10 bg-[#f4f7f3] p-6 transition hover:bg-white"
-              href="/ai-era"
+              href="/ja/ai-era"
             >
               <h3 className="text-2xl font-black">AI時代の価値へ戻る →</h3>
               <p className="mt-3 leading-7 text-[#465148]">

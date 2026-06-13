@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
-  title: "実装例 | BEAR.Sunday",
+  title: "Examples | BEAR.Sunday",
   description:
-    "BEAR.SundayのResource、DI、AOP、Hypermediaの実装イメージを紹介します。",
+    "Code examples illustrating BEAR.Sunday's Resource, DI, AOP, and Hypermedia.",
 };
 
 const examples = [
   {
     title: "Resource",
-    caption: "URIに対応するリソースは、状態を決めて返す。",
+    caption: "A resource corresponding to a URI decides its state and returns it.",
     code: `final class Profile extends ResourceObject
 {
     public function onGet(int $id): static
@@ -23,7 +23,7 @@ const examples = [
   },
   {
     title: "Dependency Injection",
-    caption: "必要な依存はコンストラクタで明示する。",
+    caption: "Required dependencies are made explicit in the constructor.",
     code: `public function __construct(
     private readonly ProfileQuery $profileQuery,
     private readonly ClockInterface $clock,
@@ -32,7 +32,7 @@ const examples = [
   },
   {
     title: "AOP",
-    caption: "横断的関心は属性とInterceptorへ逃がす。",
+    caption: "Cross-cutting concerns are offloaded to attributes and Interceptors.",
     code: `#[Transactional]
 #[Cacheable(expirySecond: 30)]
 public function onPost(string $name): static
@@ -44,7 +44,7 @@ public function onPost(string $name): static
   },
   {
     title: "Hypermedia",
-    caption: "次に遷移できるリソースをリンクとして宣言する。",
+    caption: "Declare the next reachable resources as links.",
     code: `#[Link(rel: 'orders', href: 'app://self/orders{?id}')]
 #[Embed(rel: 'profile', src: 'app://self/profile{?id}')]
 public function onGet(int $id): static
@@ -55,19 +55,19 @@ public function onGet(int $id): static
 ];
 
 const outcomes = [
-  "リソース単位でテストを書ける",
-  "同じリソースをWeb API、HTML、CLIで使える",
-  "キャッシュやトランザクションを業務ロジックから分離できる",
-  "リンクとスキーマからAPIドキュメントを組み立てやすい",
+  "Tests can be written per resource",
+  "The same resource can be used as Web API, HTML, and CLI",
+  "Caching and transactions are separated from business logic",
+  "Links and schemas make API documentation easy to assemble",
 ];
 
 export default function ExamplesPage() {
   return (
-    <PageShell>
+    <PageShell lang="en">
       <PageHero
         eyebrow="Examples"
-        lead="BEAR.Sundayのコードは、リソースが中心です。入力、依存、リンク、横断的処理が見える場所に残るため、読み手はアプリケーションの意味をたどれます。"
-        title="小さなコードに、設計の境界を残す。"
+        lead="BEAR.Sunday code is centered on resources. Inputs, dependencies, links, and cross-cutting concerns remain visible, allowing the reader to trace the meaning of the application."
+        title="Small code that preserves design boundaries."
       />
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
@@ -95,11 +95,12 @@ export default function ExamplesPage() {
               What this enables
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              コード例は、使い方ではなく境界を示す。
+              Code examples show boundaries, not just usage.
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
-              リソースが状態を持ち、表現や転送は外側へ分かれる。依存は注入され、
-              横断的関心はAOPへ分かれる。この単純な分離が、テストと拡張の土台になります。
+              Resources hold state; representation and transport are separated to the outside.
+              Dependencies are injected; cross-cutting concerns go to AOP.
+              This simple separation becomes the foundation for testing and extension.
             </p>
           </div>
           <ul className="grid grid-cols-1 gap-3">
@@ -113,7 +114,7 @@ export default function ExamplesPage() {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand lang="en" />
     </PageShell>
   );
 }

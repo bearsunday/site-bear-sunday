@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "技術的特徴 | BEAR.Sunday",

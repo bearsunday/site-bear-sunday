@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "ビジネス向け | BEAR.Sunday",
@@ -280,13 +280,13 @@ export default function BusinessPage() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 className="rounded-md bg-[#245c7a] px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#1c495f]"
-                href="/value"
+                href="/ja/value"
               >
                 仕組みから価値を見る
               </a>
               <a
                 className="rounded-md border border-[#245c7a]/30 bg-white px-5 py-3 text-center text-sm font-semibold text-[#111611] transition hover:bg-[#f8fbfd]"
-                href="/tech"
+                href="/ja/tech"
               >
                 技術的な裏側を見る
               </a>
