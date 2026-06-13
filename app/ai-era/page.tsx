@@ -274,6 +274,21 @@ export default function AiEraPage() {
               決める根拠になります。BEAR.ToolUseは、単発のツール呼び出しから、専門エージェントを編成する
               ランタイムへと広がっています。
             </p>
+            <aside className="mt-8 rounded-lg border-l-4 border-[#1f7a5a] bg-[#f4f7f3] p-6">
+              <p className="font-mono text-xs uppercase text-[#1f7a5a]">ALPSとは</p>
+              <p className="mt-3 leading-8 text-[#3b463d]">
+                ALPS(Application-Level Profile Semantics)は、アプリケーションの語彙・状態・遷移と、
+                その遷移が安全(safe)・冪等(idempotent)・破壊的(unsafe)のどれかだけを記述する小さな仕様です。
+                画面も保存方法も性能も書けません。書けないからこそ、どの実装とも競合しない「意味の置き場所」になり、
+                人間にもAIにも同じ意味を渡せます。
+              </p>
+              <a
+                className="mt-4 inline-flex text-sm font-semibold text-[#1f7a5a] underline"
+                href="https://www.app-state-diagram.com/"
+              >
+                ALPSと状態遷移図について →
+              </a>
+            </aside>
           </div>
           <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {restAgentPoints.map((item) => (
