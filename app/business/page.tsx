@@ -130,7 +130,7 @@ export default function BusinessPage() {
     <PageShell>
       <PageHero
         eyebrow="For business"
-        lead="BEAR.Sundayは、技術者だけのためのフレームワークではありません。継続可能性、予見可能性、高性能、柔軟性を、長く使うWebアプリケーションの設計として支えます。"
+        lead="BEAR.Sundayは、技術者だけのためのフレームワークではありません。継続可能性、予見可能性、高性能、柔軟性を、長く使うWebアプリケーションの設計として支えます。このページは、その価値を事業の言葉で——成果、コスト、リスクとして読みます。"
         title="長く使えるWebサービスを、速く、強く、直しやすく。"
       />
 
@@ -282,7 +282,7 @@ export default function BusinessPage() {
                 className="rounded-md bg-[#245c7a] px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#1c495f]"
                 href="/value"
               >
-                価値を詳しく見る
+                仕組みから価値を見る
               </a>
               <a
                 className="rounded-md border border-[#245c7a]/30 bg-white px-5 py-3 text-center text-sm font-semibold text-[#111611] transition hover:bg-[#f8fbfd]"

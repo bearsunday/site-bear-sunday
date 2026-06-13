@@ -80,7 +80,7 @@ export default function ValuePage() {
     <PageShell>
       <PageHero
         eyebrow="Value"
-        lead="BEAR.Sundayの価値は、生産性、拡張性、パフォーマンスといった一般語だけでは説明しきれません。価値の源泉は、Resource、context-agnostic DI、AOP、CDN中心のRead Modelが、設計から運用まで同じ意味を保つところにあります。"
+        lead="BEAR.Sundayの価値は、生産性、拡張性、パフォーマンスといった一般語だけでは説明しきれません。価値の源泉は、Resource、context-agnostic DI、AOP、CDN中心のRead Modelが、設計から運用まで同じ意味を保つところにあります。このページは、技術がどう価値に変わるか、その因果をたどります。"
         title="技術的特徴を、持続する価値へ。"
       />
 
@@ -188,6 +188,12 @@ export default function ValuePage() {
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
               BEAR.Sundayは、Webアプリケーションの意味を長く保つためのフレームワーク。
             </h2>
+            <a
+              className="mt-8 inline-flex rounded-md bg-[#245c7a] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1c495f]"
+              href="/business"
+            >
+              事業の言葉で読む
+            </a>
           </div>
           <div className="rounded-lg border border-black/10 bg-white p-6">
             <p className="text-lg leading-8 text-[#3b463d]">
