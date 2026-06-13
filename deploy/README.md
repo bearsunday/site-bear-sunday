@@ -7,7 +7,7 @@ out, builds it to static, and places it at `/learn/`.
 
 ## Files
 
-- `bearsunday.github.io/workflows/pages.yml` — GitHub Actions workflow. Put it at
+- `bearsunday.github.io/pages.yml` — GitHub Actions workflow. Put it at
   `.github/workflows/pages.yml` in the **bearsunday.github.io** repo.
 - `bearsunday.github.io/index.html` — the jumbotron with `[Learn]` → `/learn/`
   and `[Manual]` → `/manuals/`. Replaces the current root `index.html`.
