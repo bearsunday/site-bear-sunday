@@ -108,7 +108,7 @@ export default function Home() {
         <div
           aria-hidden="true"
           className="absolute right-0 top-24 -z-10 h-32 w-[92vw] bg-contain bg-right bg-no-repeat opacity-15 sm:right-[-12rem] sm:h-40 sm:w-[48rem] md:right-[-5rem] md:top-28 md:h-56 md:w-[58rem] md:opacity-20"
-          style={{ backgroundImage: "url('/bear-logo.png')" }}
+          style={{ backgroundImage: "url(/bear-logo.png)" }}
         />
         <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 pb-10 pt-8 sm:gap-12 sm:pb-20 sm:pt-12 lg:grid-cols-[1fr_28rem] lg:items-end">
           <div className="max-w-4xl">

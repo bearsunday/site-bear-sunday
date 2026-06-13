@@ -77,7 +77,7 @@ export function PageHero({
       <div
         aria-hidden="true"
         className="absolute right-0 top-24 -z-10 h-32 w-[92vw] bg-contain bg-right bg-no-repeat opacity-10 sm:right-[-12rem] sm:h-40 sm:w-[48rem] md:right-[-5rem] md:h-56 md:w-[58rem]"
-        style={{ backgroundImage: "url('/bear-logo.png')" }}
+        style={{ backgroundImage: "url(/bear-logo.png)" }}
       />
       <div className="mx-auto max-w-7xl">
         <p className="text-sm font-semibold uppercase text-[#b3262d]">
