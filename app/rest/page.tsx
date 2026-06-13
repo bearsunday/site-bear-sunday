@@ -24,7 +24,7 @@ const methodRows = [
     method: "PUT",
     safe: "—",
     idempotent: "冪等",
-    note: "表現をまるごとURIに置く(無ければ作る)。何回でも同じ。",
+    note: "状態を指定する操作。冪等で、連続実行でも結果は同じ。",
   },
   {
     method: "PATCH",
