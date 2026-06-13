@@ -24,7 +24,7 @@ const methodRows = [
     method: "PUT",
     safe: "—",
     idempotent: "冪等",
-    note: "内容を置き換える。何度実行しても同じ。",
+    note: "表現をまるごとURIに置く(無ければ作る)。何回でも同じ。",
   },
   {
     method: "PATCH",
@@ -238,7 +238,7 @@ export default function RestPage() {
             Why the classic still wins
           </p>
           <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-            古典が、現代を無償で生む。
+            古典が、まだ知らなかった現代を用意していた。
           </h2>
           <p className="mt-6 text-xl leading-9 text-white/80">
             関係を宣言するという一点から、意図(What)と実行(How)が分かれます。だから、
