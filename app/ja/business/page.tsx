@@ -127,7 +127,7 @@ const bankruptcySignals = [
 
 export default function BusinessPage() {
   return (
-    <PageShell>
+    <PageShell path="business">
       <PageHero
         eyebrow="For business"
         lead="BEAR.Sundayは、技術者だけのためのフレームワークではありません。継続可能性、予見可能性、高性能、柔軟性を、長く使うWebアプリケーションの設計として支えます。このページは、その価値を事業の言葉で——成果、コスト、リスクとして読みます。"

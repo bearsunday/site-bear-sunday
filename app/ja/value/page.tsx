@@ -77,7 +77,7 @@ const chain = [
 
 export default function ValuePage() {
   return (
-    <PageShell>
+    <PageShell path="value">
       <PageHero
         eyebrow="Value"
         lead="BEAR.Sundayの価値は、生産性、拡張性、パフォーマンスといった一般語だけでは説明しきれません。価値の源泉は、Resource、context-agnostic DI、AOP、CDN中心のRead Modelが、設計から運用まで同じ意味を保つところにあります。このページは、技術がどう価値に変わるか、その因果をたどります。"

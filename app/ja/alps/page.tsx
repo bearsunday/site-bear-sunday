@@ -43,7 +43,7 @@ const threeDoors = [
 
 export default function AlpsPage() {
   return (
-    <PageShell>
+    <PageShell path="alps">
       <PageHero
         eyebrow="Semantic SSOT"
         lead="コードは安くなりました。けれど「何を作るべきか」という意味は、いまも高いままです。同じ業務上の事実が、仕様書・コード・テスト・DB制約・FAQへ、別々の方言で何度も書き写される。ALPSは、その意味だけを書く小さな仕様です。BEAR.Sundayは、ここから実装・ドキュメント・AIの道具を射影します。"

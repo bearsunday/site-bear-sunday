@@ -109,7 +109,7 @@ const connectPhilosophy = [
 
 export default function ArchitecturePage() {
   return (
-    <PageShell>
+    <PageShell path="architecture">
       <PageHero
         eyebrow="Architecture"
         lead="BEAR.Sundayは、Webの制約をアプリケーション内部の設計原則として扱います。Resource、DI、AOP、Contextが役割を分けるため、コードの意味が読みやすく、長期運用に耐える構造になります。"

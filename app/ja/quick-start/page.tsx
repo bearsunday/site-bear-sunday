@@ -48,7 +48,7 @@ const nextReads = [
 
 export default function QuickStartPage() {
   return (
-    <PageShell>
+    <PageShell path="quick-start">
       <PageHero
         eyebrow="Quick Start"
         lead="BEAR.Sundayは、最初から大きな構成を覚える必要はありません。まず1つのリソースを作り、URIで呼び、テストする。その小さな単位がWeb、CLI、ドキュメントへ広がります。"

@@ -168,7 +168,7 @@ const flowTestPoints = [
 
 export default function TechPage() {
   return (
-    <PageShell>
+    <PageShell path="tech">
       <PageHero
         eyebrow="Technology"
         lead="BEAR.Sundayのキャッシュは、レスポンスを一時保存する仕組みではありません。本質的に静的なリソース表現をRead Modelとして生成し、サーバー、CDN、クライアントの各層で同一性と依存関係を維持するアーキテクチャです。"

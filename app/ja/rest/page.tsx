@@ -67,7 +67,7 @@ const classicPillars = [
 
 export default function RestPage() {
   return (
-    <PageShell>
+    <PageShell path="rest">
       <PageHero
         eyebrow="Web principles"
         lead="URI、統一インターフェース、ハイパーメディア。RESTは四半世紀にわたってWebを支えてきた、枯れた設計です。BEAR.Sundayはそれを外部APIだけでなく、アプリケーションの内側全体の制約にします。新しさではなく、正しさが残っているからです。"
