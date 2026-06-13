@@ -4,7 +4,7 @@ import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
 export const metadata: Metadata = {
   title: "技術的特徴 | BEAR.Sunday",
   description:
-    "BEAR.Sundayのイベントドリブンコンテンツ、依存解決、ETag、CDN中心Read Model、ドーナツキャッシュを統合的に紹介します。",
+    "BEAR.Sundayのイベントドリブンコンテンツ、依存解決、ETag、CDN中心のRead Model、ドーナツキャッシュを統合的に紹介します。",
 };
 
 const cacheLevels = [
@@ -133,7 +133,7 @@ export default function TechPage() {
     <PageShell>
       <PageHero
         eyebrow="Technology"
-        lead="BEAR.Sundayのキャッシュは、レスポンスを一時保存する仕組みではありません。本質的に静的なリソース表現をRead Modelとして創成し、サーバー、CDN、クライアントの各層で同一性と依存関係を維持するアーキテクチャです。"
+        lead="BEAR.Sundayのキャッシュは、レスポンスを一時保存する仕組みではありません。本質的に静的なリソース表現をRead Modelとして生成し、サーバー、CDN、クライアントの各層で同一性と依存関係を維持するアーキテクチャです。"
         title="静的Webの自然な仕組みを、動的アプリケーションへ。"
       />
 
@@ -324,7 +324,7 @@ export default function TechPage() {
             <article className="rounded-lg border border-black/10 bg-white p-6">
               <h3 className="text-2xl font-black">Donut cache</h3>
               <p className="mt-4 leading-7 text-[#465148]">
-                全体の中にキャッシュできない穴がある場合、周辺の本質的に静的な部分を再利用します。
+                全体の中にキャッシュできない穴がある場合、周辺の変化しない部分を再利用します。
               </p>
             </article>
             <article className="rounded-lg border border-black/10 bg-white p-6">
@@ -365,6 +365,105 @@ export default function TechPage() {
                 <p className="mt-4 leading-8 text-[#465148]">{item.text}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-semibold uppercase text-[#245c7a]">
+            Transparent parallel execution
+          </p>
+          <div className="mt-4 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
+            <div>
+              <h2 className="text-4xl font-black sm:text-5xl">
+                並列化のために、コードは書き換えない。
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-[#36434c]">
+                `#[Embed]` は、リソースの「結果」を埋め込むのではありません。リソースへの「リクエスト」、
+                つまりリソース間の関係そのものを埋め込みます。だから、逐次に取るか、ext-parallelのスレッドで
+                並列に取るか、Swooleのコルーチンで取るかを決めるのはLinkerの仕事です。
+                リソースクラスは、自分が並列に呼ばれたことを知りません。
+              </p>
+              <p className="mt-5 text-lg leading-8 text-[#36434c]">
+                URIが意図(What)を表し、実行方法(How)をModuleへ隠すからこそ、実行戦略は後から差し替えられます。
+                10年前に書いたリソースが、Moduleを足すだけで並列実行の恩恵を受けます。標準のPHPで開発・デバッグし、
+                本番では設定の変更だけで並列へ切り替えられます。
+              </p>
+              <p className="mt-5 text-lg leading-8 text-[#36434c]">
+                非同期プログラミングでよく語られる「関数の色」問題 ―― 非同期関数を呼ぶ関数自身も非同期になり、
+                コードベース全体へ伝播する ―― は、リソース境界で断ち切られます。逐次でも並列でもコードは同じ。
+                変わるのは実行戦略だけです。
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="rounded-lg border border-black/10 bg-[#101820] p-6 text-white shadow-[0_18px_60px_rgba(16,24,32,0.2)]">
+                <p className="font-mono text-xs uppercase text-white/54">
+                  sequential vs parallel
+                </p>
+                <pre className="mt-4 overflow-x-auto font-mono text-xs leading-6 text-[#d9f7e7] sm:text-sm">
+                  <code>{`[逐次]                  [並列]
+Request                 Request
+ ├ Embed 1 ── 50ms       ├ Embed 1 ─┐
+ ├ Embed 2 ── 50ms       ├ Embed 2 ─┤
+ ├ Embed 3 ── 50ms       ├ Embed 3 ─┤
+ └ Embed 4 ── 50ms       └ Embed 4 ─┘
+Response 200ms          Response 50ms`}</code>
+                </pre>
+              </div>
+              <div className="rounded-lg border border-black/10 bg-white p-6">
+                <p className="font-mono text-xs uppercase text-[#667068]">
+                  runtimes — application code unchanged
+                </p>
+                <div className="mt-4 grid grid-cols-1 gap-3">
+                  <div className="rounded-md border border-black/10 bg-[#f4f7f3] p-4">
+                    <p className="font-bold">ext-parallel</p>
+                    <p className="mt-1 text-sm leading-6 text-[#465148]">
+                      スレッドプール。PHP-FPM / Apache 向け。bin/async.php を足すだけ。
+                    </p>
+                  </div>
+                  <div className="rounded-md border border-black/10 bg-[#f4f7f3] p-4">
+                    <p className="font-bold">Swoole</p>
+                    <p className="mt-1 text-sm leading-6 text-[#465148]">
+                      コルーチン。常駐サーバーで高い並行性。AsyncSwooleModuleをinstall。
+                    </p>
+                  </div>
+                  <div className="rounded-md border border-black/10 bg-[#f4f7f3] p-4">
+                    <p className="font-bold">mysqli</p>
+                    <p className="mt-1 text-sm leading-6 text-[#465148]">
+                      DBクエリのみ並列。最小構成。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.2)]">
+              <code>{`class Dashboard extends ResourceObject
+{
+    #[Embed(rel: 'user', src: '/user{?id}')]
+    #[Embed(rel: 'notifications', src: '/notifications{?user_id}')]
+    #[Embed(rel: 'stats', src: '/stats{?user_id}')]
+    public function onGet(string $id): static
+    {
+        $this->body['id'] = $id;
+
+        return $this;
+    }
+}`}</code>
+            </pre>
+            <div className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="leading-8 text-[#465148]">
+                この埋め込み宣言は、逐次でも並列でも一文字も変わりません。MVCが「どう実行するか」を
+                手続きで書くのに対し、BEAR.Sundayは「リソース間の関係」を宣言します。宣言が実行戦略から
+                独立しているため、戦略を入れ替えてもコードに影響しません。
+              </p>
+              <p className="mt-4 text-sm leading-6 text-[#667068]">
+                ※ BEAR.Async は現在 Alpha。ext-parallel は ZTS版PHPとext-parallel拡張、Swooleはext-swooleが必要です。
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -572,7 +671,7 @@ $post = $this->resource->get('app://blog/post', ['id' => 42]);
           <p className="mt-6 text-xl leading-9 text-white/78">
             BEAR.Sundayにおけるキャッシュは、レスポンスを速くするための補助機能ではありません。
             リソースから本質的に静的なHTTP表現を生成し、その同一性をETagで示し、その依存関係をサーバーとCDNにまたがって
-            維持し、変更イベントで破棄する。これは、アプリケーションのRead ModelをWebの仕組みとして創成する設計です。
+            維持し、変更イベントで破棄する。これは、アプリケーションのRead ModelをWebの仕組みとして創り出す設計です。
           </p>
         </div>
       </section>

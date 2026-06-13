@@ -14,7 +14,7 @@ const valueMechanisms = [
   },
   {
     title: "Read Modelが、Webの仕組みに乗る",
-    text: "本質的に静的なリソース表現を生成し、ETag、304、依存タグ、CDN purgeへ接続します。単なるキャッシュではなく、アプリケーションの読み取りモデルをWebインフラ上に創成する設計です。",
+    text: "本質的に静的なリソース表現を生成し、ETag、304、依存タグ、CDN purgeへ接続します。単なるキャッシュではなく、アプリケーションの読み取りモデルをWebインフラ上に創り出す設計です。",
   },
   {
     title: "変更は、外側から差し替える",
@@ -48,7 +48,7 @@ const audienceValues = [
     headline: "速く、安定して、同じ機能に届く。",
     text: "ユーザー価値は、フレームワーク名ではなく体験に現れます。本質的に静的なコンテンツはCDNから配信され、変更がなければETagで304になります。オリジンやDBに到達しないリクエストが増えるほど、レスポンスは速くなり、障害時にも読める範囲が広がります。",
     points: [
-      "CDN中心Read Modelにより、応答速度と可用性が上がる",
+      "CDN中心のRead Modelにより、応答速度と可用性が上がる",
       "依存解決により、古い表現や古いETagを残しにくい",
       "同じリソースをWeb、API、CLIへ接続できる",
     ],
@@ -80,7 +80,7 @@ export default function ValuePage() {
     <PageShell>
       <PageHero
         eyebrow="Value"
-        lead="BEAR.Sundayの価値は、生産性、拡張性、パフォーマンスといった一般語だけでは説明しきれません。価値の源泉は、Resource、context-agnostic DI、AOP、CDN中心Read Modelが、設計から運用まで同じ意味を保つところにあります。"
+        lead="BEAR.Sundayの価値は、生産性、拡張性、パフォーマンスといった一般語だけでは説明しきれません。価値の源泉は、Resource、context-agnostic DI、AOP、CDN中心のRead Modelが、設計から運用まで同じ意味を保つところにあります。"
         title="技術的特徴を、持続する価値へ。"
       />
 
@@ -193,7 +193,7 @@ export default function ValuePage() {
             <p className="text-lg leading-8 text-[#3b463d]">
               開発者には、変更しやすく読める構造を。ユーザーには、速く安定した体験を。
               ビジネスには、移行と運用のコストを抑えながら成長できる土台を。
-              その3つは別々の機能ではなく、Resource、DI、AOP、CDN中心Read Modelという同じ設計から生まれます。
+              その3つは別々の機能ではなく、Resource、DI、AOP、CDN中心のRead Modelという同じ設計から生まれます。
             </p>
           </div>
         </div>

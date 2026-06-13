@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 const navItems = [
   { href: "/business", label: "ビジネス" },
   { href: "/value", label: "価値" },
+  { href: "/rest", label: "Web原則" },
   { href: "/tech", label: "技術" },
   { href: "/architecture", label: "設計" },
   { href: "/ai-era", label: "AI時代" },
@@ -18,7 +19,7 @@ export function SiteHeader() {
         <Link className="text-sm font-semibold" href="/">
           BEAR.Sunday
         </Link>
-        <div className="hidden items-center gap-7 text-sm font-medium text-[#344036] md:flex">
+        <div className="hidden items-center gap-6 text-sm font-medium text-[#344036] md:flex">
           {navItems.map((item) => (
             <Link href={item.href} key={item.href}>
               {item.label}
