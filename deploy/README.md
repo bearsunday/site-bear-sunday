@@ -32,6 +32,10 @@ out, builds it to static, and places it at `/learn/`.
   (`/learn/`). To make it return to the jumbotron instead, set the brand `href`
   to `/` in `app/_components/site-chrome.tsx`.
 - **First run** may need one iteration on CI specifics — watch the Actions log.
+- **`exit code 8` in the Learn build step** = `wget` hit an optional asset 404
+  (e.g. the image endpoint). Steps run under `set -e`, so any non-zero `wget`
+  status fails the step. The workflow already tolerates this (`|| true`) and
+  instead asserts the key pages exist — just use the current `pages.yml`.
 
 ## How it works
 

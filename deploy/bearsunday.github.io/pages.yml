@@ -53,14 +53,22 @@ jobs:
           npm ci
           npm run build
           PORT=4399 npm run start &
+          server_pid=$!
           for i in $(seq 1 60); do
             curl -sf http://localhost:4399/ >/dev/null && break
             sleep 1
           done
           mkdir -p snapshot
-          ( cd snapshot && wget -q -r -l 3 -p -k -E -nH -e robots=off http://localhost:4399/ )
-          kill %1 2>/dev/null || true
+          # wget returns a non-zero status (8) if ANY requested URL returns an
+          # error response (e.g. an optional asset 404). That is not fatal for a
+          # static snapshot, and GitHub Actions runs each step with `set -e`, so
+          # tolerate it and assert the key pages exist instead.
+          ( cd snapshot && wget -nv -r -l 3 -p -k -E -nH -e robots=off http://localhost:4399/ ) || true
+          kill "$server_pid" 2>/dev/null || true
           test -f snapshot/index.html
+          test -f snapshot/rest.html
+          test -f snapshot/tech.html
+          test -f snapshot/alps.html
 
       - name: Place Learn under /learn/
         run: |
