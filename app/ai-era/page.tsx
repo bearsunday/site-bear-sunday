@@ -129,6 +129,33 @@ const agentWorkflow = [
   "テストとドキュメントへ変更の影響を反映する",
 ];
 
+const restAgentPoints = [
+  {
+    title: "安全な操作は自由に、危険な操作は確認を",
+    text: "GETのような安全・冪等な操作はエージェントに自由に呼ばせ、状態を変える操作にはconfirmを挟みます。RESTのメソッド分類が、そのまま道具の権限モデルになります。",
+  },
+  {
+    title: "ALPSが、意味をフィルタに変える",
+    text: "ALPSプロファイルのsafe / idempotentな遷移情報から、実行時に渡す道具を絞れます。読み取り専用モードを、思いつきではなくリソースの意味論から導けます。",
+  },
+  {
+    title: "エージェントは、リソースグラフを辿る",
+    text: "ハイパーメディアがクライアントにリンクをたどらせるのと同じ構造で、エージェントはURIとリンクをたどって調査し、操作します。リソースグラフが、そのままエージェントの地図になります。",
+  },
+  {
+    title: "専門エージェントへ委譲する",
+    text: "コーディネーターがask_criticやask_editorのように、専門エージェントを道具として呼べます。設計レビューと文章校正のように、役割の違う専門家を編成できます。",
+  },
+  {
+    title: "文脈を継続する",
+    text: "複数回の実行にわたって会話履歴を保ち、調査・レビュー・修正の多段ワークフローを、文脈を作り直さずに進められます。",
+  },
+  {
+    title: "実行ごとにポリシーを変える",
+    text: "渡す道具の一覧を実行単位で絞り、読み取り専用、コスト上限、安全方針を、エージェント本体を変えずに適用できます。",
+  },
+];
+
 export default function AiEraPage() {
   return (
     <PageShell>
@@ -225,6 +252,49 @@ export default function AiEraPage() {
               <article className="rounded-lg border border-white/16 bg-white/[0.06] p-6" key={item.title}>
                 <h3 className="text-2xl font-black text-[#9ee0bb]">{item.title}</h3>
                 <p className="mt-4 leading-8 text-white/76">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#b3262d]">
+              REST semantics as a safety model
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              RESTの意味論が、そのままAIの安全モデルになる。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              リソースを道具にできるのは、新しい仕組みを足したからではありません。URI、統一インターフェース、
+              型、JSON Schema、ALPSが、最初からツール定義の形をしているからです。そしてRESTが古くから持つ
+              「安全」「冪等」というメソッドの意味論が、エージェントに何を自由に呼ばせ、何に確認を挟むかを
+              決める根拠になります。BEAR.ToolUseは、単発のツール呼び出しから、専門エージェントを編成する
+              ランタイムへと広がっています。
+            </p>
+            <aside className="mt-8 rounded-lg border-l-4 border-[#1f7a5a] bg-[#f4f7f3] p-6">
+              <p className="font-mono text-xs uppercase text-[#1f7a5a]">ALPSとは</p>
+              <p className="mt-3 leading-8 text-[#3b463d]">
+                ALPS(Application-Level Profile Semantics)は、アプリケーションの語彙・状態・遷移と、
+                その遷移が安全(safe)・冪等(idempotent)・破壊的(unsafe)のどれかだけを記述する小さな仕様です。
+                画面も保存方法も性能も書けません。書けないからこそ、どの実装とも競合しない「意味の置き場所」になり、
+                人間にもAIにも同じ意味を渡せます。
+              </p>
+              <a
+                className="mt-4 inline-flex text-sm font-semibold text-[#1f7a5a] underline"
+                href="/alps"
+              >
+                ALPSをもっと知る →
+              </a>
+            </aside>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {restAgentPoints.map((item) => (
+              <article className="rounded-lg border border-black/10 bg-[#f4f7f3] p-6" key={item.title}>
+                <h3 className="text-2xl font-black">{item.title}</h3>
+                <p className="mt-4 leading-8 text-[#465148]">{item.text}</p>
               </article>
             ))}
           </div>

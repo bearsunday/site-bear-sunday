@@ -170,6 +170,49 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-b border-black/10 bg-[#111611] px-5 py-20 text-white sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#9ee0bb]">
+              Why it all connects
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              関係を宣言する。あとは、ついてくる。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-white/76">
+              BEAR.Sundayは、Webの原則(REST)をアプリケーション全体の設計制約にするPHPフレームワークです。
+              リンクや埋め込みで「リソース間の関係」を宣言すると、意図(What)と実行(How)が分かれます。
+              だから次のものが、後付けの機能ではなく構造から生まれます。
+            </p>
+            <a
+              className="mt-8 inline-flex rounded-md bg-[#9ee0bb] px-5 py-3 text-sm font-semibold text-[#111611] transition hover:bg-[#c0f0d3]"
+              href="/rest"
+            >
+              Web原則から見る
+            </a>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            <div className="rounded-lg border border-white/16 bg-white/[0.06] p-5 font-mono text-sm">
+              <p className="text-[#9ee0bb]">関係を宣言する(URI・リンク・埋め込み)</p>
+              <p className="mt-2 text-white/70">↓ What(意図)と How(実行)を分離</p>
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {[
+                { t: "透過的な並列実行", d: "埋め込みは関係の宣言。実行戦略はModuleで差し替え。" },
+                { t: "AIの道具", d: "URI・型・スキーマが、そのままツール定義になる。" },
+                { t: "複数の表現", d: "同じ状態から HTML・JSON・CLI・ドキュメント。" },
+                { t: "長期互換", d: "意味はリソースに残り、詳細は外側で替える。" },
+              ].map((item) => (
+                <div className="rounded-lg border border-white/16 bg-white/[0.06] p-5" key={item.t}>
+                  <h3 className="text-lg font-black text-[#9ee0bb]">{item.t}</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/76">{item.d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="architecture" className="px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
@@ -219,7 +262,7 @@ export default function Home() {
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#36434c]">
               BEAR.Sundayの価値は、便利機能の多さではなく、設計制約が長く効き続けることにあります。
-              Resource、context-agnostic DI、AOP、CDN中心Read Modelが、開発、利用体験、ビジネス継続性へ
+              Resource、context-agnostic DI、AOP、CDN中心のRead Modelが、開発、利用体験、ビジネス継続性へ
               同じ構造から価値を届けます。
             </p>
             <a

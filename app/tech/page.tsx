@@ -4,7 +4,7 @@ import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
 export const metadata: Metadata = {
   title: "技術的特徴 | BEAR.Sunday",
   description:
-    "BEAR.Sundayのイベントドリブンコンテンツ、依存解決、ETag、CDN中心Read Model、ドーナツキャッシュを統合的に紹介します。",
+    "BEAR.Sundayのイベントドリブンコンテンツ、依存解決、ETag、CDN中心のRead Model、ドーナツキャッシュを統合的に紹介します。",
 };
 
 const cacheLevels = [
@@ -128,12 +128,50 @@ const compositionPoints = [
   },
 ];
 
+const sqlFirstClass = [
+  {
+    title: "SQLを隠さず、第一級市民にする",
+    text: "Ray.MediaQueryでは、SQLは var/sql の独立したファイル、入口は #[DbQuery] を付けた型付きインターフェースです。ORMの裏に隠さないので、JOIN、CTE、ウィンドウ関数、ベンダー固有のSQLをそのまま書けます。",
+  },
+  {
+    title: "契約があるから、分業・並行開発できる",
+    text: "インターフェース(署名・戻り値型・SQLファイル名)が契約になります。SQL担当とアプリ担当は互いの完成を待たず並行で進み、アプリ側はfakeでDBがなくてもユースケースを先に組めます。",
+  },
+  {
+    title: "SQL特化のツールがそのまま効く",
+    text: "独立した .sql ファイルなので、DataGripのようなSQL特化IDEで、スキーマ補完、実行、EXPLAIN、整形、リファクタが直接使えます。実行計画やインデックスの検討を、PHPランタイムと切り離して回せます。",
+  },
+  {
+    title: "AIも、隠れた生成なしに読み書きできる",
+    text: "動的なクエリ生成で隠れないため、AIはインターフェースの契約と実際のSQLを直接読み、書けます。人間の専用ツールとAIが、同じSQL資産に同じようにアクセスできます。",
+  },
+];
+
+const flowTestPoints = [
+  {
+    title: "テストが、リンクを辿る",
+    text: "URIをベタ書きせず、レスポンスが差し出す _links や Location(=affordance)を辿ります。クライアントと同じ歩き方。HATEOASを、実行できるテストにしたものです。",
+  },
+  {
+    title: "spec(ALPS)に整列する",
+    text: "各ステップを #[Alps('goCheckout')] のようにALPSの遷移へ束縛します。テスト手順が、そのまま意味の状態遷移の走査になります。",
+  },
+  {
+    title: "トランスポートはDIで差し替える",
+    text: "in-processのリソースでも実HTTPでも、リソースは同じものです。newResource()をHttpResourceに変えるだけで、同じ筋書きが実HTTP/JSONを通ります。",
+  },
+  {
+    title: "E2Eは、得意分野に絞れる",
+    text: "「APIが正しく振る舞うか」はリソース層へ降ろせます。ブラウザのE2Eは、視覚回帰・実ブラウザのJS・認証フローという本来の領分に縮められます。",
+  },
+];
+
 export default function TechPage() {
   return (
     <PageShell>
       <PageHero
         eyebrow="Technology"
-        lead="BEAR.Sundayのキャッシュは、レスポンスを一時保存する仕組みではありません。本質的に静的なリソース表現をRead Modelとして創成し、サーバー、CDN、クライアントの各層で同一性と依存関係を維持するアーキテクチャです。"
+        lead="BEAR.Sundayのキャッシュは、レスポンスを一時保存する仕組みではありません。本質的に静的なリソース表現をRead Modelとして生成し、サーバー、CDN、クライアントの各層で同一性と依存関係を維持するアーキテクチャです。"
         title="静的Webの自然な仕組みを、動的アプリケーションへ。"
       />
 
@@ -324,7 +362,7 @@ export default function TechPage() {
             <article className="rounded-lg border border-black/10 bg-white p-6">
               <h3 className="text-2xl font-black">Donut cache</h3>
               <p className="mt-4 leading-7 text-[#465148]">
-                全体の中にキャッシュできない穴がある場合、周辺の本質的に静的な部分を再利用します。
+                全体の中にキャッシュできない穴がある場合、周辺の変化しない部分を再利用します。
               </p>
             </article>
             <article className="rounded-lg border border-black/10 bg-white p-6">
@@ -366,6 +404,222 @@ export default function TechPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#f4f7f3] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#245c7a]">
+              SQL as a first-class citizen
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              SQLを、隠さず第一級市民にする。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              BEAR.Sundayは標準技術を好み、SQLをORMの裏に隠しません。Ray.MediaQueryでは、SQLは独立した
+              ファイル、入口は型付きインターフェースです。SQLが第一級市民であることは、性能の検査
+              (出荷前のEXPLAIN)だけでなく、開発のしかたそのものを変えます。契約で分業でき、SQL特化のIDEも
+              AIも、同じSQL資産を直接扱えます。
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {sqlFirstClass.map((item) => (
+              <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
+                <h3 className="text-2xl font-black">{item.title}</h3>
+                <p className="mt-4 leading-8 text-[#465148]">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-semibold uppercase text-[#245c7a]">
+            Transparent parallel execution
+          </p>
+          <div className="mt-4 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
+            <div>
+              <h2 className="text-4xl font-black sm:text-5xl">
+                並列化のために、コードは書き換えない。
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-[#36434c]">
+                `#[Embed]` は、リソースの「結果」を埋め込むのではありません。リソースへの「リクエスト」、
+                つまりリソース間の関係そのものを埋め込みます。だから、逐次に取るか、ext-parallelのスレッドで
+                並列に取るか、Swooleのコルーチンで取るかを決めるのはLinkerの仕事です。
+                リソースクラスは、自分が並列に呼ばれたことを知りません。
+              </p>
+              <p className="mt-5 text-lg leading-8 text-[#36434c]">
+                URIが意図(What)を表し、実行方法(How)をModuleへ隠すからこそ、実行戦略は後から差し替えられます。
+                10年前に書いたリソースが、Moduleを足すだけで並列実行の恩恵を受けます。標準のPHPで開発・デバッグし、
+                本番では設定の変更だけで並列へ切り替えられます。
+              </p>
+              <p className="mt-5 text-lg leading-8 text-[#36434c]">
+                非同期プログラミングでよく語られる「関数の色」問題 ―― 非同期関数を呼ぶ関数自身も非同期になり、
+                コードベース全体へ伝播する ―― は、リソース境界で断ち切られます。逐次でも並列でもコードは同じ。
+                変わるのは実行戦略だけです。
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="rounded-lg border border-black/10 bg-[#101820] p-6 text-white shadow-[0_18px_60px_rgba(16,24,32,0.2)]">
+                <p className="font-mono text-xs uppercase text-white/54">
+                  sequential vs parallel
+                </p>
+                <pre className="mt-4 overflow-x-auto font-mono text-xs leading-6 text-[#d9f7e7] sm:text-sm">
+                  <code>{`Sequential               Parallel
+Request                  Request
+ ├ Embed 1 ── 50ms        ├ Embed 1 ─┐
+ ├ Embed 2 ── 50ms        ├ Embed 2 ─┤
+ ├ Embed 3 ── 50ms        ├ Embed 3 ─┤
+ └ Embed 4 ── 50ms        └ Embed 4 ─┘
+Response 200ms           Response 50ms`}</code>
+                </pre>
+              </div>
+              <div className="rounded-lg border border-black/10 bg-white p-6">
+                <p className="font-mono text-xs uppercase text-[#667068]">
+                  runtimes — application code unchanged
+                </p>
+                <div className="mt-4 grid grid-cols-1 gap-3">
+                  <div className="rounded-md border border-black/10 bg-[#f4f7f3] p-4">
+                    <p className="font-bold">ext-parallel</p>
+                    <p className="mt-1 text-sm leading-6 text-[#465148]">
+                      スレッドプール。PHP-FPM / Apache 向け。bin/async.php を足すだけ。
+                    </p>
+                  </div>
+                  <div className="rounded-md border border-black/10 bg-[#f4f7f3] p-4">
+                    <p className="font-bold">Swoole</p>
+                    <p className="mt-1 text-sm leading-6 text-[#465148]">
+                      コルーチン。常駐サーバーで高い並行性。AsyncSwooleModuleをinstall。
+                    </p>
+                  </div>
+                  <div className="rounded-md border border-black/10 bg-[#f4f7f3] p-4">
+                    <p className="font-bold">mysqli</p>
+                    <p className="mt-1 text-sm leading-6 text-[#465148]">
+                      DBクエリのみ並列。最小構成。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.2)]">
+              <code>{`class Dashboard extends ResourceObject
+{
+    #[Embed(rel: 'user', src: '/user{?id}')]
+    #[Embed(rel: 'notifications', src: '/notifications{?user_id}')]
+    #[Embed(rel: 'stats', src: '/stats{?user_id}')]
+    public function onGet(string $id): static
+    {
+        $this->body['id'] = $id;
+
+        return $this;
+    }
+}`}</code>
+            </pre>
+            <div className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="leading-8 text-[#465148]">
+                この埋め込み宣言は、逐次でも並列でも一文字も変わりません。MVCが「どう実行するか」を
+                手続きで書くのに対し、BEAR.Sundayは「リソース間の関係」を宣言します。宣言が実行戦略から
+                独立しているため、戦略を入れ替えてもコードに影響しません。
+              </p>
+              <p className="mt-4 text-sm leading-6 text-[#667068]">
+                ※ BEAR.Async は現在 Alpha。ext-parallel は ZTS版PHPとext-parallel拡張、Swooleはext-swooleが必要です。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#111611] px-5 py-20 text-white sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#9ee0bb]">
+              Tests that follow links
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              一つのストーリーが、リソースからHTTPまで、同じコードで通る。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-white/76">
+              これは便利機能ではありません。クライアントは次の操作を推測せず、リソースが差し出すリンクを辿る——
+              そのWebの原則(HATEOAS)を、そのまま実行できるテストにしたものです。ユーザーストーリーを
+              リンクを辿るフローとして書き、トランスポートをDIで差し替えれば、同じ筋書きが実HTTP/JSONを通り、
+              さらにHTMLのlink/formへ続きます。
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
+            <div>
+              <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+                in-process — follows the affordances
+              </p>
+              <pre className="mt-3 overflow-x-auto rounded-lg bg-[#101820] p-6 text-xs leading-7 text-[#d9f7e7] sm:text-sm">
+                <code>{`class PurchaseFlowTest extends AbstractWorkflowTest
+{
+    #[Alps('goProduct')]
+    public function testProduct(): ResourceObject
+    {
+        return $this->resource->get('page://self/product', ['id' => 1]);
+    }
+
+    #[Alps('doAddCartItem')]
+    #[Depends('testProduct')]
+    public function testAddToCart(ResourceObject $product): ResourceObject
+    {
+        // ベタ書きURIではなく、差し出されたリンクを辿る
+        $cart = $this->resource->post(
+            $this->linkHref($product, 'doAddCartItem'),
+            ['qty' => 2],
+        );
+        $this->assertSame(Code::CREATED, $cart->code);
+
+        return $cart;
+    }
+
+    #[Alps('goCheckout')]
+    #[Depends('testAddToCart')]
+    public function testCheckout(ResourceObject $cart): ResourceObject
+    {
+        return $this->follow($cart, 'goCheckout');
+    }
+}`}</code>
+              </pre>
+            </div>
+            <div>
+              <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+                real HTTP/JSON — swap newResource() only
+              </p>
+              <pre className="mt-3 overflow-x-auto rounded-lg bg-[#101820] p-6 text-xs leading-7 text-[#d9f7e7] sm:text-sm">
+                <code>{`// 全工程を、実HTTP/JSONで再実行。
+// 変えるのは newResource() だけ。筋書きは継承する。
+final class HttpPurchaseFlowTest extends PurchaseFlowTest
+{
+    protected function newResource(): ResourceInterface
+    {
+        return new HttpResource(
+            '127.0.0.1:8080',
+            __DIR__ . '/index.php',
+        );
+    }
+}`}</code>
+              </pre>
+              <p className="mt-4 leading-7 text-white/70">
+                同じテストが、in-processのリソースグラフ(ミリ秒・ブラウザ無し)でも、実HTTP境界(cookie・リダイレクト込み)でも走ります。
+              </p>
+            </div>
+          </div>
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {flowTestPoints.map((item) => (
+              <article className="rounded-lg border border-white/16 bg-white/[0.06] p-6" key={item.title}>
+                <h3 className="text-xl font-black text-[#9ee0bb]">{item.title}</h3>
+                <p className="mt-3 leading-7 text-white/76">{item.text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-8 max-w-4xl text-sm leading-7 text-white/54">
+            ※ 同じ仕組みで、Fake実装とSQL実装を同じアサーションの“双子”にすれば、移行を「祈り」ではなく等価性の確認にできます——これは「すべてが注入される」ことの一例です。
+          </p>
         </div>
       </section>
 
@@ -572,7 +826,7 @@ $post = $this->resource->get('app://blog/post', ['id' => 42]);
           <p className="mt-6 text-xl leading-9 text-white/78">
             BEAR.Sundayにおけるキャッシュは、レスポンスを速くするための補助機能ではありません。
             リソースから本質的に静的なHTTP表現を生成し、その同一性をETagで示し、その依存関係をサーバーとCDNにまたがって
-            維持し、変更イベントで破棄する。これは、アプリケーションのRead ModelをWebの仕組みとして創成する設計です。
+            維持し、変更イベントで破棄する。これは、アプリケーションのRead ModelをWebの仕組みとして創り出す設計です。
           </p>
         </div>
       </section>

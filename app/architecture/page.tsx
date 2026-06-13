@@ -88,6 +88,25 @@ const resourceDiscipline = [
   },
 ];
 
+const connectPhilosophy = [
+  {
+    title: "取り込まない",
+    text: "認証も検証もORMも抱え込みません。フレームワークは制約を与え、ライブラリは選べるまま。標準を選べる自由を残します。",
+  },
+  {
+    title: "独立して繋ぐ",
+    text: "JSON Schema、HAL、OpenAPI、SQL、PSRは、BEAR.Sundayの外でも通用する姿のまま使われます。投資がフレームワークに閉じ込められません。",
+  },
+  {
+    title: "重大なことは、標準に従う",
+    text: "検証はJSON Schema、リンクはHAL、API記述はOpenAPI。肝心な部分ほど独自構文を作らず、公開された標準で表します。だから文書化され、長く残り、他のツールやAIにもそのまま通じます。",
+  },
+  {
+    title: "緊張ではなく、調和",
+    text: "SQLにオブジェクトのふりをさせません。それぞれが得意なことだけをする。無理な抽象がないから、継ぎ目に摩擦が出ません。",
+  },
+];
+
 export default function ArchitecturePage() {
   return (
     <PageShell>
@@ -96,6 +115,36 @@ export default function ArchitecturePage() {
         lead="BEAR.Sundayは、Webの制約をアプリケーション内部の設計原則として扱います。Resource、DI、AOP、Contextが役割を分けるため、コードの意味が読みやすく、長期運用に耐える構造になります。"
         title="設計を、実装のあとに隠さない。"
       />
+
+      <section className="border-b border-black/10 bg-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Design philosophy
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              それぞれを、それぞれのままつなぐ。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              BEAR.Sundayは、必要な技術を自分の中に取り込んで作り直しません。SQLはSQLのまま、検証はJSON
+              Schemaのまま、リンクはHALのまま。重大な約束ごとほど、フレームワーク独自の発明ではなく、
+              公開された標準に従います。それぞれに仕事を任せるから、緊張ではなく調和が生まれます。
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {connectPhilosophy.map((item) => (
+              <article className="rounded-lg border border-black/10 bg-[#f4f7f3] p-6" key={item.title}>
+                <h3 className="text-2xl font-black">{item.title}</h3>
+                <p className="mt-4 leading-8 text-[#465148]">{item.text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-10 max-w-4xl text-lg leading-8 text-[#3b463d]">
+            つなぐ場所に一つの仕事を与え、型で渡し、反対側を隠す。だから差し替えられ、長く保てる。
+            これは機能ではなく、設計哲学でありひとつの美学です。
+          </p>
+        </div>
+      </section>
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 lg:grid-cols-3">
