@@ -128,6 +128,25 @@ const compositionPoints = [
   },
 ];
 
+const sqlFirstClass = [
+  {
+    title: "SQLを隠さず、第一級市民にする",
+    text: "Ray.MediaQueryでは、SQLは var/sql の独立したファイル、入口は #[DbQuery] を付けた型付きインターフェースです。ORMの裏に隠さないので、JOIN、CTE、ウィンドウ関数、ベンダー固有のSQLをそのまま書けます。",
+  },
+  {
+    title: "契約があるから、分業・並行開発できる",
+    text: "インターフェース(署名・戻り値型・SQLファイル名)が契約になります。SQL担当とアプリ担当は互いの完成を待たず並行で進み、アプリ側はfakeでDBがなくてもユースケースを先に組めます。",
+  },
+  {
+    title: "SQL特化のツールがそのまま効く",
+    text: "独立した .sql ファイルなので、DataGripのようなSQL特化IDEで、スキーマ補完、実行、EXPLAIN、整形、リファクタが直接使えます。実行計画やインデックスの検討を、PHPランタイムと切り離して回せます。",
+  },
+  {
+    title: "AIも、隠れた生成なしに読み書きできる",
+    text: "動的なクエリ生成で隠れないため、AIはインターフェースの契約と実際のSQLを直接読み、書けます。人間の専用ツールとAIが、同じSQL資産に同じようにアクセスできます。",
+  },
+];
+
 export default function TechPage() {
   return (
     <PageShell>
@@ -360,6 +379,33 @@ export default function TechPage() {
           </div>
           <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {performancePoints.map((item) => (
+              <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
+                <h3 className="text-2xl font-black">{item.title}</h3>
+                <p className="mt-4 leading-8 text-[#465148]">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#f4f7f3] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#245c7a]">
+              SQL as a first-class citizen
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              SQLを、隠さず第一級市民にする。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              BEAR.Sundayは標準技術を好み、SQLをORMの裏に隠しません。Ray.MediaQueryでは、SQLは独立した
+              ファイル、入口は型付きインターフェースです。SQLが第一級市民であることは、性能の検査
+              (出荷前のEXPLAIN)だけでなく、開発のしかたそのものを変えます。契約で分業でき、SQL特化のIDEも
+              AIも、同じSQL資産を直接扱えます。
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {sqlFirstClass.map((item) => (
               <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
                 <h3 className="text-2xl font-black">{item.title}</h3>
                 <p className="mt-4 leading-8 text-[#465148]">{item.text}</p>
