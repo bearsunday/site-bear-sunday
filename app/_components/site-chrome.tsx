@@ -46,8 +46,10 @@ const t = {
   },
 };
 
-export function SiteHeader({ lang = "ja" }: { lang?: Lang }) {
+export function SiteHeader({ lang = "ja", path = "" }: { lang?: Lang; path?: string }) {
   const homeHref = lang === "en" ? "/en" : "/ja";
+  const enHref = path ? `/en/${path}` : "/en";
+  const jaHref = path ? `/ja/${path}` : "/ja";
   return (
     <header className="fixed inset-x-0 top-0 z-30 border-b border-black/10 bg-[#f4f7f3]/92 backdrop-blur">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
@@ -64,14 +66,14 @@ export function SiteHeader({ lang = "ja" }: { lang?: Lang }) {
         <div className="hidden items-center text-sm md:flex">
           <a
             className={lang === "en" ? "text-black/90 underline underline-offset-2" : "text-black/50 no-underline hover:text-black/90"}
-            href="/en"
+            href={enHref}
           >
             En
           </a>
           <span className="mx-1.5 text-black/30">|</span>
           <a
             className={lang === "ja" ? "text-black/90 underline underline-offset-2" : "text-black/50 no-underline hover:text-black/90"}
-            href="/ja"
+            href={jaHref}
           >
             Ja
           </a>
@@ -102,10 +104,10 @@ export function SiteFooter({ lang = "ja" }: { lang?: Lang }) {
   );
 }
 
-export function PageShell({ lang = "ja", children }: Readonly<{ lang?: Lang; children: ReactNode }>) {
+export function PageShell({ lang = "ja", path = "", children }: Readonly<{ lang?: Lang; path?: string; children: ReactNode }>) {
   return (
     <main className="min-h-screen bg-[#f4f7f3] text-[#111611]">
-      <SiteHeader lang={lang} />
+      <SiteHeader lang={lang} path={path} />
       {children}
       <SiteFooter lang={lang} />
     </main>

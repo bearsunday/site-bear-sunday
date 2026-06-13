@@ -127,7 +127,7 @@ const bankruptcySignals = [
 
 export default function BusinessPage() {
   return (
-    <PageShell lang="en">
+    <PageShell lang="en" path="business">
       <PageHero
         eyebrow="For business"
         lead="BEAR.Sunday is not just a framework for engineers. It supports continuity, predictability, high performance, and flexibility as the design foundation for long-lived web applications. This page reads that value in the language of business—as outcomes, costs, and risks."

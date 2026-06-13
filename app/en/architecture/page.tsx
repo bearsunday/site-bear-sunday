@@ -109,7 +109,7 @@ const connectPhilosophy = [
 
 export default function ArchitecturePage() {
   return (
-    <PageShell lang="en">
+    <PageShell lang="en" path="architecture">
       <PageHero
         eyebrow="Architecture"
         lead="BEAR.Sunday treats Web constraints as design principles for the interior of the application. Resource, DI, AOP, and Context divide responsibilities, making code meaning readable and producing a structure that withstands long-term operation."

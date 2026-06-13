@@ -43,7 +43,7 @@ const threeDoors = [
 
 export default function AlpsPage() {
   return (
-    <PageShell lang="en">
+    <PageShell lang="en" path="alps">
       <PageHero
         eyebrow="Semantic SSOT"
         lead="Code has become cheap. But meaning—'what should be built'—remains expensive. The same business fact gets copied into specs, code, tests, DB constraints, and FAQs—in separate dialects every time. ALPS is a small specification that writes only that meaning. BEAR.Sunday projects implementation, documentation, and AI instruments from here."

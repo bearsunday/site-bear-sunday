@@ -168,7 +168,7 @@ const flowTestPoints = [
 
 export default function TechPage() {
   return (
-    <PageShell lang="en">
+    <PageShell lang="en" path="tech">
       <PageHero
         eyebrow="Technology"
         lead="BEAR.Sunday's caching is not a mechanism for temporarily storing responses. It is an architecture that generates inherently static resource representations as Read Models and maintains identity and dependency relationships across the server, CDN, and client layers."

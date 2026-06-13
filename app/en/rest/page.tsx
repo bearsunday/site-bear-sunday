@@ -67,7 +67,7 @@ const classicPillars = [
 
 export default function RestPage() {
   return (
-    <PageShell lang="en">
+    <PageShell lang="en" path="rest">
       <PageHero
         eyebrow="Web principles"
         lead="URI, uniform interface, hypermedia. REST is a battle-tested design that has supported the Web for a quarter century. BEAR.Sunday makes it a constraint not just for external APIs but for the entire interior of your application. Not because it's new—but because its correctness endures."

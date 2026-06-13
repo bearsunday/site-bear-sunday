@@ -98,7 +98,7 @@ const valueSignals = [
 export default function EnHome() {
   return (
     <main className="min-h-screen bg-[#f4f7f3] text-[#111611]">
-      <SiteHeader lang="en" />
+      <SiteHeader lang="en" path="" />
 
       <section
         id="top"

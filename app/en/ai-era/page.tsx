@@ -158,7 +158,7 @@ const restAgentPoints = [
 
 export default function AiEraPage() {
   return (
-    <PageShell lang="en">
+    <PageShell lang="en" path="ai-era">
       <PageHero
         eyebrow="AI-ready architecture"
         lead="When AI agents read, modify, and explain code, meaning that remains in the code matters more than ambiguous conventions. BEAR.Sunday preserves application meaning as resources, attributes, schemas, and links."

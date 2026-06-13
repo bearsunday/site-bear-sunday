@@ -77,7 +77,7 @@ const chain = [
 
 export default function ValuePage() {
   return (
-    <PageShell lang="en">
+    <PageShell lang="en" path="value">
       <PageHero
         eyebrow="Value"
         lead="BEAR.Sunday's value can't be fully explained through generic terms like productivity, extensibility, or performance. The source of its value lies in how Resource, context-agnostic DI, AOP, and CDN-centric Read Models preserve the same meaning from design through to operation. This page traces the causality—how technology translates into value."

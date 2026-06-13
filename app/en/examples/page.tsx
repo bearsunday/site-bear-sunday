@@ -63,7 +63,7 @@ const outcomes = [
 
 export default function ExamplesPage() {
   return (
-    <PageShell lang="en">
+    <PageShell lang="en" path="examples">
       <PageHero
         eyebrow="Examples"
         lead="BEAR.Sunday code is centered on resources. Inputs, dependencies, links, and cross-cutting concerns remain visible, allowing the reader to trace the meaning of the application."
