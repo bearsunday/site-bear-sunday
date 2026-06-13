@@ -1,28 +1,28 @@
 import type { Metadata } from "next";
-import { PageHero, PageShell } from "../_components/site-chrome";
+import { PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "Quick Start | BEAR.Sunday",
   description:
-    "BEAR.Sundayを始めるための最短導線と、最初に見るべきリソース指向の考え方を紹介します。",
+    "The shortest path to getting started with BEAR.Sunday and the resource-oriented mindset to begin with.",
 };
 
 const steps = [
   {
-    title: "プロジェクトを作る",
-    text: "Composerでskeletonを作成し、最初のアプリケーション構造を得ます。",
+    title: "Create a project",
+    text: "Create a skeleton with Composer and get your first application structure.",
     code: `VENDOR=MyVendor PACKAGE=MyProject \\
 composer create-project bear/skeleton my-project`,
   },
   {
-    title: "リソースを呼ぶ",
-    text: "Webサーバーを立てる前に、page.phpからResourceを直接呼び出せます。",
+    title: "Call a resource",
+    text: "Before setting up a web server, you can call Resources directly from page.php.",
     code: `cd my-project
 php bin/page.php get /hello`,
   },
   {
-    title: "テストで観察する",
-    text: "ResourceObjectを中心にテストし、URI、メソッド、入力、出力を小さく確認します。",
+    title: "Observe through tests",
+    text: "Test with ResourceObject at the center—check URIs, methods, inputs, and outputs in small units.",
     code: `composer test
 composer sa`,
   },
@@ -30,29 +30,29 @@ composer sa`,
 
 const nextReads = [
   {
-    href: "/architecture",
-    title: "設計を理解する",
-    text: "Resource、DI、AOP、Contextがどのように役割を分けるか。",
+    href: "/en/architecture",
+    title: "Understand the design",
+    text: "How Resource, DI, AOP, and Context divide responsibilities.",
   },
   {
-    href: "/ai-era",
-    title: "AI時代の価値を見る",
-    text: "宣言性、明示性、トレーサビリティがなぜ効くのか。",
+    href: "/en/ai-era",
+    title: "Value in the AI era",
+    text: "Why declarativity, explicitness, and traceability matter.",
   },
   {
-    href: "/examples",
-    title: "コード例を見る",
-    text: "リソース、依存注入、AOP、Hypermediaの実装イメージ。",
+    href: "/en/examples",
+    title: "See code examples",
+    text: "Implementation examples of resources, dependency injection, AOP, and Hypermedia.",
   },
 ];
 
 export default function QuickStartPage() {
   return (
-    <PageShell>
+    <PageShell lang="en" path="quick-start">
       <PageHero
         eyebrow="Quick Start"
-        lead="BEAR.Sundayは、最初から大きな構成を覚える必要はありません。まず1つのリソースを作り、URIで呼び、テストする。その小さな単位がWeb、CLI、ドキュメントへ広がります。"
-        title="1つのリソースから始める。"
+        lead="You don't need to learn a large configuration upfront with BEAR.Sunday. Start by creating a single resource, calling it by URI, and testing it. That small unit expands to the Web, CLI, and documentation."
+        title="Start with one resource."
       />
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
@@ -81,23 +81,23 @@ export default function QuickStartPage() {
               Official guide
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              詳細は公式マニュアルへ。
+              See the official manual for details.
             </h2>
             <p className="mt-5 text-lg leading-8 text-white/76">
-              このページは導入の入口です。実際のセットアップ、環境構築、チュートリアルは
-              公式マニュアルのQuick StartとTutorialへ進んでください。
+              This page is an entry point. For actual setup, environment configuration, and tutorials,
+              proceed to the Quick Start and Tutorial in the official manual.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
               className="rounded-md bg-[#9ee0bb] px-5 py-3 text-center text-sm font-semibold text-[#111611] transition hover:bg-[#c0f0d3]"
-              href="https://bearsunday.github.io/manuals/1.0/ja/quick-start.html"
+              href="https://bearsunday.github.io/manuals/1.0/en/quick-start.html"
             >
-              公式Quick Start
+              Official Quick Start
             </a>
             <a
               className="rounded-md border border-white/20 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-white/10"
-              href="https://bearsunday.github.io/manuals/1.0/ja/tutorial.html"
+              href="https://bearsunday.github.io/manuals/1.0/en/tutorial.html"
             >
               Tutorial
             </a>
@@ -111,7 +111,7 @@ export default function QuickStartPage() {
             Next
           </p>
           <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-            次に読むページ。
+            What to read next.
           </h2>
           <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
             {nextReads.map((item) => (

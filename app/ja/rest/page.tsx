@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "Web原則とREST | BEAR.Sunday",
@@ -67,7 +67,7 @@ const classicPillars = [
 
 export default function RestPage() {
   return (
-    <PageShell>
+    <PageShell path="rest">
       <PageHero
         eyebrow="Web principles"
         lead="URI、統一インターフェース、ハイパーメディア。RESTは四半世紀にわたってWebを支えてきた、枯れた設計です。BEAR.Sundayはそれを外部APIだけでなく、アプリケーションの内側全体の制約にします。新しさではなく、正しさが残っているからです。"
@@ -249,13 +249,13 @@ export default function RestPage() {
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <a
               className="rounded-md bg-[#9ee0bb] px-5 py-3 text-center text-sm font-semibold text-[#111611] transition hover:bg-[#c0f0d3]"
-              href="/tech"
+              href="/ja/tech"
             >
               並列性として見る
             </a>
             <a
               className="rounded-md border border-white/20 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-white/10"
-              href="/ai-era"
+              href="/ja/ai-era"
             >
               AIの道具として見る
             </a>

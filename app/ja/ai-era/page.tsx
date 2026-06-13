@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "AI時代 | BEAR.Sunday",
@@ -158,7 +158,7 @@ const restAgentPoints = [
 
 export default function AiEraPage() {
   return (
-    <PageShell>
+    <PageShell path="ai-era">
       <PageHero
         eyebrow="AI-ready architecture"
         lead="AIエージェントがコードを読み、変更し、説明するなら、曖昧な規約よりも、コード上に残る意味が重要です。BEAR.Sundayは、アプリケーションの意味をリソース、属性、スキーマ、リンクとして残します。"
@@ -284,7 +284,7 @@ export default function AiEraPage() {
               </p>
               <a
                 className="mt-4 inline-flex text-sm font-semibold text-[#1f7a5a] underline"
-                href="/alps"
+                href="/ja/alps"
               >
                 ALPSをもっと知る →
               </a>

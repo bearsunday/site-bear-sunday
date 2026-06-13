@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "もたらす価値 | BEAR.Sunday",
@@ -77,7 +77,7 @@ const chain = [
 
 export default function ValuePage() {
   return (
-    <PageShell>
+    <PageShell path="value">
       <PageHero
         eyebrow="Value"
         lead="BEAR.Sundayの価値は、生産性、拡張性、パフォーマンスといった一般語だけでは説明しきれません。価値の源泉は、Resource、context-agnostic DI、AOP、CDN中心のRead Modelが、設計から運用まで同じ意味を保つところにあります。このページは、技術がどう価値に変わるか、その因果をたどります。"
@@ -190,7 +190,7 @@ export default function ValuePage() {
             </h2>
             <a
               className="mt-8 inline-flex rounded-md bg-[#245c7a] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1c495f]"
-              href="/business"
+              href="/ja/business"
             >
               事業の言葉で読む
             </a>

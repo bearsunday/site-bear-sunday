@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
-import "./globals.css";
 
 export const metadata: Metadata = {
   title: "BEAR.Sunday | Resource Oriented PHP Framework",
   description:
     "A promotion site conveying the declarativity, explicitness, and traceability of BEAR.Sunday.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/icon.png",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
   },
 };
 
-export default function RootLayout({
+export default function EnLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="ja">
-      <body>{children}</body>
-    </html>
-  );
+  return <>{children}</>;
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHero, PageShell } from "../_components/site-chrome";
+import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
   title: "ALPS — 意味を一箇所に置く | BEAR.Sunday",
@@ -43,7 +43,7 @@ const threeDoors = [
 
 export default function AlpsPage() {
   return (
-    <PageShell>
+    <PageShell path="alps">
       <PageHero
         eyebrow="Semantic SSOT"
         lead="コードは安くなりました。けれど「何を作るべきか」という意味は、いまも高いままです。同じ業務上の事実が、仕様書・コード・テスト・DB制約・FAQへ、別々の方言で何度も書き写される。ALPSは、その意味だけを書く小さな仕様です。BEAR.Sundayは、ここから実装・ドキュメント・AIの道具を射影します。"
@@ -257,7 +257,7 @@ export default function AlpsPage() {
             </a>
             <a
               className="rounded-lg border border-black/10 bg-[#f4f7f3] p-6 transition hover:bg-white"
-              href="/ai-era"
+              href="/ja/ai-era"
             >
               <h3 className="text-2xl font-black">AI時代の価値へ戻る →</h3>
               <p className="mt-3 leading-7 text-[#465148]">
