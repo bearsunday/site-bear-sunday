@@ -284,9 +284,9 @@ export default function AiEraPage() {
               </p>
               <a
                 className="mt-4 inline-flex text-sm font-semibold text-[#1f7a5a] underline"
-                href="https://www.app-state-diagram.com/"
+                href="/alps"
               >
-                ALPSと状態遷移図について →
+                ALPSをもっと知る →
               </a>
             </aside>
           </div>
