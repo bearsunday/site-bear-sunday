@@ -98,8 +98,9 @@ Highlights:
   gallery to take in the code's *character*, not a cookbook. Curated cards:
   CacheableResponse, DonutCache (🍩 = "do not" cache), Cli, SQL (MediaQuery BDR).
   Fixed `#[Cacheable]` → `#[Loggable]` on a POST sample.
-- Home: a quiet closing tagline band —
-  *古典が、まだ知らなかった現代を用意していた。*
+- Home: briefly added a quiet closing tagline band
+  (*古典が、まだ知らなかった現代を用意していた。*), then removed it as too abrupt —
+  the same idea already lands in context on `/rest` (Web principles).
 - `/tech`: foregrounded the network cache as the apex of "design = performance" —
   *最も速いのは、計算しないこと。* with the historical note (REST/HTTP, 25+ years).
   Named **Data resource / Computed resource**. Return-type spectrum as a chip

@@ -18,11 +18,14 @@ the finer calibration that the copy is tuned to:
   Show the idea; don't imply adoption. No star counts, no "N companies use it."
 - **No manifesto paragraphs.** Let a concrete thing carry the point; trust the
   reader to draw the conclusion.
-- **One evocative line, earned.** The home closing band —
+- **One evocative line, earned — and in the right place.** The flagship example is
+  the `/rest` (Web principles) closing line —
   *古典が、まだ知らなかった現代を用意していた。* /
-  *The classics had already prepared a world they could not yet see.* — works
-  *because* everything around it is restrained. Don't add a second such line per
-  page.
+  *The classics had already prepared the modernity no one foresaw.* — which lands
+  *because* the page has just made the "REST prepared for modernity" argument and
+  everything around it is restrained. A near-identical band was briefly tried on
+  the home page and removed: the same line felt abrupt without that build-up. So:
+  at most one such line per page, and only where the context has earned it.
 - **`/examples` is titled "Code / コード", not "Examples / 実装例", on purpose.** It
   is a gallery to take in the *character* of the code (uniform, small
   declarations), not a cookbook to look things up. The same-shaped cards are the
