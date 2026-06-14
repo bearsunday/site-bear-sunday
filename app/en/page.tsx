@@ -435,14 +435,6 @@ final class Profile extends ResourceObject
         </div>
       </section>
 
-      <section className="border-y border-black/10 bg-[#111611] px-5 py-24 text-white sm:px-8 lg:py-36">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="text-3xl font-black leading-tight sm:text-5xl sm:leading-[1.15]">
-            The classics had already prepared a world they could not yet see.
-          </p>
-        </div>
-      </section>
-
       <section id="start" className="bg-white px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
