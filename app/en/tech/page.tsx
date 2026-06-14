@@ -116,7 +116,7 @@ const performancePoints = [
   },
   {
     title: "Switch embed representation to parallel execution",
-    text: "BEAR.Async lets you switch #[Embed] resources from sequential to parallel fetching without changing resource code. Whether HTML or JSON representation, embedded resources are fetched in parallel—execution strategy changes through Module swap alone.",
+    text: "BEAR.Async lets you switch #[Embed] resources from sequential to parallel without changing resource code. It is not only data fetching that runs in parallel—each embedded resource is also rendered to its representation in parallel. Whether HTML or JSON, the execution strategy changes through a Module swap alone.",
   },
 ];
 
