@@ -406,13 +406,31 @@ export default function TechPage() {
               Speed is a consequence of design, not optimization.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              BEAR.Sunday places performance extremely deep in the design. Not after-the-fact optimization
-              to go faster—the very existence of SQL, resource graphs, DI graphs, and root objects as
-              explicit structures leads to performance. That's why they can be inspected before shipping,
-              and at runtime switched to batching, DI compilation, root object caching, and parallelization.
+              BEAR.Sunday places performance deep in the design — not as after-the-fact optimization.
+              And the greatest performance comes not from computing faster, but from not computing at all.
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 rounded-lg border border-black/10 bg-[#111611] p-8 text-white">
+            <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+              the fastest computation is none
+            </p>
+            <p className="mt-3 text-2xl font-black sm:text-3xl">
+              The fastest computation is none.
+            </p>
+            <p className="mt-4 text-lg leading-8 text-white/76">
+              An essentially static resource representation is served from the CDN. When nothing has changed,
+              ETag and 304 keep the request from reaching PHP or the database at all. Before competing on
+              language or runtime speed, the surest win is to skip the computation entirely. This is the peak of
+              design-as-performance, delivered by the event-driven cache (Read Model generation) shown in the
+              first half of this page.
+            </p>
+          </div>
+          <p className="mt-10 max-w-4xl text-lg leading-8 text-[#3b463d]">
+            When computation is needed, the structure itself removes waste. Because SQL, the resource graph, the
+            DI graph, and the root object exist explicitly, you can inspect before shipping and switch on batching,
+            DI compilation, root-object cache, and parallelization at runtime.
+          </p>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {performancePoints.map((item) => (
               <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
                 <h3 className="text-2xl font-black">{item.title}</h3>

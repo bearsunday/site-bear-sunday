@@ -402,12 +402,30 @@ export default function TechPage() {
               速さは、最適化ではなく設計の帰結。
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              BEAR.Sundayは、極端なほどパフォーマンスを設計の中に置きます。速くするための後付け最適化ではなく、
-              SQL、リソースグラフ、DI graph、root objectが明示的な構造として存在すること自体が性能につながります。
-              だから出荷前に検査でき、実行時にはバッチ化、DI compile、ルートオブジェクトキャッシュ、並列化へ切り替えられます。
+              BEAR.Sundayは、極端なほどパフォーマンスを設計の中に置きます。速くするための後付け最適化ではありません。
+              そして最大の性能は、計算を速くすることではなく、そもそも計算しないことから生まれます。
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 rounded-lg border border-black/10 bg-[#111611] p-8 text-white">
+            <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+              the fastest computation is none
+            </p>
+            <p className="mt-3 text-2xl font-black sm:text-3xl">
+              最も速いのは、計算しないこと。
+            </p>
+            <p className="mt-4 text-lg leading-8 text-white/76">
+              本質的に静的なリソース表現は、CDNから配信されます。変更がなければ、ETagと304によって
+              リクエストはPHPにもDBにも届きません。言語やランタイムの速度を競う前に、実行そのものを避ける
+              ——これが、本ページ前半で見たイベント駆動キャッシュ(Read Modelの生成)がもたらす、
+              設計＝パフォーマンスの頂点です。
+            </p>
+          </div>
+          <p className="mt-10 max-w-4xl text-lg leading-8 text-[#3b463d]">
+            計算が必要なときも、構造そのものが無駄を省きます。SQL、リソースグラフ、DI graph、root objectが
+            明示的に存在するので、出荷前に検査でき、実行時にはバッチ化、DIコンパイル、ルートオブジェクトキャッシュ、
+            並列化へ切り替えられます。
+          </p>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {performancePoints.map((item) => (
               <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
                 <h3 className="text-2xl font-black">{item.title}</h3>
