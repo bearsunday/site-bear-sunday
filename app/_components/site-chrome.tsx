@@ -92,7 +92,7 @@ export function SiteFooter({ lang = "ja" }: { lang?: Lang }) {
         <img
           alt=""
           className="absolute left-1/2 top-1/2 hidden h-6 w-6 -translate-x-1/2 -translate-y-1/2 opacity-10 lg:block"
-          src="/favicon-48.png"
+          src="https://bearsunday.github.io/favicon.ico"
         />
         <div className="flex flex-wrap gap-5 font-semibold text-[#111611]">
           <a href="https://bearsunday.github.io/">{l.footerOfficial}</a>
