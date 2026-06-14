@@ -93,7 +93,18 @@ const performancePoints = [
   },
   {
     title: "DataLoaderがN+1をバッチ化する",
-    text: "linkCrawlでリソースグラフを構成するとき、子リソースごとのDBアクセスはDataLoaderでまとめられます。複数のリソースリクエストを、1つの効率的なクエリへ変換できます。",
+    text: (
+      <>
+        linkCrawlでリソースグラフを構成するとき、子リソースごとのDBアクセスは、GraphQLでも使われる
+        <a
+          className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+          href="https://github.com/graphql/dataloader"
+        >
+          DataLoader
+        </a>
+        パターンでまとめられます。複数のリソースリクエストを、1つの効率的なクエリへ変換できます。
+      </>
+    ),
   },
   {
     title: "DIコンパイラで起動コストを抑える",

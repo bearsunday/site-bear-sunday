@@ -93,7 +93,18 @@ const performancePoints = [
   },
   {
     title: "DataLoader batches N+1",
-    text: "When linkCrawl constructs a resource graph, per-child-resource DB access is batched by DataLoader. Multiple resource requests are converted into a single efficient query.",
+    text: (
+      <>
+        When linkCrawl constructs a resource graph, per-child-resource DB access is batched by the{" "}
+        <a
+          className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+          href="https://github.com/graphql/dataloader"
+        >
+          DataLoader
+        </a>{" "}
+        pattern (also used in GraphQL). Multiple resource requests are converted into a single efficient query.
+      </>
+    ),
   },
   {
     title: "DI compiler curbs startup cost",
