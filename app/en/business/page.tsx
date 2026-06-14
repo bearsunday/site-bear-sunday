@@ -163,6 +163,49 @@ export default function BusinessPage() {
         </div>
       </section>
 
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#245c7a]">
+              Speed, resilience, and cost
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Fast experience, resilience, and lower cost — from one design.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#36434c]">
+              When nothing has changed, the representation is served from the CDN and the server does no work.
+              Even when freshness must be checked every time, an ETag conditional request returns 304 — no
+              recomputation, no resending of the body. Compute and network resources translate directly into
+              running cost. So the cache design is not merely a speed trick: it lowers cost while raising speed and
+              resilience at the same time — a gain for users, operations, and the business alike.
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3">
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">user</p>
+              <h3 className="mt-3 text-2xl font-black">Fast experience</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                Delivered instantly from a CDN close to the user; on return visits, 304 keeps the wait to a minimum.
+              </p>
+            </article>
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">operations</p>
+              <h3 className="mt-3 text-2xl font-black">Resilience</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                Under traffic spikes, delivery without computation absorbs most of the load, making the service harder to knock over.
+              </p>
+            </article>
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">business</p>
+              <h3 className="mt-3 text-2xl font-black">Lower cost</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                A server that never runs is never billed. Cutting compute and network is, directly, cutting the cost of keeping the service alive.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section className="border-y border-black/10 bg-[#111611] px-5 py-20 text-white sm:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
