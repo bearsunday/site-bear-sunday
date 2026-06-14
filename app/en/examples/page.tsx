@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CtaBand, PageHero, PageShell } from "../../_components/site-chrome";
 
 export const metadata: Metadata = {
-  title: "Examples | BEAR.Sunday",
+  title: "Code | BEAR.Sunday",
   description:
     "Code examples illustrating BEAR.Sunday's Resource, DI, AOP, and Hypermedia.",
 };
@@ -120,7 +120,7 @@ export default function ExamplesPage() {
   return (
     <PageShell lang="en" path="examples">
       <PageHero
-        eyebrow="Examples"
+        eyebrow="Code"
         lead="BEAR.Sunday code is centered on resources. Inputs, dependencies, links, and cross-cutting concerns remain visible, allowing the reader to trace the meaning of the application."
         title="Small code that preserves design boundaries."
       />

@@ -407,7 +407,7 @@ export default function Home() {
               className="mt-8 inline-flex rounded-md bg-[#245c7a] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1c495f]"
               href="/ja/examples"
             >
-              実装例を見る
+              コードを見る
             </a>
           </div>
           <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.25)]">

@@ -41,7 +41,7 @@ const nextReads = [
   },
   {
     href: "/examples",
-    title: "コード例を見る",
+    title: "コードを見る",
     text: "リソース、依存注入、AOP、Hypermediaの実装イメージ。",
   },
 ];

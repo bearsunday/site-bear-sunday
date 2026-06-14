@@ -41,7 +41,7 @@ const nextReads = [
   },
   {
     href: "/en/examples",
-    title: "See code examples",
+    title: "See the code",
     text: "Implementation examples of resources, dependency injection, AOP, and Hypermedia.",
   },
 ];
