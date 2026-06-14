@@ -37,7 +37,7 @@ const businessReasons = [
   },
   {
     title: "Make data access predictable",
-    text: "SQL has decades of proven track record, with accumulated knowledge around execution plans, indexing, and tuning. AI assists with the difficulty of writing; standard technology preserves operational clarity.",
+    text: "SQL has a decades-long track record, with accumulated knowledge around execution plans, indexing, and tuning. AI assists with the difficulty of writing; standard technology preserves operational clarity.",
   },
   {
     title: "Reduce performance issues before shipping",
@@ -122,7 +122,7 @@ const bankruptcySignals = [
   "More budget goes to investigating and adjusting existing code than to adding features",
   "The number of people who can make decisions shrinks as personnel transfer or leave",
   "Inability to keep up with a framework's breaking changes, left stranded on an old version",
-  "Wanting to start new channels or AI initiatives, but the existing system acts as a shackle",
+  "Wanting to start new channels or AI initiatives, but the existing system holds you back",
 ];
 
 export default function BusinessPage() {
