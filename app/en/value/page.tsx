@@ -45,8 +45,8 @@ const audienceValues = [
   },
   {
     audience: "For users",
-    headline: "Fast, stable, reaching the same functionality.",
-    text: "User value appears in experience, not in framework names. Inherently static content is served from CDN; unchanged content returns 304 via ETag. More requests reach neither origin nor DB, making responses faster and readable scope wider even during outages.",
+    headline: "The same features, fast and reliable.",
+    text: "User value appears in experience, not in framework names. Inherently static content is served from CDN; unchanged content returns 304 via ETag. More requests reach neither origin nor DB, so responses are faster, and more of the site stays readable even during outages.",
     points: [
       "CDN-centric Read Models improve response speed and availability",
       "Dependency resolution prevents stale representations and stale ETags",
@@ -72,7 +72,7 @@ const chain = [
   "AOP applies cross-cutting concerns",
   "Generate representation as a Read Model",
   "Connect to CDN, ETag, 304",
-  "Returns as speed, maintainability, continuity",
+  "Comes back as speed, maintainability, and continuity",
 ];
 
 export default function ValuePage() {
