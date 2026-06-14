@@ -34,7 +34,7 @@ const examples = [
     title: "AOP",
     caption: "横断的関心は属性とInterceptorへ逃がす。",
     code: `#[Transactional]
-#[Cacheable(expirySecond: 30)]
+#[Loggable]
 public function onPost(string $name): static
 {
     $this->body = $this->command->create($name);
@@ -50,6 +50,60 @@ public function onPost(string $name): static
 public function onGet(int $id): static
 {
     return $this;
+}`,
+  },
+  {
+    title: "CacheableResponse",
+    caption: "キャッシュは時間ではなく、依存の変化で無効化される。",
+    code: `use BEAR\\RepositoryModule\\Annotation\\CacheableResponse;
+
+#[CacheableResponse]
+public function onGet(string $id): static
+{
+    $this->body = $this->blog->entry($id);
+
+    return $this;
+}`,
+  },
+  {
+    title: "DonutCache",
+    caption: "ページはキャッシュ、コメントの“穴”だけ毎回新鮮に。",
+    code: `#[DonutCache]
+#[Embed(rel: 'comment', src: 'page://self/blog/comment')]
+public function onGet(int $id): static
+{
+    $this->body += ['article' => '...'];
+
+    return $this;
+}`,
+  },
+  {
+    title: "CLI",
+    caption: "同じリソースは、属性ひとつでCLIにもなる。",
+    code: `use BEAR\\Cli\\Attribute\\Cli;
+use BEAR\\Cli\\Attribute\\Option;
+
+#[Cli(name: 'greet', description: '多言語で挨拶', output: 'greeting')]
+public function onGet(
+    #[Option(shortName: 'n')] string $name,
+    #[Option(shortName: 'l')] string $lang = 'en',
+): static {
+    // 同じ onGet が Web でも CLI でも動く
+    return $this;
+}`,
+  },
+  {
+    title: "SQL",
+    caption: "SQLはSQLのまま、型を渡し型で受け取る。現在時刻もDIが入れる。",
+    code: `interface OrderRepositoryInterface
+{
+    // 戻り値の型が意図:不変ドメインオブジェクト
+    #[DbQuery('order_item', factory: OrderFactory::class)]
+    public function getOrder(string $id): Order;
+
+    // 型のある引数。現在時刻はDIが束縛。戻り値の型 = 更新行数
+    #[DbQuery('order_close')]
+    public function close(string $id, DateTimeInterface $at): AffectedRows;
 }`,
   },
 ];
@@ -95,7 +149,7 @@ export default function ExamplesPage() {
               What this enables
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              コード例は、使い方ではなく境界を示す。
+              どれも同じ小さな宣言。だから長く読める。
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               リソースが状態を持ち、表現や転送は外側へ分かれる。依存は注入され、

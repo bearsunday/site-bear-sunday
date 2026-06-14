@@ -34,7 +34,7 @@ const examples = [
     title: "AOP",
     caption: "Cross-cutting concerns are offloaded to attributes and Interceptors.",
     code: `#[Transactional]
-#[Cacheable(expirySecond: 30)]
+#[Loggable]
 public function onPost(string $name): static
 {
     $this->body = $this->command->create($name);
@@ -50,6 +50,60 @@ public function onPost(string $name): static
 public function onGet(int $id): static
 {
     return $this;
+}`,
+  },
+  {
+    title: "CacheableResponse",
+    caption: "Cache is invalidated by a dependency change, not by elapsed time.",
+    code: `use BEAR\\RepositoryModule\\Annotation\\CacheableResponse;
+
+#[CacheableResponse]
+public function onGet(string $id): static
+{
+    $this->body = $this->blog->entry($id);
+
+    return $this;
+}`,
+  },
+  {
+    title: "DonutCache",
+    caption: "Cache the page; keep the comment “hole” fresh on every request.",
+    code: `#[DonutCache]
+#[Embed(rel: 'comment', src: 'page://self/blog/comment')]
+public function onGet(int $id): static
+{
+    $this->body += ['article' => '...'];
+
+    return $this;
+}`,
+  },
+  {
+    title: "CLI",
+    caption: "The same resource also becomes a CLI with one attribute.",
+    code: `use BEAR\\Cli\\Attribute\\Cli;
+use BEAR\\Cli\\Attribute\\Option;
+
+#[Cli(name: 'greet', description: 'Greet in many languages', output: 'greeting')]
+public function onGet(
+    #[Option(shortName: 'n')] string $name,
+    #[Option(shortName: 'l')] string $lang = 'en',
+): static {
+    // the same onGet serves both the web and the CLI
+    return $this;
+}`,
+  },
+  {
+    title: "SQL",
+    caption: "SQL stays SQL — pass types, receive types; even the clock is injected.",
+    code: `interface OrderRepositoryInterface
+{
+    // the return type is the intent: an immutable domain object
+    #[DbQuery('order_item', factory: OrderFactory::class)]
+    public function getOrder(string $id): Order;
+
+    // typed argument; the clock is injected; return type = affected rows
+    #[DbQuery('order_close')]
+    public function close(string $id, DateTimeInterface $at): AffectedRows;
 }`,
   },
 ];
@@ -95,7 +149,7 @@ export default function ExamplesPage() {
               What this enables
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Code examples show boundaries, not just usage.
+              All just the same small declaration — which is why it stays readable.
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               Resources hold state; representation and transport are separated to the outside.
