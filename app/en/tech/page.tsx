@@ -437,6 +437,43 @@ export default function TechPage() {
               </article>
             ))}
           </div>
+          <p className="mt-10 max-w-4xl text-sm leading-7 text-[#465148]">
+            The return type declares what you want: <span className="font-mono">User</span> (an immutable domain object), <span className="font-mono">array&lt;User&gt;</span> (a list), <span className="font-mono">AffectedRows</span> (row count), <span className="font-mono">InsertedRow</span> (id and bound values), <span className="font-mono">Pages&lt;User&gt;</span> (lazy pagination), <span className="font-mono">void</span> (execute only).
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Stream
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Huge content, too — just stream it through the body.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              A resource only decides its state — and that holds even when the state is a stream. Assign a file
+              pointer to the body and StreamRenderer streams the HTTP output, serving content larger than PHP&apos;s
+              memory limit with low memory use. It can mix with ordinary values and coexists with existing renderers.
+            </p>
+          </div>
+          <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.2)]">
+            <code>{`use BEAR\\Streamer\\StreamTransferInject;
+
+class Download extends ResourceObject
+{
+    use StreamTransferInject;
+
+    public function onGet(): static
+    {
+        // even data that won't fit in memory — just put it in the body
+        $this->body = fopen('/path/to/big.csv', 'r');
+
+        return $this;
+    }
+}`}</code>
+          </pre>
         </div>
       </section>
 

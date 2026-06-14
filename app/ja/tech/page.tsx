@@ -431,6 +431,43 @@ export default function TechPage() {
               </article>
             ))}
           </div>
+          <p className="mt-10 max-w-4xl text-sm leading-7 text-[#465148]">
+            戻り値の型が、何を取りたいかを宣言します。<span className="font-mono">User</span>(不変ドメインオブジェクト)、<span className="font-mono">array&lt;User&gt;</span>(一覧)、<span className="font-mono">AffectedRows</span>(更新行数)、<span className="font-mono">InsertedRow</span>(idと束縛値)、<span className="font-mono">Pages&lt;User&gt;</span>(遅延評価のページング)、<span className="font-mono">void</span>(実行のみ)。
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Stream
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              巨大なコンテンツも、bodyに流すだけ。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              リソースは状態を決めるだけ——その状態がストリームでも同じです。bodyにファイルポインタを入れると、
+              StreamRendererがHTTP出力をストリーム化し、PHPのメモリ制限を超える大きさでも低メモリで配信します。
+              通常の値と混在もでき、既存のレンダラーと共存します。
+            </p>
+          </div>
+          <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.2)]">
+            <code>{`use BEAR\\Streamer\\StreamTransferInject;
+
+class Download extends ResourceObject
+{
+    use StreamTransferInject;
+
+    public function onGet(): static
+    {
+        // メモリに載らない巨大データも、bodyに入れるだけ
+        $this->body = fopen('/path/to/big.csv', 'r');
+
+        return $this;
+    }
+}`}</code>
+          </pre>
         </div>
       </section>
 
