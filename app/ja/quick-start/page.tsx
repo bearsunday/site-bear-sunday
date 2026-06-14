@@ -30,17 +30,17 @@ composer sa`,
 
 const nextReads = [
   {
-    href: "/architecture",
+    href: "/ja/architecture",
     title: "設計を理解する",
     text: "Resource、DI、AOP、Contextがどのように役割を分けるか。",
   },
   {
-    href: "/ai-era",
+    href: "/ja/ai-era",
     title: "AI時代の価値を見る",
     text: "宣言性、明示性、トレーサビリティがなぜ効くのか。",
   },
   {
-    href: "/examples",
+    href: "/ja/examples",
     title: "コードを見る",
     text: "リソース、依存注入、AOP、Hypermediaの実装イメージ。",
   },

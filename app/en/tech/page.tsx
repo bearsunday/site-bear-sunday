@@ -441,9 +441,24 @@ export default function TechPage() {
             <p className="font-mono text-xs uppercase text-[#667068]">
               return type = intent
             </p>
-            <p className="mt-3 text-base leading-8 text-[#3b463d]">
-              The return type declares what you want: <span className="font-mono">User</span> (an immutable domain object), <span className="font-mono">array&lt;User&gt;</span> (a list), <span className="font-mono">AffectedRows</span> (row count), <span className="font-mono">InsertedRow</span> (id and bound values), <span className="font-mono">Pages&lt;User&gt;</span> (lazy pagination), <span className="font-mono">void</span> (execute only).
+            <p className="mt-3 leading-8 text-[#3b463d]">
+              The return type declares what you want.
             </p>
+            <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { t: "User", d: "an immutable domain object" },
+                { t: "array<User>", d: "a list" },
+                { t: "AffectedRows", d: "row count" },
+                { t: "InsertedRow", d: "id and bound values" },
+                { t: "Pages<User>", d: "lazy pagination" },
+                { t: "void", d: "execute only" },
+              ].map((item) => (
+                <div className="flex items-baseline gap-3 rounded-md border border-black/10 bg-[#f4f7f3] px-4 py-3" key={item.t}>
+                  <code className="shrink-0 font-mono text-sm font-bold text-[#1f7a5a]">{item.t}</code>
+                  <span className="text-sm leading-6 text-[#465148]">{item.d}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

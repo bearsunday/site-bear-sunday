@@ -435,9 +435,24 @@ export default function TechPage() {
             <p className="font-mono text-xs uppercase text-[#667068]">
               return type = intent
             </p>
-            <p className="mt-3 text-base leading-8 text-[#3b463d]">
-              戻り値の型が、何を取りたいかを宣言します。<span className="font-mono">User</span>(不変ドメインオブジェクト)、<span className="font-mono">array&lt;User&gt;</span>(一覧)、<span className="font-mono">AffectedRows</span>(更新行数)、<span className="font-mono">InsertedRow</span>(idと束縛値)、<span className="font-mono">Pages&lt;User&gt;</span>(遅延評価のページング)、<span className="font-mono">void</span>(実行のみ)。
+            <p className="mt-3 leading-8 text-[#3b463d]">
+              戻り値の型が、何を取りたいかを宣言します。
             </p>
+            <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { t: "User", d: "不変ドメインオブジェクト" },
+                { t: "array<User>", d: "一覧" },
+                { t: "AffectedRows", d: "更新行数" },
+                { t: "InsertedRow", d: "idと束縛値" },
+                { t: "Pages<User>", d: "遅延評価のページング" },
+                { t: "void", d: "実行のみ" },
+              ].map((item) => (
+                <div className="flex items-baseline gap-3 rounded-md border border-black/10 bg-[#f4f7f3] px-4 py-3" key={item.t}>
+                  <code className="shrink-0 font-mono text-sm font-bold text-[#1f7a5a]">{item.t}</code>
+                  <span className="text-sm leading-6 text-[#465148]">{item.d}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
