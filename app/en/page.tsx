@@ -188,7 +188,7 @@ export default function EnHome() {
               className="mt-8 inline-flex rounded-md bg-[#9ee0bb] px-5 py-3 text-sm font-semibold text-[#111611] transition hover:bg-[#c0f0d3]"
               href="/en/rest"
             >
-              See through Web principles
+              View through Web principles
             </a>
           </div>
           <div className="grid grid-cols-1 gap-4">
@@ -322,7 +322,7 @@ export default function EnHome() {
               AI-ready architecture
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              In the AI era, code that doesn&apos;t require guessing wins.
+              In the AI era, code you don&apos;t have to guess about wins.
             </h2>
             <p className="mt-6 text-lg leading-8 text-white/74">
               In an age where AI agents read, modify, and review code, declarativity, explicitness, and traceability
@@ -407,7 +407,7 @@ export default function EnHome() {
               className="mt-8 inline-flex rounded-md bg-[#245c7a] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1c495f]"
               href="/en/examples"
             >
-              See code examples
+              See the code
             </a>
           </div>
           <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.25)]">
@@ -432,6 +432,14 @@ final class Profile extends ResourceObject
     }
 }`}</code>
           </pre>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#111611] px-5 py-24 text-white sm:px-8 lg:py-36">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="text-3xl font-black leading-tight sm:text-5xl sm:leading-[1.15]">
+            The classics had already prepared a world they could not yet see.
+          </p>
         </div>
       </section>
 

@@ -151,7 +151,7 @@ const restAgentPoints = [
     text: "Maintain conversation history across multiple executions, allowing multi-stage workflows of investigation, review, and revision to proceed without rebuilding context each time.",
   },
   {
-    title: "Per-execution policy variation",
+    title: "Vary policy per execution",
     text: "Narrow the list of provided tools per execution. Apply read-only, cost caps, and safety policies without changing the agent itself.",
   },
 ];
@@ -186,7 +186,7 @@ export default function AiEraPage() {
               Design principles for AI
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Design principles become AI's decision material.
+              Design principles become what AI reasons from.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#36434c]">
               BEAR.Sunday is not a framework for brandishing names like Clean Architecture, CQS/CQRS, or DDD.
@@ -314,7 +314,7 @@ export default function AiEraPage() {
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
               In the AI era, some say more popular frameworks have an advantage.
-              But more public code doesn't directly mean more correct context.
+              But more public code doesn't automatically mean better context.
               Extracting average shapes from a corpus that mixes different versions, quality levels,
               and design decisions doesn't necessarily lead to clean changes.
             </p>
@@ -342,7 +342,7 @@ export default function AiEraPage() {
               Agent workflow
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Readable units enable delegating changes.
+              Readable units make changes you can delegate.
             </h2>
             <p className="mt-5 text-lg leading-8 text-white/76">
               What's hard for AI isn't the volume of code—it's meaning being scattered across multiple places.
@@ -376,7 +376,7 @@ export default function AiEraPage() {
               Strict types strengthen explicitness and locality.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              In code that AI modifies, ambiguous arrays and implicit structures become room for guesswork.
+              In code that AI modifies, ambiguous arrays and implicit structures leave room for guesswork.
               BEAR.Sunday uses PHPStan and Psalm at high static analysis levels, giving even arrays
               meaning as shapes and domain types. Types are not just checks—they are specifications
               for AI to read.

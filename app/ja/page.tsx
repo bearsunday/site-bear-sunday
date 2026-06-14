@@ -407,7 +407,7 @@ export default function Home() {
               className="mt-8 inline-flex rounded-md bg-[#245c7a] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1c495f]"
               href="/ja/examples"
             >
-              実装例を見る
+              コードを見る
             </a>
           </div>
           <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.25)]">
@@ -432,6 +432,14 @@ final class Profile extends ResourceObject
     }
 }`}</code>
           </pre>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#111611] px-5 py-24 text-white sm:px-8 lg:py-36">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="text-3xl font-black leading-tight sm:text-5xl sm:leading-[1.15]">
+            古典が、まだ知らなかった現代を用意していた。
+          </p>
         </div>
       </section>
 

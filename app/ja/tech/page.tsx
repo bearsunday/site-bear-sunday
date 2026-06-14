@@ -93,7 +93,18 @@ const performancePoints = [
   },
   {
     title: "DataLoaderがN+1をバッチ化する",
-    text: "linkCrawlでリソースグラフを構成するとき、子リソースごとのDBアクセスはDataLoaderでまとめられます。複数のリソースリクエストを、1つの効率的なクエリへ変換できます。",
+    text: (
+      <>
+        linkCrawlでリソースグラフを構成するとき、子リソースごとのDBアクセスは、GraphQLでも使われる
+        <a
+          className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+          href="https://github.com/graphql/dataloader"
+        >
+          DataLoader
+        </a>
+        パターンでまとめられます。複数のリソースリクエストを、1つの効率的なクエリへ変換できます。
+      </>
+    ),
   },
   {
     title: "DIコンパイラで起動コストを抑える",
@@ -105,7 +116,7 @@ const performancePoints = [
   },
   {
     title: "Embed表現を並列実行へ切り替えられる",
-    text: "BEAR.Asyncを使うと、逐次取得されていた#[Embed]リソースを、リソースコードを変えずに並列取得へ切り替えられます。HTML表現でもJSON表現でも、埋め込まれたリソースは並列に取得され、Moduleの差し替えだけで実行戦略を変えられます。",
+    text: "BEAR.Asyncを使うと、逐次処理されていた#[Embed]リソースを、リソースコードを変えずに並列へ切り替えられます。並列化されるのはデータ取得だけではありません——埋め込まれた各リソースの、表現へのレンダリングも並列に実行されます。HTML表現でもJSON表現でも、Moduleの差し替えだけで実行戦略を変えられます。",
   },
 ];
 
@@ -266,12 +277,14 @@ export default function TechPage() {
                   <p className="mt-3 leading-7 text-white/76">
                     状態が変わらない限り、同じURIは同じ表現になる。イベントでのみ変化する。
                   </p>
+                  <p className="mt-4 text-sm font-bold text-[#9ee0bb]">データ型リソース</p>
                 </div>
                 <div className="rounded-md border border-white/16 p-5">
                   <h3 className="text-2xl font-black">本質的に動的</h3>
                   <p className="mt-3 leading-7 text-white/76">
-                    リクエストごとに意味が変わる。個人化、乱数、現在時刻、計算過程そのものが表現になる。
+                    リクエストごとに意味が変わる。個人化、ダッシュボード、現時点での情報、計算過程そのものが表現になる。
                   </p>
+                  <p className="mt-4 text-sm font-bold text-[#9ee0bb]">計算型リソース</p>
                 </div>
               </div>
             </div>
@@ -391,12 +404,30 @@ export default function TechPage() {
               速さは、最適化ではなく設計の帰結。
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              BEAR.Sundayは、極端なほどパフォーマンスを設計の中に置きます。速くするための後付け最適化ではなく、
-              SQL、リソースグラフ、DI graph、root objectが明示的な構造として存在すること自体が性能につながります。
-              だから出荷前に検査でき、実行時にはバッチ化、DI compile、ルートオブジェクトキャッシュ、並列化へ切り替えられます。
+              BEAR.Sundayは、極端なほどパフォーマンスを設計の中に置きます。速くするための後付け最適化ではありません。
+              そして最大の性能は、計算を速くすることではなく、そもそも計算しないことから生まれます。
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 rounded-lg border border-black/10 bg-[#111611] p-8 text-white">
+            <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+              the fastest computation is none
+            </p>
+            <p className="mt-3 text-2xl font-black sm:text-3xl">
+              最も速いのは、計算しないこと。
+            </p>
+            <p className="mt-4 text-lg leading-8 text-white/76">
+              本質的に静的なリソース表現は、変更がなければCDNから配信され、ETagと304により、
+              リクエストはPHPやDBに届く前に完結します。言語やランタイムの速度を競う前に、実行そのものを避ける。
+              四半世紀以上前にRESTへ組み込まれていたこの普遍的な設計思想こそが、イベント駆動キャッシュ
+              (Read Modelの生成)がもたらす「設計＝パフォーマンスの頂点」です。
+            </p>
+          </div>
+          <p className="mt-10 max-w-4xl text-lg leading-8 text-[#3b463d]">
+            計算が必要なときも、構造そのものが無駄を省きます。SQL、リソースグラフ、DI graph、root objectが
+            明示的に存在するので、出荷前に検査でき、実行時にはバッチ化、DIコンパイル、ルートオブジェクトキャッシュ、
+            並列化へ切り替えられます。
+          </p>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {performancePoints.map((item) => (
               <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
                 <h3 className="text-2xl font-black">{item.title}</h3>
@@ -431,6 +462,63 @@ export default function TechPage() {
               </article>
             ))}
           </div>
+          <div className="mt-8 rounded-lg border border-black/10 bg-white p-6">
+            <p className="font-mono text-xs uppercase text-[#667068]">
+              return type = intent
+            </p>
+            <p className="mt-3 leading-8 text-[#3b463d]">
+              戻り値の型が、何を取りたいかを宣言します。
+            </p>
+            <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { t: "User", d: "不変ドメインオブジェクト" },
+                { t: "array<User>", d: "一覧" },
+                { t: "AffectedRows", d: "更新行数" },
+                { t: "InsertedRow", d: "idと束縛値" },
+                { t: "Pages<User>", d: "遅延評価のページング" },
+                { t: "void", d: "実行のみ" },
+              ].map((item) => (
+                <div className="flex items-baseline gap-3 rounded-md border border-black/10 bg-[#f4f7f3] px-4 py-3" key={item.t}>
+                  <code className="shrink-0 font-mono text-sm font-bold text-[#1f7a5a]">{item.t}</code>
+                  <span className="text-sm leading-6 text-[#465148]">{item.d}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Stream
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              巨大なコンテンツも、bodyに流すだけ。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              リソースは状態を決めるだけ——その状態がストリームでも同じです。bodyにファイルポインタを入れると、
+              StreamRendererがHTTP出力をストリーム化し、PHPのメモリ制限を超える大きさでも低メモリで配信します。
+              通常の値とも混在できます。
+            </p>
+          </div>
+          <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.2)]">
+            <code>{`use BEAR\\Streamer\\StreamTransferInject;
+
+class Download extends ResourceObject
+{
+    use StreamTransferInject;
+
+    public function onGet(): static
+    {
+        // メモリに載らない巨大データも、bodyに入れるだけ
+        $this->body = fopen('/path/to/big.csv', 'r');
+
+        return $this;
+    }
+}`}</code>
+          </pre>
         </div>
       </section>
 

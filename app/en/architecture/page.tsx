@@ -59,6 +59,14 @@ const rayDiConcepts = [
     title: "Compiler",
     text: "Generates PHP factory code from the dependency graph, reducing container initialization overhead in production. The generated output has a traceable structure.",
   },
+  {
+    title: "Injection Point",
+    text: "A Provider can know where it is being injected (class, parameter, attributes) and provide accordingly — e.g. naming a Logger after the injecting class — so context decides the dependency without global references.",
+  },
+  {
+    title: "Matcher",
+    text: "Interceptors are not attached one by one; methods are searched by name or attribute and bound in bulk. With matchers like annotatedWith or startsWith, cross-cutting behavior is woven only into the matching methods.",
+  },
 ];
 
 const flow = [
@@ -91,11 +99,11 @@ const resourceDiscipline = [
 const connectPhilosophy = [
   {
     title: "Don't subsume",
-    text: "Authentication, validation, and ORM are not bundled in. The framework provides constraints; libraries remain choosable. The freedom to choose standards is preserved.",
+    text: "Authentication, validation, and ORM are not bundled in. The framework provides constraints; the libraries stay yours to choose. You keep the freedom to pick the standards you want.",
   },
   {
     title: "Connect independently",
-    text: "JSON Schema, HAL, OpenAPI, SQL, and PSR are used in forms that remain valid outside BEAR.Sunday. Your investment isn't locked into the framework.",
+    text: "JSON Schema, HAL, OpenAPI, SQL, and PSR are used in ways that stay valid outside BEAR.Sunday. Your investment isn't locked into the framework.",
   },
   {
     title: "Follow standards for what matters",
@@ -141,7 +149,7 @@ export default function ArchitecturePage() {
             ))}
           </div>
           <p className="mt-10 max-w-4xl text-lg leading-8 text-[#3b463d]">
-            Give one job to the connection point, pass by type, hide the other side. That's why
+            Give the connection point one job, pass by type, hide the other side. That's why
             it's replaceable and long-lasting. This is not a feature—it's a design philosophy, an aesthetic.
           </p>
         </div>
@@ -168,7 +176,7 @@ export default function ArchitecturePage() {
               Resource discipline
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              A Resource is not a place to write anything.
+              A Resource is not a place to put just anything.
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               BEAR.Sunday's resource orientation is not about creating URL-callable components.
@@ -203,7 +211,7 @@ export default function ArchitecturePage() {
               to assemble the object graph before execution.
             </p>
             <p className="mt-5 text-lg leading-8 text-white/76">
-              That's why BEAR.Sunday's DI is not convenient auto-wiring. It treats context, binding,
+              That's why BEAR.Sunday's DI is not auto-wiring for convenience. It treats context, binding,
               scope, and interceptors as object graph composition, and eliminates the ability of
               post-construction objects to reference configuration information.
             </p>

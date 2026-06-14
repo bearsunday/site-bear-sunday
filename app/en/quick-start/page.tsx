@@ -41,7 +41,7 @@ const nextReads = [
   },
   {
     href: "/en/examples",
-    title: "See code examples",
+    title: "See the code",
     text: "Implementation examples of resources, dependency injection, AOP, and Hypermedia.",
   },
 ];
@@ -51,7 +51,7 @@ export default function QuickStartPage() {
     <PageShell lang="en" path="quick-start">
       <PageHero
         eyebrow="Quick Start"
-        lead="You don't need to learn a large configuration upfront with BEAR.Sunday. Start by creating a single resource, calling it by URI, and testing it. That small unit expands to the Web, CLI, and documentation."
+        lead="You don't need to learn a lot of configuration up front with BEAR.Sunday. Start by creating a single resource, calling it by URI, and testing it. That small unit expands to the Web, CLI, and documentation."
         title="Start with one resource."
       />
 

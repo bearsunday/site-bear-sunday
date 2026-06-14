@@ -93,7 +93,18 @@ const performancePoints = [
   },
   {
     title: "DataLoader batches N+1",
-    text: "When linkCrawl constructs a resource graph, per-child-resource DB access is batched by DataLoader. Multiple resource requests are converted into a single efficient query.",
+    text: (
+      <>
+        When linkCrawl constructs a resource graph, per-child-resource DB access is batched by the{" "}
+        <a
+          className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+          href="https://github.com/graphql/dataloader"
+        >
+          DataLoader
+        </a>{" "}
+        pattern (also used in GraphQL). Multiple resource requests are converted into a single efficient query.
+      </>
+    ),
   },
   {
     title: "DI compiler curbs startup cost",
@@ -105,7 +116,7 @@ const performancePoints = [
   },
   {
     title: "Switch embed representation to parallel execution",
-    text: "BEAR.Async lets you switch #[Embed] resources from sequential to parallel fetching without changing resource code. Whether HTML or JSON representation, embedded resources are fetched in parallel—execution strategy changes through Module swap alone.",
+    text: "BEAR.Async lets you switch #[Embed] resources from sequential to parallel without changing resource code. It is not only data fetching that runs in parallel—each embedded resource is also rendered to its representation in parallel. Whether HTML or JSON, the execution strategy changes through a Module swap alone.",
   },
 ];
 
@@ -267,12 +278,14 @@ export default function TechPage() {
                   <p className="mt-3 leading-7 text-white/76">
                     As long as state doesn't change, the same URI yields the same representation. Changes only on events.
                   </p>
+                  <p className="mt-4 text-sm font-bold text-[#9ee0bb]">Data resource</p>
                 </div>
                 <div className="rounded-md border border-white/16 p-5">
                   <h3 className="text-2xl font-black">Inherently dynamic</h3>
                   <p className="mt-3 leading-7 text-white/76">
-                    Meaning changes with each request. Personalization, random numbers, current time—the computation process itself is the representation.
+                    Meaning changes with each request. Personalization, dashboards, up-to-the-moment information—the computation process itself is the representation.
                   </p>
+                  <p className="mt-4 text-sm font-bold text-[#9ee0bb]">Computed resource</p>
                 </div>
               </div>
             </div>
@@ -314,7 +327,7 @@ export default function TechPage() {
             </p>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               In BEAR.Sunday, #[Embed] resources and explicitly declared dependency URIs become tags.
-              When AOP detects a change, server-side caches and ETags are cascading-invalidated, and
+              When AOP detects a change, server-side caches and ETags are invalidated in cascade, and
               where possible, the same dependency relationships propagate to CDN Surrogate-Keys.
               Dependency resolution doesn't stay confined inside the server.
             </p>
@@ -395,13 +408,31 @@ export default function TechPage() {
               Speed is a consequence of design, not optimization.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              BEAR.Sunday places performance extremely deep in the design. Not after-the-fact optimization
-              to go faster—the very existence of SQL, resource graphs, DI graphs, and root objects as
-              explicit structures leads to performance. That's why they can be inspected before shipping,
-              and at runtime switched to batching, DI compilation, root object caching, and parallelization.
+              BEAR.Sunday places performance deep in the design — not as after-the-fact optimization.
+              And the greatest performance comes not from computing faster, but from not computing at all.
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 rounded-lg border border-black/10 bg-[#111611] p-8 text-white">
+            <p className="font-mono text-xs uppercase text-[#9ee0bb]">
+              the fastest computation is none
+            </p>
+            <p className="mt-3 text-2xl font-black sm:text-3xl">
+              The fastest computation is none.
+            </p>
+            <p className="mt-4 text-lg leading-8 text-white/76">
+              An essentially static resource representation is served from the CDN, and with ETag and 304 the
+              request completes before it ever reaches PHP or the database. Before any contest of language or
+              runtime speed, the move is to avoid execution itself — a universal design idea that REST built into
+              the Web more than a quarter-century ago. That is the peak of design-as-performance the event-driven
+              cache (Read Model generation) delivers.
+            </p>
+          </div>
+          <p className="mt-10 max-w-4xl text-lg leading-8 text-[#3b463d]">
+            When computation is needed, the structure itself removes waste. Because SQL, the resource graph, the
+            DI graph, and the root object exist explicitly, you can inspect before shipping and switch on batching,
+            DI compilation, root-object cache, and parallelization at runtime.
+          </p>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {performancePoints.map((item) => (
               <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
                 <h3 className="text-2xl font-black">{item.title}</h3>
@@ -437,6 +468,63 @@ export default function TechPage() {
               </article>
             ))}
           </div>
+          <div className="mt-8 rounded-lg border border-black/10 bg-white p-6">
+            <p className="font-mono text-xs uppercase text-[#667068]">
+              return type = intent
+            </p>
+            <p className="mt-3 leading-8 text-[#3b463d]">
+              The return type declares what you want.
+            </p>
+            <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { t: "User", d: "an immutable domain object" },
+                { t: "array<User>", d: "a list" },
+                { t: "AffectedRows", d: "row count" },
+                { t: "InsertedRow", d: "id and bound values" },
+                { t: "Pages<User>", d: "lazy pagination" },
+                { t: "void", d: "execute only" },
+              ].map((item) => (
+                <div className="flex items-baseline gap-3 rounded-md border border-black/10 bg-[#f4f7f3] px-4 py-3" key={item.t}>
+                  <code className="shrink-0 font-mono text-sm font-bold text-[#1f7a5a]">{item.t}</code>
+                  <span className="text-sm leading-6 text-[#465148]">{item.d}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Stream
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Huge content, too — just stream it through the body.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              A resource only decides its state — and that holds even when the state is a stream. Assign a file
+              pointer to the body and StreamRenderer streams the HTTP output, serving content larger than PHP&apos;s
+              memory limit with low memory use. It can mix with ordinary values, too.
+            </p>
+          </div>
+          <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.2)]">
+            <code>{`use BEAR\\Streamer\\StreamTransferInject;
+
+class Download extends ResourceObject
+{
+    use StreamTransferInject;
+
+    public function onGet(): static
+    {
+        // even data that won't fit in memory — just put it in the body
+        $this->body = fopen('/path/to/big.csv', 'r');
+
+        return $this;
+    }
+}`}</code>
+          </pre>
         </div>
       </section>
 

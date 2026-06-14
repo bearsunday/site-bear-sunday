@@ -37,7 +37,7 @@ const businessReasons = [
   },
   {
     title: "Make data access predictable",
-    text: "SQL has decades of proven track record, with accumulated knowledge around execution plans, indexing, and tuning. AI assists with the difficulty of writing; standard technology preserves operational clarity.",
+    text: "SQL has a decades-long track record, with accumulated knowledge around execution plans, indexing, and tuning. AI assists with the difficulty of writing; standard technology preserves operational clarity.",
   },
   {
     title: "Reduce performance issues before shipping",
@@ -122,7 +122,7 @@ const bankruptcySignals = [
   "More budget goes to investigating and adjusting existing code than to adding features",
   "The number of people who can make decisions shrinks as personnel transfer or leave",
   "Inability to keep up with a framework's breaking changes, left stranded on an old version",
-  "Wanting to start new channels or AI initiatives, but the existing system acts as a shackle",
+  "Wanting to start new channels or AI initiatives, but the existing system holds you back",
 ];
 
 export default function BusinessPage() {
@@ -141,7 +141,7 @@ export default function BusinessPage() {
               Business outcomes
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Four qualities management needs, supported by design.
+              The four qualities management needs — by design.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
               Framework selection isn't just a development team concern.
@@ -159,6 +159,49 @@ export default function BusinessPage() {
                 <p className="mt-4 leading-8 text-[#465148]">{item.text}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#245c7a]">
+              Speed, resilience, and cost
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Fast experience, resilience, and lower cost — from one design.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#36434c]">
+              When nothing has changed, the representation is served from the CDN and the server does no work.
+              Even when freshness must be checked every time, an ETag conditional request returns 304 — no
+              recomputation, no resending of the body. Compute and network resources translate directly into
+              running cost. So the cache design is not merely a speed trick: it lowers cost while raising speed and
+              resilience at the same time — a gain for users, operations, and the business alike.
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3">
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">user</p>
+              <h3 className="mt-3 text-2xl font-black">Fast experience</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                Delivered instantly from a CDN close to the user; on return visits, 304 keeps the wait to a minimum.
+              </p>
+            </article>
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">operations</p>
+              <h3 className="mt-3 text-2xl font-black">Resilience</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                Under traffic spikes, delivery without computation absorbs most of the load, making the service harder to knock over.
+              </p>
+            </article>
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">business</p>
+              <h3 className="mt-3 text-2xl font-black">Lower cost</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                A server that never runs is never billed. Cutting compute and network is, directly, cutting the cost of keeping the service alive.
+              </p>
+            </article>
           </div>
         </div>
       </section>
@@ -244,7 +287,7 @@ export default function BusinessPage() {
             Business-critical technology
           </p>
           <h2 className="mt-4 max-w-4xl text-4xl font-black sm:text-5xl">
-            See technology as directly connected to business.
+            Technology that ties directly to the business.
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-8 text-[#3b463d]">
             Technical features return to the business as speed, availability, refactoring costs, and ease of handover.
@@ -273,7 +316,7 @@ export default function BusinessPage() {
               Business leverage
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Deploy one functional asset to multiple outcomes.
+              One functional asset, many outcomes.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#36434c]">
               In BEAR.Sunday, features aren't confined to specific screens or controllers.

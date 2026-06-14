@@ -163,6 +163,48 @@ export default function BusinessPage() {
         </div>
       </section>
 
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold uppercase text-[#245c7a]">
+              Speed, resilience, and cost
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              速い体験・堅牢性・低コストを、同じ設計から。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#36434c]">
+              変更がなければ、表現はCDNから配信され、サーバーは動きません。都度の鮮度確認が必要なときも、
+              ETagによる条件付きリクエストが304を返し、本文の再計算も再送信も起きません。
+              計算資源とネットワーク資源は、そのまま維持コストに直結します。つまりキャッシュ設計は、
+              速さのためだけの仕組みではなく、コストを下げながら速度と堅牢性を同時に上げる——三方よしの選択です。
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3">
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">user</p>
+              <h3 className="mt-3 text-2xl font-black">速い体験</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                ユーザーに近いCDNから即座に届き、再訪では304で待ち時間を最小化します。
+              </p>
+            </article>
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">operations</p>
+              <h3 className="mt-3 text-2xl font-black">堅牢性</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                アクセスが集中しても、計算を伴わない配信が負荷の大半を吸収し、障害に強くなります。
+              </p>
+            </article>
+            <article className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">business</p>
+              <h3 className="mt-3 text-2xl font-black">コスト低減</h3>
+              <p className="mt-4 leading-8 text-[#465148]">
+                動かさないサーバーは課金されません。計算とネットワークの削減が、そのまま維持コストの削減になります。
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section className="border-y border-black/10 bg-[#111611] px-5 py-20 text-white sm:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>

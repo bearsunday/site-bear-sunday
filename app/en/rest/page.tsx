@@ -71,7 +71,7 @@ export default function RestPage() {
       <PageHero
         eyebrow="Web principles"
         lead="URI, uniform interface, hypermedia. REST is a battle-tested design that has supported the Web for a quarter century. BEAR.Sunday makes it a constraint not just for external APIs but for the entire interior of your application. Not because it's new—but because its correctness endures."
-        title="The most time-tested technology as the backbone of design."
+        title="The most time-tested technology, as your design's backbone."
       />
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
@@ -84,7 +84,7 @@ export default function RestPage() {
               The Web was right from the start.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              REST is not new technology. The concept of a collection of resources connected by links
+              REST is not a new technology. The concept of a collection of resources connected by links
               has been part of the Web since the 1990s. At its core, the uniform interface refers
               not to methods alone, but to four constraints. BEAR.Sunday applies these constraints
               consistently—not just to external APIs, but to the interior of the application as well.
@@ -115,8 +115,8 @@ export default function RestPage() {
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#36434c]">
               At the heart of self-descriptive messages lies method semantics. REST methods are not CRUD
-              on tables—they are operations on application state. Each carries a property of being either
-              safe (not changing state) or idempotent (same result regardless of repetition). These
+              on tables—they are operations on application state. Each method is defined by whether it is
+              safe (it does not change state) and whether it is idempotent (repeating it yields the same result). These
               properties are not mere convention—they become the rationale that pays off later. GET is
               safe, so it can be freely cached and freely invoked by AI. State-changing operations are
               handled differently based on idempotency. The same semantics apply in both caching strategy
@@ -172,8 +172,8 @@ export default function RestPage() {
             </p>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               #[Embed] goes further. It doesn't embed the result of a resource—it embeds the request to
-              a resource, i.e., the relationship between resources itself. This distinction later pays
-              off in the form of parallel execution.
+              a resource, i.e., the relationship between resources itself. This distinction is what later
+              enables parallel execution.
             </p>
           </div>
           <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.25)]">
@@ -237,10 +237,10 @@ export default function RestPage() {
       <section className="bg-[#111611] px-5 py-20 text-white sm:px-8 lg:py-28">
         <div className="mx-auto max-w-5xl">
           <p className="text-sm font-semibold uppercase text-[#9ee0bb]">
-            Why the classic still wins
+            Why the classics still win
           </p>
           <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-            The classic had already prepared for a modernity no one foresaw.
+            The classics had already prepared the modernity no one foresaw.
           </h2>
           <p className="mt-6 text-xl leading-9 text-white/80">
             Declaring relationships alone separates intent (What) from execution (How). That's why
