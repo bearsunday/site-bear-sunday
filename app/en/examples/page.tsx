@@ -67,7 +67,7 @@ public function onGet(string $id): static
   },
   {
     title: "DonutCache",
-    caption: "Cache the page; keep the comment “hole” fresh on every request.",
+    caption: "Cache the page; do not cache the comment “hole” — fresh every request.",
     code: `#[DonutCache]
 #[Embed(rel: 'comment', src: 'page://self/blog/comment')]
 public function onGet(int $id): static
@@ -88,7 +88,8 @@ public function onGet(
     #[Option(shortName: 'n')] string $name,
     #[Option(shortName: 'l')] string $lang = 'en',
 ): static {
-    // the same onGet serves both the web and the CLI
+    // this onGet becomes a standalone 'greet' command
+    // --help and --name/-n are generated from the declaration
     return $this;
 }`,
   },

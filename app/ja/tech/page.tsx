@@ -431,9 +431,14 @@ export default function TechPage() {
               </article>
             ))}
           </div>
-          <p className="mt-10 max-w-4xl text-sm leading-7 text-[#465148]">
-            戻り値の型が、何を取りたいかを宣言します。<span className="font-mono">User</span>(不変ドメインオブジェクト)、<span className="font-mono">array&lt;User&gt;</span>(一覧)、<span className="font-mono">AffectedRows</span>(更新行数)、<span className="font-mono">InsertedRow</span>(idと束縛値)、<span className="font-mono">Pages&lt;User&gt;</span>(遅延評価のページング)、<span className="font-mono">void</span>(実行のみ)。
-          </p>
+          <div className="mt-8 rounded-lg border border-black/10 bg-white p-6">
+            <p className="font-mono text-xs uppercase text-[#667068]">
+              return type = intent
+            </p>
+            <p className="mt-3 text-base leading-8 text-[#3b463d]">
+              戻り値の型が、何を取りたいかを宣言します。<span className="font-mono">User</span>(不変ドメインオブジェクト)、<span className="font-mono">array&lt;User&gt;</span>(一覧)、<span className="font-mono">AffectedRows</span>(更新行数)、<span className="font-mono">InsertedRow</span>(idと束縛値)、<span className="font-mono">Pages&lt;User&gt;</span>(遅延評価のページング)、<span className="font-mono">void</span>(実行のみ)。
+            </p>
+          </div>
         </div>
       </section>
 
@@ -449,7 +454,7 @@ export default function TechPage() {
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
               リソースは状態を決めるだけ——その状態がストリームでも同じです。bodyにファイルポインタを入れると、
               StreamRendererがHTTP出力をストリーム化し、PHPのメモリ制限を超える大きさでも低メモリで配信します。
-              通常の値と混在もでき、既存のレンダラーと共存します。
+              通常の値とも混在できます。
             </p>
           </div>
           <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.2)]">

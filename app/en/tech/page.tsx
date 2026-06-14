@@ -437,9 +437,14 @@ export default function TechPage() {
               </article>
             ))}
           </div>
-          <p className="mt-10 max-w-4xl text-sm leading-7 text-[#465148]">
-            The return type declares what you want: <span className="font-mono">User</span> (an immutable domain object), <span className="font-mono">array&lt;User&gt;</span> (a list), <span className="font-mono">AffectedRows</span> (row count), <span className="font-mono">InsertedRow</span> (id and bound values), <span className="font-mono">Pages&lt;User&gt;</span> (lazy pagination), <span className="font-mono">void</span> (execute only).
-          </p>
+          <div className="mt-8 rounded-lg border border-black/10 bg-white p-6">
+            <p className="font-mono text-xs uppercase text-[#667068]">
+              return type = intent
+            </p>
+            <p className="mt-3 text-base leading-8 text-[#3b463d]">
+              The return type declares what you want: <span className="font-mono">User</span> (an immutable domain object), <span className="font-mono">array&lt;User&gt;</span> (a list), <span className="font-mono">AffectedRows</span> (row count), <span className="font-mono">InsertedRow</span> (id and bound values), <span className="font-mono">Pages&lt;User&gt;</span> (lazy pagination), <span className="font-mono">void</span> (execute only).
+            </p>
+          </div>
         </div>
       </section>
 
@@ -455,7 +460,7 @@ export default function TechPage() {
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
               A resource only decides its state — and that holds even when the state is a stream. Assign a file
               pointer to the body and StreamRenderer streams the HTTP output, serving content larger than PHP&apos;s
-              memory limit with low memory use. It can mix with ordinary values and coexists with existing renderers.
+              memory limit with low memory use. It can mix with ordinary values, too.
             </p>
           </div>
           <pre className="overflow-x-auto rounded-lg bg-[#101820] p-6 text-sm leading-7 text-[#d9f7e7] shadow-[0_20px_60px_rgba(16,24,32,0.2)]">

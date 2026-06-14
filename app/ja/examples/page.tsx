@@ -67,7 +67,7 @@ public function onGet(string $id): static
   },
   {
     title: "DonutCache",
-    caption: "ページはキャッシュ、コメントの“穴”だけ毎回新鮮に。",
+    caption: "ページはキャッシュ。コメントの“穴”は Do not キャッシュ。毎回新鮮。",
     code: `#[DonutCache]
 #[Embed(rel: 'comment', src: 'page://self/blog/comment')]
 public function onGet(int $id): static
@@ -88,7 +88,8 @@ public function onGet(
     #[Option(shortName: 'n')] string $name,
     #[Option(shortName: 'l')] string $lang = 'en',
 ): static {
-    // 同じ onGet が Web でも CLI でも動く
+    // この onGet が、独立した greet コマンドになる
+    // --help も --name/-n も、宣言から自動で生成される
     return $this;
 }`,
   },
