@@ -6,9 +6,9 @@ export const metadata: Metadata = {
   description:
     "A promotion site conveying the declarativity, explicitness, and traceability of BEAR.Sunday.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/icon.png",
+    icon: "https://bearsunday.github.io/favicon.ico",
+    shortcut: "https://bearsunday.github.io/favicon.ico",
+    apple: "https://bearsunday.github.io/icon.png",
   },
 };
 
