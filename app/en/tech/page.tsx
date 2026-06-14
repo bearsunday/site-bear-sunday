@@ -278,12 +278,14 @@ export default function TechPage() {
                   <p className="mt-3 leading-7 text-white/76">
                     As long as state doesn't change, the same URI yields the same representation. Changes only on events.
                   </p>
+                  <p className="mt-4 text-sm font-bold text-[#9ee0bb]">Data resource</p>
                 </div>
                 <div className="rounded-md border border-white/16 p-5">
                   <h3 className="text-2xl font-black">Inherently dynamic</h3>
                   <p className="mt-3 leading-7 text-white/76">
-                    Meaning changes with each request. Personalization, random numbers, current time—the computation process itself is the representation.
+                    Meaning changes with each request. Personalization, dashboards, up-to-the-moment information—the computation process itself is the representation.
                   </p>
+                  <p className="mt-4 text-sm font-bold text-[#9ee0bb]">Computed resource</p>
                 </div>
               </div>
             </div>

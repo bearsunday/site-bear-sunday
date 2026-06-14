@@ -277,12 +277,14 @@ export default function TechPage() {
                   <p className="mt-3 leading-7 text-white/76">
                     状態が変わらない限り、同じURIは同じ表現になる。イベントでのみ変化する。
                   </p>
+                  <p className="mt-4 text-sm font-bold text-[#9ee0bb]">データ型リソース</p>
                 </div>
                 <div className="rounded-md border border-white/16 p-5">
                   <h3 className="text-2xl font-black">本質的に動的</h3>
                   <p className="mt-3 leading-7 text-white/76">
-                    リクエストごとに意味が変わる。個人化、乱数、現在時刻、計算過程そのものが表現になる。
+                    リクエストごとに意味が変わる。個人化、ダッシュボード、現時点での情報、計算過程そのものが表現になる。
                   </p>
+                  <p className="mt-4 text-sm font-bold text-[#9ee0bb]">計算型リソース</p>
                 </div>
               </div>
             </div>
