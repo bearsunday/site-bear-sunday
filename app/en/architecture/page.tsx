@@ -99,11 +99,11 @@ const resourceDiscipline = [
 const connectPhilosophy = [
   {
     title: "Don't subsume",
-    text: "Authentication, validation, and ORM are not bundled in. The framework provides constraints; libraries remain choosable. The freedom to choose standards is preserved.",
+    text: "Authentication, validation, and ORM are not bundled in. The framework provides constraints; the libraries stay yours to choose. You keep the freedom to pick the standards you want.",
   },
   {
     title: "Connect independently",
-    text: "JSON Schema, HAL, OpenAPI, SQL, and PSR are used in forms that remain valid outside BEAR.Sunday. Your investment isn't locked into the framework.",
+    text: "JSON Schema, HAL, OpenAPI, SQL, and PSR are used in ways that stay valid outside BEAR.Sunday. Your investment isn't locked into the framework.",
   },
   {
     title: "Follow standards for what matters",
@@ -149,7 +149,7 @@ export default function ArchitecturePage() {
             ))}
           </div>
           <p className="mt-10 max-w-4xl text-lg leading-8 text-[#3b463d]">
-            Give one job to the connection point, pass by type, hide the other side. That's why
+            Give the connection point one job, pass by type, hide the other side. That's why
             it's replaceable and long-lasting. This is not a feature—it's a design philosophy, an aesthetic.
           </p>
         </div>
@@ -211,7 +211,7 @@ export default function ArchitecturePage() {
               to assemble the object graph before execution.
             </p>
             <p className="mt-5 text-lg leading-8 text-white/76">
-              That's why BEAR.Sunday's DI is not convenient auto-wiring. It treats context, binding,
+              That's why BEAR.Sunday's DI is not auto-wiring for convenience. It treats context, binding,
               scope, and interceptors as object graph composition, and eliminates the ability of
               post-construction objects to reference configuration information.
             </p>
