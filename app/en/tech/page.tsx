@@ -327,7 +327,7 @@ export default function TechPage() {
             </p>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               In BEAR.Sunday, #[Embed] resources and explicitly declared dependency URIs become tags.
-              When AOP detects a change, server-side caches and ETags are cascading-invalidated, and
+              When AOP detects a change, server-side caches and ETags are invalidated in cascade, and
               where possible, the same dependency relationships propagate to CDN Surrogate-Keys.
               Dependency resolution doesn't stay confined inside the server.
             </p>
