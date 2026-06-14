@@ -188,7 +188,7 @@ export default function EnHome() {
               className="mt-8 inline-flex rounded-md bg-[#9ee0bb] px-5 py-3 text-sm font-semibold text-[#111611] transition hover:bg-[#c0f0d3]"
               href="/en/rest"
             >
-              See through Web principles
+              View through Web principles
             </a>
           </div>
           <div className="grid grid-cols-1 gap-4">
