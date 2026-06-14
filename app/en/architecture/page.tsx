@@ -59,6 +59,14 @@ const rayDiConcepts = [
     title: "Compiler",
     text: "Generates PHP factory code from the dependency graph, reducing container initialization overhead in production. The generated output has a traceable structure.",
   },
+  {
+    title: "Injection Point",
+    text: "A Provider can know where it is being injected (class, parameter, attributes) and provide accordingly — e.g. naming a Logger after the injecting class — so context decides the dependency without global references.",
+  },
+  {
+    title: "Matcher",
+    text: "Interceptors are not attached one by one; methods are searched by name or attribute and bound in bulk. With matchers like annotatedWith or startsWith, cross-cutting behavior is woven only into the matching methods.",
+  },
 ];
 
 const flow = [

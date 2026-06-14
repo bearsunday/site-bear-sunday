@@ -59,6 +59,14 @@ const rayDiConcepts = [
     title: "Compiler",
     text: "依存グラフからPHP factory codeを生成し、本番ではコンテナ初期化の負荷を抑えます。生成結果は追跡可能な構造になります。",
   },
+  {
+    title: "Injection Point",
+    text: "Providerは「自分がどこに注入されるか」(クラス・引数・属性)を知って供給を変えられます。注入先クラス名でLoggerを命名するなど、グローバル参照ではなく文脈に応じて注入できます。",
+  },
+  {
+    title: "Matcher",
+    text: "Interceptorは個々に貼るのではなく、メソッドを名前や属性で検索して束ねます。annotatedWith や startsWith などのMatcherで、合致したメソッドだけに横断的処理を織り込めます。",
+  },
 ];
 
 const flow = [
