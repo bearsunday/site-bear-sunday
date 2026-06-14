@@ -322,7 +322,7 @@ export default function EnHome() {
               AI-ready architecture
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              In the AI era, code that doesn&apos;t require guessing wins.
+              In the AI era, code you don&apos;t have to guess about wins.
             </h2>
             <p className="mt-6 text-lg leading-8 text-white/74">
               In an age where AI agents read, modify, and review code, declarativity, explicitness, and traceability

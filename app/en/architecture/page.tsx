@@ -176,7 +176,7 @@ export default function ArchitecturePage() {
               Resource discipline
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              A Resource is not a place to write anything.
+              A Resource is not a place to put just anything.
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               BEAR.Sunday's resource orientation is not about creating URL-callable components.

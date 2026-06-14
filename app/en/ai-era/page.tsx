@@ -186,7 +186,7 @@ export default function AiEraPage() {
               Design principles for AI
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Design principles become AI's decision material.
+              Design principles become what AI reasons from.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#36434c]">
               BEAR.Sunday is not a framework for brandishing names like Clean Architecture, CQS/CQRS, or DDD.
@@ -342,7 +342,7 @@ export default function AiEraPage() {
               Agent workflow
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Readable units enable delegating changes.
+              Readable units make changes you can delegate.
             </h2>
             <p className="mt-5 text-lg leading-8 text-white/76">
               What's hard for AI isn't the volume of code—it's meaning being scattered across multiple places.

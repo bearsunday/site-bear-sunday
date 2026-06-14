@@ -141,7 +141,7 @@ export default function BusinessPage() {
               Business outcomes
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Four qualities management needs, supported by design.
+              The four qualities management needs — by design.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
               Framework selection isn't just a development team concern.
@@ -287,7 +287,7 @@ export default function BusinessPage() {
             Business-critical technology
           </p>
           <h2 className="mt-4 max-w-4xl text-4xl font-black sm:text-5xl">
-            See technology as directly connected to business.
+            Technology that ties directly to the business.
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-8 text-[#3b463d]">
             Technical features return to the business as speed, availability, refactoring costs, and ease of handover.
@@ -316,7 +316,7 @@ export default function BusinessPage() {
               Business leverage
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Deploy one functional asset to multiple outcomes.
+              One functional asset, many outcomes.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#36434c]">
               In BEAR.Sunday, features aren't confined to specific screens or controllers.

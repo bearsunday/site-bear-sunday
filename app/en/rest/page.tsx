@@ -71,7 +71,7 @@ export default function RestPage() {
       <PageHero
         eyebrow="Web principles"
         lead="URI, uniform interface, hypermedia. REST is a battle-tested design that has supported the Web for a quarter century. BEAR.Sunday makes it a constraint not just for external APIs but for the entire interior of your application. Not because it's new—but because its correctness endures."
-        title="The most time-tested technology as the backbone of design."
+        title="The most time-tested technology, as your design's backbone."
       />
 
       <section className="px-5 py-20 sm:px-8 lg:py-28">
@@ -237,10 +237,10 @@ export default function RestPage() {
       <section className="bg-[#111611] px-5 py-20 text-white sm:px-8 lg:py-28">
         <div className="mx-auto max-w-5xl">
           <p className="text-sm font-semibold uppercase text-[#9ee0bb]">
-            Why the classic still wins
+            Why the classics still win
           </p>
           <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-            The classic had already prepared for a modernity no one foresaw.
+            The classics had already prepared the modernity no one foresaw.
           </h2>
           <p className="mt-6 text-xl leading-9 text-white/80">
             Declaring relationships alone separates intent (What) from execution (How). That's why

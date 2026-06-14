@@ -192,7 +192,7 @@ export default function AlpsPage() {
               The reader arrived
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              The reader HATEOAS was waiting for has just arrived.
+              The reader HATEOAS was waiting for is finally here.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
               When HATEOAS was formalized in 2000, it envisioned "machine clients" that could read meaning
