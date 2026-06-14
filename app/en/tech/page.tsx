@@ -418,11 +418,11 @@ export default function TechPage() {
               The fastest computation is none.
             </p>
             <p className="mt-4 text-lg leading-8 text-white/76">
-              An essentially static resource representation is served from the CDN. When nothing has changed,
-              ETag and 304 keep the request from reaching PHP or the database at all. Before competing on
-              language or runtime speed, the surest win is to skip the computation entirely. This is the peak of
-              design-as-performance, delivered by the event-driven cache (Read Model generation) shown in the
-              first half of this page.
+              An essentially static resource representation is served from the CDN, and with ETag and 304 the
+              request completes before it ever reaches PHP or the database. Before any contest of language or
+              runtime speed, the move is to avoid execution itself — a universal design idea that REST built into
+              the Web more than a quarter-century ago. That is the peak of design-as-performance the event-driven
+              cache (Read Model generation) delivers.
             </p>
           </div>
           <p className="mt-10 max-w-4xl text-lg leading-8 text-[#3b463d]">
