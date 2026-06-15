@@ -50,6 +50,7 @@ export function SiteHeader({ lang = "ja", path = "" }: { lang?: Lang; path?: str
   const homeHref = lang === "en" ? "/en" : "/ja";
   const enHref = path ? `/en/${path}` : "/en";
   const jaHref = path ? `/ja/${path}` : "/ja";
+  const llmsHref = path ? "../llms-full.txt" : "llms-full.txt";
   return (
     <header className="fixed inset-x-0 top-0 z-30 border-b border-black/10 bg-[#f4f7f3]/92 backdrop-blur">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
@@ -76,6 +77,13 @@ export function SiteHeader({ lang = "ja", path = "" }: { lang?: Lang; path?: str
             href={jaHref}
           >
             Ja
+          </a>
+          <span className="mx-1.5 text-black/30">|</span>
+          <a
+            className="text-black/50 no-underline hover:text-black/90"
+            href={llmsHref}
+          >
+            llms
           </a>
         </div>
       </nav>

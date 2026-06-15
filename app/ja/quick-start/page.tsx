@@ -18,7 +18,7 @@ composer create-project bear/skeleton my-project`,
     title: "リソースを呼ぶ",
     text: "Webサーバーを立てる前に、page.phpからResourceを直接呼び出せます。",
     code: `cd my-project
-php bin/page.php get /hello`,
+php bin/page.php get '/?name=hello'`,
   },
   {
     title: "テストで観察する",

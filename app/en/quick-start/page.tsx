@@ -18,7 +18,7 @@ composer create-project bear/skeleton my-project`,
     title: "Call a resource",
     text: "Before setting up a web server, you can call Resources directly from page.php.",
     code: `cd my-project
-php bin/page.php get /hello`,
+php bin/page.php get '/?name=hello'`,
   },
   {
     title: "Observe through tests",
