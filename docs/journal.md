@@ -84,3 +84,41 @@ npm run build
 
 Browser checks were run against local pages when needed. Public Sites deployments were saved and deployed through the Sites connector.
 
+## 2026-06-14
+
+### Content deepening + English editorial pass (PR #8, merged)
+
+A long collaborative session with the maintainer; shipped to `master` via PR #8.
+The durable distillation lives in `docs/learn-site-guide.md` — this entry is the
+narrative.
+
+Highlights:
+
+- Renamed `/examples` from "Examples / 実装例" to **Code / コード** — it is a
+  gallery to take in the code's *character*, not a cookbook. Curated cards:
+  CacheableResponse, DonutCache (🍩 = "do not" cache), Cli, SQL (MediaQuery BDR).
+  Fixed `#[Cacheable]` → `#[Loggable]` on a POST sample.
+- Home: briefly added a quiet closing tagline band
+  (*古典が、まだ知らなかった現代を用意していた。*), then removed it as too abrupt —
+  the same idea already lands in context on `/rest` (Web principles).
+- `/tech`: foregrounded the network cache as the apex of "design = performance" —
+  *最も速いのは、計算しないこと。* with the historical note (REST/HTTP, 25+ years).
+  Named **Data resource / Computed resource**. Return-type spectrum as a chip
+  grid. DataLoader linked to the GraphQL pattern. Noted that parallel `#[Embed]`
+  renders (not just fetches). Added a Stream section; corrected the
+  StreamTransferInject renderer note.
+- `/architecture`: added **Injection Point** (contextual injection) and
+  **Matcher** concept cards to the Ray.Di section.
+- `/business`: a "Speed, resilience, and cost" section — the cache architecture
+  read as operating-cost reduction (ETag/304 keeps compute + network minimal).
+  A win for user, operations, and business.
+- Fixed `app/ja/quick-start` next-step links that were missing the `/ja/` prefix
+  (would 404 under i18n + `trailingSlash`).
+- **English full-text pass** across every `en` page: sharpened flat /
+  non-idiomatic headlines and body copy; corrected a technical inaccuracy
+  ("either safe or idempotent"); left well-written lines alone. JA untouched.
+
+Every change was built (`npm run build`) and rendered (`vinext start`,
+trailing-slash URLs) before pushing. CodeRabbit returned no actionable comments
+(only the inapplicable Docstring Coverage warning).
+
