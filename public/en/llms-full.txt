@@ -1,0 +1,691 @@
+# BEAR.Sunday
+
+> Resource Oriented PHP Framework — Web principles, all the way inside your application.
+
+BEAR.Sunday is a PHP framework that makes Web principles (REST) the design constraint for your entire application. One ResourceObject becomes a Web API, HTML page, console tool, AI instrument, and documentation. Write it once. Don't rebuild for every output.
+
+The core idea is **Because Everything is a Resource.** From the same URI, only the representation changes.
+
+```
+GET app://self/article?id=42
+  → HTML ・ JSON(HAL) ・ CLI ・ Tool Use ・ OpenAPI
+```
+
+Three design pillars:
+
+- **Resource** — Everything is identified by URI. Pages, APIs, and internal processes are all expressed as ResourceObjects. With a uniform interface of GET / POST / PUT / DELETE, you can trace what each piece of code handles directly from the code itself.
+- **DI (Ray.Di)** — Dependencies are injected from outside. Ray.Di resolves dependencies at compile time, maintaining a structure free from runtime service locators and global state.
+- **AOP (Ray.Aop)** — Cross-cutting concerns are separated. Logging, caching, transactions, and more are separated using Ray.Aop. Business logic stays clean and well-defined.
+
+The boundaries one ResourceObject connects to: HTTP API / HTML Page / Console / Composer package / CLI ・ Homebrew / AI-readable docs.
+
+"Declare the relationships. Everything else follows." — When you declare relationships between resources through links and embeds, intent (What) and execution (How) are separated. As a result, the following emerge from the structure itself—not as bolt-on features:
+
+- Transparent parallelism (embeds are relationship declarations; execution strategy is swapped via Module)
+- AI instruments (URIs, types, and schemas become tool definitions as-is)
+- Multiple representations (same state → HTML, JSON, CLI, documentation)
+- Long-term compatibility (meaning stays in resources; details change on the outside)
+
+Traceability: from request to representation to documentation, you can trace through the same semantic model.
+```
+request        GET app://self/user?id=1
+resource       User::onGet(int $id): static
+representation HAL / HTML / JSON / CLI
+documentation  OpenAPI 3.1 / JSON Schema / llms.txt
+```
+
+Official site: https://bearsunday.github.io/ ／ Manual (English): https://bearsunday.github.io/manuals/1.0/en/ ／ GitHub: https://github.com/bearsunday/BEAR.Sunday
+
+---
+
+## Pages
+
+- [Business](/en/business) — continuity, predictability, high performance, and flexibility in the language of business
+- [Value](/en/value) — how technical features translate into value for developers, users, and business
+- [Web Principles](/en/rest) — URI, uniform interface, and hypermedia as the backbone of design
+- [Tech](/en/tech) — Read Model generation, event-driven caching, ETag/CDN, parallel execution, SQL as a first-class citizen
+- [Design](/en/architecture) — Resource Oriented Architecture, DI, AOP, Context
+- [AI Era](/en/ai-era) — declarativity, explicitness, traceability, and Tool Use
+- [ALPS](/en/alps) — the SSOT of meaning and the "wasp waist" design
+- [Code](/en/examples) — implementation snapshots of Resource, DI, AOP, and Hypermedia
+- [Quick Start](/en/quick-start) — an on-ramp that starts with a single resource
+
+---
+
+## Web Principles & REST (/en/rest)
+
+**The most time-tested technology, as your design's backbone.** URI, uniform interface, hypermedia. REST is a battle-tested design that has supported the Web for a quarter century. BEAR.Sunday makes it a constraint not just for external APIs but for the entire interior of your application. Not because it's new—but because its correctness endures.
+
+### Uniform interface (four constraints)
+
+REST is not a new technology. The concept of a collection of resources connected by links has been part of the Web since the 1990s. At its core, the uniform interface refers not to methods alone, but to four constraints. BEAR.Sunday applies these constraints consistently—not just to external APIs, but to the interior of the application as well.
+
+- **Resource identification** — Everything is identified by URI. app://self/user points to the intent "I want user information," while How (MySQL or Redis, how to fetch) is hidden from the application.
+- **Manipulation through representations** — Clients don't touch resources directly—they operate through representations. State is separated from representation; the same state can yield HTML, JSON, HAL, and CLI.
+- **Self-descriptive messages** — Method safety, idempotency, media types, and status codes carry meaning in the message itself. Recipients can interpret the message without guessing hidden context.
+- **Hypermedia (HATEOAS)** — Resources present what can be done next (affordances) as links. Clients navigate application state by following the offered links rather than guessing the next transition.
+
+### Method semantics (six verbs)
+
+At the heart of self-descriptive messages lies method semantics. REST methods are not CRUD on tables—they are operations on application state. Each method is defined by whether it is safe (it does not change state) and whether it is idempotent (repeating it yields the same result). GET is safe, so it can be freely cached and freely invoked by AI. State-changing operations are handled differently based on idempotency. The same semantics apply in both caching strategy and AI safety design.
+
+| Method | Safe | Idempotent | Meaning |
+| --- | --- | --- | --- |
+| GET | Safe | Idempotent | Reads state. Does not change the resource. |
+| POST | — | — | Changes state. Not idempotent; repeated execution may yield different results. |
+| PUT | — | Idempotent | Places the entire representation at the URI (creates if absent). Same result every time. |
+| PATCH | — | — | Applies a diff. |
+| DELETE | — | Idempotent | Deletes. Idempotent like PUT. |
+| OPTIONS | Safe | Idempotent | Inquires about required parameters and responses. |
+
+### Hypermedia
+
+In hypermedia, resources present not just state but also what operations are available next (affordances). In HAL, _links serves this role, with rel indicating the type of relationship. Clients follow the links that resources offer rather than guessing what they can do next. #[Embed] goes further. It doesn't embed the result of a resource—it embeds the request to a resource, i.e., the relationship between resources itself. This distinction is what later enables parallel execution.
+
+```json
+{
+  "_links": {
+    "self":   { "href": "/article/42" },
+    "author": { "href": "/profile/7" },
+    "next":   { "href": "/article/43" }
+  },
+  "_embedded": {
+    "comments": { "_links": { "self": { "href": "/article/42/comments" } } }
+  },
+  "title": "Because Everything is a Resource"
+}
+```
+
+Resources written in HAL function as a headless REST application. Like navigating a website, you can reach every resource simply by following links from the root. The API describes itself; documentation can be discovered from the API itself. Humans, console curl commands, and AI agents all navigate the same way. These resources are self-descriptive, explorable, and testable around state.
+
+**The classics had already prepared the modernity no one foresaw.** Declaring relationships alone separates intent (What) from execution (How). That's why embedded resources can be fetched in parallel, resources become AI instruments as-is, multiple representations emerge from the same meaning, and evolution can continue with backward compatibility intact. These aren't bolt-on features—they are the result of accepting the Web's original nature as a design constraint.
+
+---
+
+## Tech (/en/tech)
+
+**The natural mechanisms of the static Web, brought to dynamic applications.** BEAR.Sunday's caching is not a mechanism for temporarily storing responses. It is an architecture that generates inherently static resource representations as Read Models and maintains identity and dependency relationships across the server, CDN, and client layers.
+
+### Not caching—Read Model generation
+
+Content like blog posts, product info, news articles, and profiles appears "dynamic" because each request passes through PHP and DB. But if the same resource state yields the same representation, it's inherently static. What changes isn't time—it's events. ResourceObjects generate HTTP representations, retain dependency relationships as URI tags, and express identity through ETags. Generated representations are placed on server caches and CDNs and served as static content until a change event occurs.
+
+Cache layers: Server-side resource cache / CDN shared cache / Client HTTP cache (each caches body, dependency tags, and ETag identity).
+
+### Event-driven content
+
+Shorten the TTL and pray it's not stale yet. In many apps, that's what passes for a "caching strategy." The key insight of event-driven content is not conflating unpredictable change timing with constantly shifting content. You don't know when an article will be edited. You don't know when a comment will be added. But between events, the representation is static. Fastly classified this kind of content as static for an unknown duration, but potentially changeable. What's needed isn't a short TTL—it's immediate, programmable purge delivered to the CDN from change events the application already knows about. Without changes, the CDN keeps serving the same representation; clients check identity via ETag and take 304 Not Modified when unchanged.
+
+- **Inherently static (data resource)** — As long as state doesn't change, the same URI yields the same representation. Changes only on events.
+- **Inherently dynamic (computed resource)** — Meaning changes with each request. Personalization, dashboards, up-to-the-moment information—the computation process itself is the representation.
+
+An actual exchange:
+```
+1  GET /article/42                          200  ETag:"a1"  Surrogate-Key: article-42 profile-7
+   → CDN stores
+
+2  GET /article/42                          CDN HIT          ← No PHP or DB activity
+
+3  Author edits profile-7
+   → PURGE  Surrogate-Key: profile-7        ← Cascading invalidation of dependent article-42
+
+4  GET /article/42                          200  ETag:"b9"   ← Regenerated only this time
+
+5  GET /article/42  If-None-Match:"b9"       304 Not Modified ← Body not sent
+```
+
+### Dependency resolution and cascading invalidation
+
+If content A depends on B, and B depends on C, then a change in C doesn't stop at C's cache. B's and A's representations—and their ETags—all show stale identity and must be invalidated. In BEAR.Sunday, #[Embed] resources and explicitly declared dependency URIs become tags. When AOP detects a change, server-side caches and ETags are invalidated in cascade, and where possible, the same dependency relationships propagate to CDN Surrogate-Keys. Dependency resolution doesn't stay confined inside the server.
+
+### Partial Read Models (donut cache)
+
+It's not a binary choice of whether the whole page can be cached. BEAR.Sunday has donut caching and donut hole caching, handling cacheable parts, non-cacheable parts, and parts that change on different cycles separately. When the hole's content changes, only the necessary scope is regenerated, and the overall ETag is also updated.
+
+- **Donut cache** — When the whole has non-cacheable holes, reuse the unchanging surrounding parts.
+- **Donut hole cache** — When the hole itself is also cacheable, partial resource changes propagate to the overall cache and ETag.
+- **Recursive composition** — Even when A contains B and B contains C, regenerate at minimal cost by reusing everything except the changed C.
+
+### Performance — speed is a consequence of design, not optimization
+
+**The fastest computation is none.** An essentially static resource representation is served from the CDN, and with ETag and 304 the request completes before it ever reaches PHP or the database. Before any contest of language or runtime speed, the move is to avoid execution itself—a universal design idea that REST built into the Web more than a quarter-century ago. When computation is needed, the structure itself removes waste.
+
+- Stop bad DB access before shipping (because SQL files and parameters are independent, execution plans, full table scans, and inefficient JOINs can be analyzed in CI)
+- DataLoader batches N+1 (multiple resource requests are converted into a single efficient query)
+- DI compiler curbs startup cost (ScriptInjector generates PHP factory code so production starts from a pre-built object graph)
+- Root object cache (serialize and reuse the application root object assembled for a given context across requests)
+- Switch embed representation to parallel execution (BEAR.Async—not only data fetching but each embedded resource's rendering runs in parallel)
+
+### SQL as a first-class citizen (Ray.MediaQuery)
+
+BEAR.Sunday doesn't hide SQL behind an ORM. In Ray.MediaQuery, SQL is an independent file in var/sql, and the entry point is a typed interface with #[DbQuery].
+
+- Don't hide SQL—make it a first-class citizen (write JOINs, CTEs, window functions, and vendor-specific SQL directly)
+- Contracts enable parallel, divided work (the interface is the contract; the app side can build use cases first with fakes even without a DB)
+- SQL-specialized tools work as-is (schema completion, EXPLAIN, formatting, and refactoring in DataGrip)
+- AI can read and write without hidden generation
+
+The return type declares intent: `User` (an immutable domain object) / `array<User>` (a list) / `AffectedRows` (row count) / `InsertedRow` (id and bound values) / `Pages<User>` (lazy pagination) / `void` (execute only).
+
+### Stream
+
+A resource only decides its state—and that holds even when the state is a stream. Assign a file pointer to the body and StreamRenderer streams the HTTP output, serving content larger than PHP's memory limit with low memory use.
+```php
+use BEAR\Streamer\StreamTransferInject;
+
+class Download extends ResourceObject
+{
+    use StreamTransferInject;
+
+    public function onGet(): static
+    {
+        // even data that won't fit in memory — just put it in the body
+        $this->body = fopen('/path/to/big.csv', 'r');
+
+        return $this;
+    }
+}
+```
+
+### Transparent parallel execution
+
+**Don't rewrite code for parallelization.** #[Embed] doesn't embed the result of a resource—it embeds the request to a resource, i.e., the relationship between resources themselves. So whether to fetch sequentially, in parallel via ext-parallel threads, or via Swoole coroutines is the Linker's job. The resource class doesn't know it was called in parallel. Because URIs represent intent (What) and execution method (How) is hidden in Modules, execution strategy can be swapped in later. The "function color" problem often discussed in async programming is severed at the resource boundary.
+
+```
+Sequential               Parallel
+Request                  Request
+ ├ Embed 1 ── 50ms        ├ Embed 1 ─┐
+ ├ Embed 2 ── 50ms        ├ Embed 2 ─┤
+ ├ Embed 3 ── 50ms        ├ Embed 3 ─┤
+ └ Embed 4 ── 50ms        └ Embed 4 ─┘
+Response 200ms           Response 50ms
+```
+
+```php
+class Dashboard extends ResourceObject
+{
+    #[Embed(rel: 'user', src: '/user{?id}')]
+    #[Embed(rel: 'notifications', src: '/notifications{?user_id}')]
+    #[Embed(rel: 'stats', src: '/stats{?user_id}')]
+    public function onGet(string $id): static
+    {
+        $this->body['id'] = $id;
+
+        return $this;
+    }
+}
+```
+
+Runtimes (application code unchanged): ext-parallel (thread pool, for PHP-FPM / Apache; just add bin/async.php) / Swoole (coroutines, high concurrency on a persistent server; install AsyncSwooleModule) / mysqli (DB queries only, parallelized). * BEAR.Async is currently Alpha. ext-parallel requires ZTS PHP and the ext-parallel extension; Swoole requires ext-swoole.
+
+### Tests that follow links
+
+This is not a convenience feature. It's the Web principle (HATEOAS)—where clients follow links offered by resources rather than guessing the next operation—made into executable tests. One story travels from resource to HTTP, through the same code.
+
+```php
+class PurchaseFlowTest extends AbstractWorkflowTest
+{
+    #[Alps('goProduct')]
+    public function testProduct(): ResourceObject
+    {
+        return $this->resource->get('page://self/product', ['id' => 1]);
+    }
+
+    #[Alps('doAddCartItem')]
+    #[Depends('testProduct')]
+    public function testAddToCart(ResourceObject $product): ResourceObject
+    {
+        // Follow offered links, not hardcoded URIs
+        $cart = $this->resource->post(
+            $this->linkHref($product, 'doAddCartItem'),
+            ['qty' => 2],
+        );
+        $this->assertSame(Code::CREATED, $cart->code);
+
+        return $cart;
+    }
+
+    #[Alps('goCheckout')]
+    #[Depends('testAddToCart')]
+    public function testCheckout(ResourceObject $cart): ResourceObject
+    {
+        return $this->follow($cart, 'goCheckout');
+    }
+}
+```
+
+```php
+// Re-run the entire flow over real HTTP/JSON.
+// Only newResource() changes. Scenario is inherited.
+final class HttpPurchaseFlowTest extends PurchaseFlowTest
+{
+    protected function newResource(): ResourceInterface
+    {
+        return new HttpResource(
+            '127.0.0.1:8080',
+            __DIR__ . '/index.php',
+        );
+    }
+}
+```
+
+Transport is swapped via DI. Tests follow links, are aligned to spec (ALPS), and E2E narrows to its proper domain: visual regression, real-browser JS, and auth flows.
+
+### Context-agnostic DI
+
+Generated objects don't know their mode. Context, like prod-hal-api-app, is a matrix combining environment, representation, I/O surface, and application type. But it's used only to assemble the object graph. Post-construction objects have no need—and no means—to reference whether they're production, HTML, or API. There's no branching on globals like APP_DEBUG or APP_MODE.
+
+Ray.Di mechanics: Key = type + qualifier / Module as binding map / Provider and scope / Compiled factories.
+
+### Application composition and portable resources
+
+Integrate multiple applications without erecting HTTP walls. Pull another application in as a vendor package and integrate it while preserving independence through namespace and DI binding, assembling independent applications into a single object graph.
+```php
+// Microservices: across the network
+$post = $http->get('https://blog.internal/posts/42');
+// → timeouts, retries, serialization, separate deploys
+
+// BEAR.Sunday: pull into vendor, call by URI
+composer require acme/blog
+$post = $this->resource->get('app://blog/post', ['id' => 42]);
+// → same process, no network
+```
+
+BEAR.Sunday ResourceObjects aren't controller actions tied to a specific web framework. They are application components identified by URI and called from a Resource client—usable for migration and coexistence, integrating microservice-style without the network.
+
+### Direction of technology — don't build entry points, make resources the entry point
+
+In many frameworks, you build separate API controllers alongside HTML, and yet another implementation for CLI or AI. In BEAR.Sunday, the direction is reversed. Application meaning resides in ResourceObjects; HTTP, HTML, API, CLI, Homebrew commands, Tool Use, and multi-language integration (BEAR.Thrift) become bridges that connect to those resources. Rather than building controllers from IDL, resources come first and carry that meaning outward as IDL, documentation, and schemas.
+
+---
+
+## Design (/en/architecture)
+
+**Don't hide the design behind the implementation.** BEAR.Sunday treats Web constraints as design principles for the interior of the application. Resource, DI, AOP, and Context divide responsibilities, making code meaning readable and producing a structure that withstands long-term operation.
+
+### Design philosophy — don't subsume, connect
+
+BEAR.Sunday doesn't absorb necessary technologies and rebuild them inside itself. SQL stays SQL. Validation stays JSON Schema. Links stay HAL. The more important the commitment, the more it follows published standards rather than framework-specific inventions.
+
+- **Don't subsume** — Authentication, validation, and ORM are not bundled in. The framework provides constraints; the libraries stay yours to choose.
+- **Connect independently** — JSON Schema, HAL, OpenAPI, SQL, and PSR are used in ways that stay valid outside BEAR.Sunday. Your investment isn't locked into the framework.
+- **Follow standards for what matters** — Validation uses JSON Schema. Links use HAL. API descriptions use OpenAPI. That's why it's documented, long-lasting, and directly usable by other tools and AI.
+- **Harmony, not tension** — SQL isn't made to pretend to be objects. Without forced abstractions, there's no friction at the seams.
+
+This is not a feature—it's a design philosophy, an aesthetic.
+
+### The six pillars
+
+- **Resource Oriented Architecture** — Design application entry points as URI-identifiable resources, not pages or controllers. Web API, HTML, and CLI share the same meaning.
+- **Dependency Injection** — Ray.Di resolves dependencies using types and Qualifiers as Keys. Modules declare bindings; the Injector generates the object graph.
+- **Aspect Oriented Programming** — Cross-cutting concerns like caching, transactions, logging, and authorization are separated as Interceptors.
+- **Context** — Context strings like prod-hal-api-app combine environment, representation, and application type.
+- **Context Agnostic Objects** — Context is only used during object graph generation. Once created, objects don't know which context they were built for.
+- **ADP Package Structure** — Both framework packages and applications are structured to avoid circular dependencies. Multiple applications are integrated via namespace and DI binding.
+
+### Resource discipline
+
+BEAR.Sunday's resource orientation is not about creating URL-callable components. It's a constraint that determines where application meaning is placed.
+
+- Place meaning in the Resource (representation, dependencies, transitions, caching, and documentation unfold outward from there)
+- Govern yourself, don't manipulate others (resource methods decide their own state and return themselves, not manipulate external response objects)
+- Have no concern for representation (resources hold values, state, and links; representation is the renderer's concern)
+- Declare In / Out through constraints (input via method signatures, types, attributes, and schemas; output as body, headers, links, and schema)
+
+### Ray.Di and Guice
+
+Dependency resolution is declared graph generation, not runtime lookup. Application code doesn't go fetch dependencies—it declares what it needs in the constructor. Modules define bindings like "this Key → this Provider," and the Injector traces dependencies-of-dependencies to assemble the object graph before execution.
+
+Concepts: Key (type + Qualifier) / Module (collection of bindings, install・override) / Provider (complex creation, lazy initialization, mixed scopes) / Scope (prototype, singleton) / Interceptor (AOP Alliance-style MethodInterceptor) / Compiler (generates PHP factory code) / Injection Point (knows where it is injected and provides accordingly) / Matcher (bind methods in bulk with annotatedWith or startsWith).
+
+### Resource flow
+
+```
+01 Request:  app://self/profile?id=1
+02 Resource: Profile::onGet(int $id)
+03 Body:     holds state as an array or value object
+04 Links:    declares navigability via HAL or attributes
+05 Renderer: converts representation to HTML, JSON, HAL, or CLI
+```
+
+Change goes to modules; resource meaning is preserved: express environment differences through context modules / post-construction objects don't know their context / swap representation formats via renderers / apply cross-cutting concerns via interceptors / integrate multiple apps without HTTP walls / call BEAR resources from other PHP apps.
+
+---
+
+## AI Era (/en/ai-era)
+
+**Toward applications AI doesn't have to guess about.** When AI agents read, modify, and explain code, meaning that remains in the code matters more than ambiguous conventions. BEAR.Sunday preserves application meaning as resources, attributes, schemas, and links.
+
+### Four values
+
+- **Declarative** — Attributes, JSON Schema, Links, Embeds, Cacheable, and more declare application meaning in code. AI can ground itself in declared meaning rather than guessing hidden conventions.
+- **Explicit** — onGet / onPost, constructor injection, DbQuery, and context modules make inputs, dependencies, and runtime configuration explicit.
+- **Traceable** — URIs, resources, links, schemas, and documentation all connect to the same model. Trace the impact of changes from implementation all the way to API docs and llms.txt.
+- **Strict types** — Built on high static analysis levels from PHPStan and Psalm, meaning is carried not as bare arrays but as shaped arrays, domain arrays, and domain types. Types themselves become AI context.
+
+### Design principles become what AI reasons from
+
+BEAR.Sunday is not a framework for brandishing names like Clean Architecture, CQS/CQRS, or DDD. But the dependency direction, read/write separation, and business vocabulary boundaries that those approaches have emphasized become powerful clues in an era where AI makes change decisions.
+
+- **The essence of Clean Architecture** — Dependency direction is controlled by interfaces and DI modules. The framework, DB, HTML, API, CLI, and caching are external details.
+- **The essence of CQS / CQRS** — Optimal models differ between reads and writes. SQL defines projections; PHP adds types and behavior to read models that are disposable.
+- **The essence of DDD** — URIs, Resources, interfaces, domain types, and namespaces leave business vocabulary and boundaries in the code. Ubiquitous language and bounded context clues become readable to both AI and humans.
+
+### Contracts and information structures that AI can read
+
+Ray.MediaQuery doesn't hide SQL behind object abstractions. Interfaces show the contract, SQL files show the projection, and return types show how results are handled. Relationships between resources are also declared as Links, Embeds, crawls, and URIs.
+
+- Interface becomes the contract (callers depend on the method signature and return type rather than how SQL is assembled)
+- SQL becomes the projection (JOINs, CTEs, window functions, aggregations, and screen-specific columns are explicit as SQL files)
+- Return types signal intent (the return type declares: fetch, hydrate, wrap, or ignore)
+- Read models can be tested in small units (SQL, factories, domain objects, and application verified layer by layer)
+- Embed / crawl declares information structure (AI can trace the resource graph left in the implementation)
+
+### Resources become AI instruments as-is (BEAR.ToolUse)
+
+BEAR.ToolUse generates Tool Use definitions for AI agents from BEAR.Sunday ResourceObjects. Meaning expressed through URIs, JSON Schema, ALPS, PHPDoc, and attributes becomes AI-executable instruments. It doesn't depend on any specific LLM—it composes the agent loop as an application-side interface.
+
+- Generate Tool definitions from ResourceObjects (JSON Schema-based)
+- Specify usable features by URI (#[Tool] and #[Exclude])
+- Descriptions come from the implementation (JSON Schema, PHPDoc, ALPS profiles)
+- Confirmation gates for destructive operations (tools with confirm; Streaming Agents return confirmation events and default to rejection)
+- Filter large results before passing (filters summarize tool results before passing to the LLM)
+- Auditable invocations (ToolCallObserver observes dispatches including successes, errors, exceptions, and unknown tools)
+
+### REST semantics directly become the AI safety model
+
+Resources can become instruments not because new mechanisms were bolted on. It's because URIs, uniform interface, types, JSON Schema, and ALPS already have the shape of tool definitions. And REST's long-standing method semantics—safe and idempotent—provide the rationale for deciding what agents can freely call and what requires confirmation.
+
+- Safe operations freely, dangerous ones with confirmation (let agents freely call GET; gate state-changing operations with confirm)
+- ALPS turns meaning into filters (narrow the tools passed at runtime from safe/idempotent transition information = read-only mode)
+- Agents traverse the resource graph (traverse URIs and links to investigate and operate)
+- Delegate to specialized agents (a coordinator calls specialists like ask_critic or ask_editor as tools)
+- Persist context across invocations (maintain conversation history across multi-stage workflows)
+- Vary policy per execution (apply read-only, cost caps, and safety policies without changing the agent)
+
+### Explicit context over training volume
+
+More public code doesn't automatically mean better context. Extracting average shapes from a corpus that mixes different versions, quality levels, and design decisions doesn't necessarily lead to clean changes. What BEAR.Sunday provides to AI is not ambiguous conventions but explicit context connected to the implementation.
+
+### Agent workflow
+
+1. Discover target features from Resource URIs
+2. Read onGet / onPost inputs and outputs
+3. Check types and shapes via PHPStan / Psalm
+4. Check DbQuery interface and SQL file projections
+5. Trace resource graphs declared by Link / Embed / crawl
+6. Check tools and confirmation conditions exposed by BEAR.ToolUse
+7. Check representation contracts via JSON Schema
+8. Check runtime differences via DI modules
+9. Reflect change impact into tests and documentation
+
+```php
+#[JsonSchema(schema: 'user.json')]
+#[Link(rel: 'orders', href: 'app://self/orders{?id}')]
+public function onGet(int $id): static
+{
+    $this->body = $this->userQuery->item($id);
+
+    return $this;
+}
+```
+
+---
+
+## ALPS — Place Meaning in One Place (/en/alps)
+
+Code has become cheap. But meaning—"what should be built"—remains expensive. The same business fact gets copied into specs, code, tests, DB constraints, and FAQs—in separate dialects every time. ALPS is a small specification that writes only that meaning. BEAR.Sunday projects implementation, documentation, and AI instruments from here.
+
+### The wasp waist (thin waist)
+
+Naively connecting N sources (user stories, legacy code, domain, requirements) to M projections (diagrams, OpenAPI, JSON Schema, llms.txt, Fakes, Tests, Code, MCP/Tool, Hypermedia) yields N×M combinations. Pass through a single waist of pure meaning in between, and it collapses to N+M—all transformations converge at a single point. Same shape as IP for the Internet, LLVM IR for compilers. ALPS is the waist for "application meaning."
+
+### What ALPS writes (and won't)
+
+ALPS (Application-Level Profile Semantics) is a small specification born from the lineage of REST and hypermedia design, by Amundsen et al. It can write essentially three things. Intentionally boring, and that boredom is designed.
+
+```json
+{ "id": "Cart", "type": "semantic", "title": "Shopping Cart",
+  "tag": "flow-checkout",
+  "descriptor": [{ "href": "#doAddItem" }] },
+
+{ "id": "doAddItem", "type": "unsafe", "rt": "#Cart",
+  "doc": "Add an item to the cart" }
+```
+(Which table it's saved to, which screen it appears on—none of that is written. There's no place to write it.)
+
+- **Vocabulary** — What does "cart" mean in this application? Business language (ubiquitous language), placed in a form readable by both humans and machines.
+- **States** — Not screens—states as meaning.
+- **Transitions and their nature** — Transitions between states, and whether each is safe (observation only), idempotent (same result when repeated), or unsafe (irreversible change).
+- **What it can't write = what it doesn't compete with** — It can't describe screen layouts, persistence methods, or performance requirements. Precisely because it can't, it competes with no artifact and becomes a shared conduit.
+
+### Projection & tags — one model, three queries
+
+Each descriptor can carry free tags (flow-checkout, actor-guest, src-legacy). Then "a state transition diagram for checkout only" or "the system as seen by guests" aren't newly authored documents—they're projection queries against the same model. The diagram for sales, for security review, for migration planning—these aren't three separate documents but three queries against one model. One model, many views.
+
+### One model, three doors
+
+- **Design — MCP** — AI agents query, verify, and edit. Rather than passing the entire document, ask "What transitions are available from this state?" and receive only the 200 needed tokens.
+- **Edit — LSP** — Humans touch the same intelligence. Broken references are warned on the spot; concept renames cascade to all references.
+- **Execute — Hypermedia** — The running application itself carries semantically structured responses.
+
+### The reader HATEOAS was waiting for is finally here
+
+When HATEOAS was formalized in 2000, it envisioned "machine clients" that could read meaning and autonomously choose the next transition. That reader didn't appear for over twenty years. That reader has now arrived—and through the very same technology that made code cheap (LLMs). The crisis and the conditions for its solution arrived together, carried by the same technology.
+
+An honest caveat: making a single source of truth is also a tradeoff. With a condensed original, drift is global, instantaneous, and correlated. In exchange, the surface you need to inspect becomes one. The waist doesn't eliminate governance—it condenses governance to a single point.
+
+### BEAR.Sunday sits on the projection side of the waist
+
+BEAR.Sunday's strength is the lower half—projection. From ResourceObjects come HAL and hypermedia (runtime), ApiDoc, OpenAPI, JSON Schema, llms.txt (documentation), and ToolUse/MCP (AI instruments). With ALPS as the SSOT, code, documentation, and tools are all projected from the same meaning—implementation and docs don't drift apart. You can even prove in CI that "there is no gap." This is the culmination of "don't absorb—connect."
+
+Related: App State Diagram (state transition diagrams from ALPS, https://www.app-state-diagram.com/) / ALPS Spec (Application-Level Profile Semantics, http://alps.io/).
+
+---
+
+## Value (/en/value)
+
+**Technical features into lasting value.** The source of value lies in how Resource, context-agnostic DI, AOP, and CDN-centric Read Models preserve the same meaning from design through to operation.
+
+### From mechanism to value
+
+- Design constraints preserve meaning (responsibilities are separated into Resource, Ray.Di, AOP, and Context, so meaning doesn't scatter across controllers, config, and implicit conventions)
+- Read Models run on Web infrastructure (generate inherently static resource representations and connect them to ETag, 304, dependency tags, and CDN purge)
+- Changes are swapped in from outside (with Modules, Bindings, Providers, and AOP, environment differences, representation formats, and cross-cutting concerns are kept out of resources)
+
+### Value chain
+
+Express meaning as a Resource → Declare dependencies in Ray.Di Modules → Injector generates the object graph → AOP applies cross-cutting concerns → Generate representation as a Read Model → Connect to CDN, ETag, 304 → Comes back as speed, maintainability, and continuity.
+
+### Who benefits (from the same structure)
+
+- **For developers** — Focus on core logic. Developers don't need to chase APP_DEBUG-style execution mode branches or service locators—they can focus on the resource's responsibility.
+- **For teams** — Share structure while staying loosely coupled. Shared placement rules—Resource, Module, Interceptor, Renderer. Multiple developers and AI agents can make changes on the same map.
+- **For users** — The same features, fast and reliable. CDN-centric Read Models improve response speed and availability.
+- **For business** — Lower ongoing costs and withstand change. BEAR.Sunday prioritizes backward compatibility, connects to standard technologies, and weaves caching into the architecture. The Eternal 1.x policy curbs migration costs.
+
+> BEAR.Sunday is a framework for preserving the meaning of web applications over the long term. For developers: a readable structure that's easy to change. For users: a fast, stable experience. For business: a foundation that enables growth while keeping migration and operational costs low.
+
+---
+
+## Business (/en/business)
+
+**Long-lasting web services: fast, robust, easy to change.** BEAR.Sunday supports continuity, predictability, high performance, and flexibility as the design foundation for long-lived web applications.
+
+### The four qualities management needs
+
+- **Continuity** — Even as personnel, requirements, and organizations change, the meaning and dependency relationships of features remain.
+- **Predictability** — Trace the impact of changes through resources, dependencies, documentation, and operation logs.
+- **High performance** — When nothing changes, CDN and HTTP caching are leveraged to provide fast, congestion-resistant experiences.
+- **Flexibility** — The same features can be used from web screens, APIs, CLIs, and other PHP applications.
+
+### Fast experience, resilience, and lower cost — from one design
+
+When nothing has changed, the representation is served from the CDN and the server does no work. Even when freshness must be checked every time, an ETag conditional request returns 304—no recomputation, no resending of the body. The cache design is not merely a speed trick: it lowers cost while raising speed and resilience at the same time—a gain for users, operations, and the business alike. user (fast experience) / operations (resilience) / business (lower cost).
+
+### Resilience to change protects your profits
+
+The longer a business runs, the more changes its software undergoes. Choosing based on short-term cheapness alone means refactoring, incident response, migration, and handover costs will later eat into profits.
+
+- Don't let change costs become business risk
+- Keep options open with standard technology (rather than locking into a specific giant component)
+- Make data access predictable (SQL has a decades-long track record; AI assists with the difficulty of writing)
+- Reduce performance issues before shipping (SQL remains an independent asset, incorporated into CI and code reviews)
+- Make operation logs traceable (every action can be reduced to POST {URI})
+- Don't duplicate HTML and API as separate assets (the same resource connects to both)
+- Generate documentation from implementation (generate IDL and API documentation from implementation; verify in CI)
+- Get speed and maintainability from the same design
+
+### Constraints keep technical bankruptcy at bay
+
+When tight coupling advances too far, dependencies, code, operations, and knowledge become entangled, making it difficult to recover with normal improvement budgets. When you can't keep up with a framework's breaking changes and are left behind on an old version, it's a situation close to technical bankruptcy. BEAR.Sunday has evolved while preserving 1.x compatibility since 2011. For long-running applications, not being forced to rebuild at the framework's convenience is immense value.
+
+Early warning signs: even small changes take time to confirm the scope of impact / more budget goes to investigating and adjusting existing code than to adding features / the number of people who can make decisions shrinks / inability to keep up with breaking changes, left stranded on an old version / wanting to start new channels or AI initiatives, but the existing system holds you back.
+
+### One functional asset, many outcomes
+
+Features aren't confined to specific screens or controllers. A resource built once can be deployed with the same meaning to web screens, APIs, CLIs, operational tools, and documentation. This is reuse of development investment.
+
+As business-critical technology: CDN-centric Read Model / Resource Oriented Architecture / Dependency Injection / SQL-centric data access / SQL quality gate / POST {URI} action log / Portable resources / Application as Documentation.
+
+The reason to adopt is continuity, not trends.
+
+---
+
+## Code (/en/examples)
+
+**Small code that preserves design boundaries.** Inputs, dependencies, links, and cross-cutting concerns remain visible, allowing the reader to trace the meaning of the application.
+
+```php
+// Resource — a resource corresponding to a URI decides its state and returns it.
+final class Profile extends ResourceObject
+{
+    public function onGet(int $id): static
+    {
+        $this->body = $this->profileQuery->item($id);
+
+        return $this;
+    }
+}
+```
+
+```php
+// Dependency Injection — required dependencies are made explicit in the constructor.
+public function __construct(
+    private readonly ProfileQuery $profileQuery,
+    private readonly ClockInterface $clock,
+) {
+}
+```
+
+```php
+// AOP — cross-cutting concerns are offloaded to attributes and Interceptors.
+#[Transactional]
+#[Loggable]
+public function onPost(string $name): static
+{
+    $this->body = $this->command->create($name);
+
+    return $this;
+}
+```
+
+```php
+// Hypermedia — declare the next reachable resources as links.
+#[Link(rel: 'orders', href: 'app://self/orders{?id}')]
+#[Embed(rel: 'profile', src: 'app://self/profile{?id}')]
+public function onGet(int $id): static
+{
+    return $this;
+}
+```
+
+```php
+// CacheableResponse — cache is invalidated by a dependency change, not by elapsed time.
+use BEAR\RepositoryModule\Annotation\CacheableResponse;
+
+#[CacheableResponse]
+public function onGet(string $id): static
+{
+    $this->body = $this->blog->entry($id);
+
+    return $this;
+}
+```
+
+```php
+// DonutCache — cache the page; do not cache the comment "hole" — fresh every request.
+#[DonutCache]
+#[Embed(rel: 'comment', src: 'page://self/blog/comment')]
+public function onGet(int $id): static
+{
+    $this->body += ['article' => '...'];
+
+    return $this;
+}
+```
+
+```php
+// CLI — the same resource also becomes a CLI with one attribute.
+use BEAR\Cli\Attribute\Cli;
+use BEAR\Cli\Attribute\Option;
+
+#[Cli(name: 'greet', description: 'Greet in many languages', output: 'greeting')]
+public function onGet(
+    #[Option(shortName: 'n')] string $name,
+    #[Option(shortName: 'l')] string $lang = 'en',
+): static {
+    // this onGet becomes a standalone 'greet' command
+    // --help and --name/-n are generated from the declaration
+    return $this;
+}
+```
+
+```php
+// SQL — SQL stays SQL — pass types, receive types; even the clock is injected.
+interface OrderRepositoryInterface
+{
+    // the return type is the intent: an immutable domain object
+    #[DbQuery('order_item', factory: OrderFactory::class)]
+    public function getOrder(string $id): Order;
+
+    // typed argument; the clock is injected; return type = affected rows
+    #[DbQuery('order_close')]
+    public function close(string $id, DateTimeInterface $at): AffectedRows;
+}
+```
+
+All just the same small declaration. Tests can be written per resource, the same resource can be used as Web API, HTML, and CLI, caching and transactions are separated from business logic, and links and schemas make API documentation easy to assemble.
+
+---
+
+## Quick Start (/en/quick-start)
+
+**Start with one resource.** You don't need to learn a lot of configuration up front. Start by creating a single resource, calling it by URI, and testing it. That small unit expands to the Web, CLI, and documentation.
+
+```bash
+# 01 Create a project
+VENDOR=MyVendor PACKAGE=MyProject \
+composer create-project bear/skeleton my-project
+
+# 02 Call a resource (before setting up a web server, call directly from page.php)
+cd my-project
+php bin/page.php get '/?name=hello'
+
+# 03 Observe through tests
+composer test
+composer sa
+```
+
+For details, see the official manual: [Quick Start / Tutorial](https://bearsunday.github.io/manuals/1.0/en/)
+
+What to read next: [Understand the design](/en/architecture) / [Value in the AI era](/en/ai-era) / [See the code](/en/examples)
+
+---
+
+## Links
+
+- Official site: https://bearsunday.github.io/
+- Manual (English): https://bearsunday.github.io/manuals/1.0/en/
+- GitHub: https://github.com/bearsunday/BEAR.Sunday
+- llms-full.txt (full): https://bearsunday.github.io/llms-full.txt

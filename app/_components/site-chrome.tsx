@@ -77,6 +77,13 @@ export function SiteHeader({ lang = "ja", path = "" }: { lang?: Lang; path?: str
           >
             Ja
           </a>
+          <span className="mx-1.5 text-black/30">|</span>
+          <a
+            className="text-black/50 no-underline hover:text-black/90"
+            href="/en/llms-full.txt"
+          >
+            llms
+          </a>
         </div>
       </nav>
     </header>
