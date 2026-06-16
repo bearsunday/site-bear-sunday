@@ -64,7 +64,7 @@ export function SiteHeader({ lang = "ja", path = "" }: { lang?: Lang; path?: str
             </Link>
           ))}
         </div>
-        <div className="hidden items-center text-sm md:flex">
+        <div className="flex items-center text-sm">
           <a
             className={lang === "en" ? "text-black/90 underline underline-offset-2" : "text-black/50 no-underline hover:text-black/90"}
             href={enHref}
