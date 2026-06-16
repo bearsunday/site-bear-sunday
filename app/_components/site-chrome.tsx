@@ -50,7 +50,7 @@ export function SiteHeader({ lang = "ja", path = "" }: { lang?: Lang; path?: str
   const homeHref = lang === "en" ? "/en" : "/ja";
   const enHref = path ? `/en/${path}` : "/en";
   const jaHref = path ? `/ja/${path}` : "/ja";
-  const llmsHref = path ? "../llms-full.txt" : "llms-full.txt";
+  const llmsHref = `/${lang}/llms-full.txt`;
   return (
     <header className="fixed inset-x-0 top-0 z-30 border-b border-black/10 bg-[#f4f7f3]/92 backdrop-blur">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
