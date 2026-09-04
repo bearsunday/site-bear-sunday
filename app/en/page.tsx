@@ -78,6 +78,10 @@ const technicalFeatures = [
     title: "Application as Documentation",
     text: "Connect to ApiDoc HTML, OpenAPI 3.1, JSON Schema, and llms.txt to generate documentation that can be read from the implementation itself.",
   },
+  {
+    title: "One-file deployment",
+    text: "Compile ahead of time, pack into a Phar, and boot read-only. A deploy is a copy of one file, and the same file runs on a server, in a container, or in the browser via Wasm.",
+  },
 ];
 
 const valueSignals = [

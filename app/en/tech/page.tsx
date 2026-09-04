@@ -67,6 +67,40 @@ const portableResourcePoints = [
   },
 ];
 
+const artifactFlow = [
+  {
+    step: "php bin/compile.php",
+    text: "Resolve the object graph for one context ahead of time. A DI configuration error stops the build with exit code 1 and never reaches production.",
+  },
+  {
+    step: "Compiler::phar()",
+    text: "Pack the compiled tree into app.phar. Only a build that is compiled, and that never writes into itself, is packed.",
+  },
+  {
+    step: "php app.phar",
+    text: "Copy one file and boot it: on a host, in a container started with docker run --read-only, or behind php-fpm. A rollback is the file before it. PHP need not be installed either: built as one static binary with no library dependencies, it is one more file placed beside the archive. For a command-line tool, the two can even be one executable.",
+  },
+  {
+    step: "service worker + php-cgi-wasm",
+    text: "Hand the same archive to PHP compiled to WebAssembly. It answers requests inside the browser, from static hosting.",
+  },
+];
+
+const artifactPoints = [
+  {
+    title: "Read-only deployment",
+    text: "Serverless platforms and immutable containers restrict where an application may write. Declare the write directories with ReadOnlyAppModule in ProdModule, and the project directory is only read. Nothing has to match between build and boot: one artifact boots on any machine, with that machine's temp directory.",
+  },
+  {
+    title: "Phar: the application as one file",
+    text: "Code, vendor/, and the compiled DI scripts fit in a single immutable archive. What goes in is the framework's decision, not a packing script's. A build that was never compiled, or that would write into the archive, stops before the archive is made. Imported applications under vendor/ ship in the same archive, each with its own compiled scripts: several independent applications, one object graph, one file.",
+  },
+  {
+    title: "Wasm: the same file, in the browser",
+    text: "A service worker boots php-cgi-wasm and routes every request to app.phar. No PHP runtime, no application server. Resources answer HTML, links become <a> and <form>, and state goes to SQLite held by IndexedDB.",
+  },
+];
+
 const bridgeDirectionPoints = [
   {
     title: "Don't duplicate API / CLI / Homebrew implementations",
@@ -907,6 +941,86 @@ $post = $this->resource->get('app://blog/post', ['id' => 42]);
               </ol>
             </div>
             {portableResourcePoints.map((item) => (
+              <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
+                <h3 className="text-2xl font-black">{item.title}</h3>
+                <p className="mt-4 leading-7 text-[#465148]">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Deployment
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Compile once. Ship one file.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              An application that writes into its own directory at boot is never quite the one you
+              tested: a cache left over from the last release, a script regenerated on the first request,
+              one server answering differently from the one beside it. In BEAR.Sunday, compiling is build
+              work. The object graph is resolved before the deploy, and boot only reads what the build produced.
+            </p>
+            <p className="mt-5 text-lg leading-8 text-[#3b463d]">
+              Because boot writes nothing into the tree, the tree ships read-only. That is what serverless
+              platforms and immutable containers ask for, and it is what lets the whole application become
+              a single Phar. The same file then runs on a server, in a container, or inside the browser via Wasm.
+            </p>
+            <p className="mt-5 text-base leading-7 text-[#3b463d]">
+              Manual:{" "}
+              <a
+                className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+                href="https://bearsunday.github.io/manuals/1.0/en/production.html#writable-paths"
+              >
+                Read-only deployment
+              </a>
+              {" ・ "}
+              <a
+                className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+                href="https://bearsunday.github.io/manuals/1.0/en/phar.html"
+              >
+                Phar
+              </a>
+              {" ・ "}
+              <a
+                className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+                href="https://bearsunday.github.io/manuals/1.0/en/wasm.html"
+              >
+                Wasm
+              </a>
+              {" ／ Demo: "}
+              <a
+                className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+                href="https://koriym.github.io/wasm-todo/"
+              >
+                wasm-todo
+              </a>
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            <div className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">
+                build to boot
+              </p>
+              <ol className="mt-5 grid grid-cols-1 gap-3">
+                {artifactFlow.map((item, index) => (
+                  <li className="flex gap-4 rounded-md border border-black/10 bg-[#f4f7f3] p-4" key={item.step}>
+                    <span className="font-mono text-sm font-bold text-[#1f7a5a]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>
+                      <span className="font-mono text-sm font-semibold text-[#111611]">{item.step}</span>
+                      <span className="mt-1 block leading-7 text-[#344036]">{item.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            {artifactPoints.map((item) => (
               <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
                 <h3 className="text-2xl font-black">{item.title}</h3>
                 <p className="mt-4 leading-7 text-[#465148]">{item.text}</p>

@@ -67,6 +67,40 @@ const portableResourcePoints = [
   },
 ];
 
+const artifactFlow = [
+  {
+    step: "php bin/compile.php",
+    text: "1つのcontextのオブジェクトグラフを事前に解決します。DIの設定エラーはexit code 1でビルドを止め、本番には届きません。",
+  },
+  {
+    step: "Compiler::phar()",
+    text: "コンパイル済みのツリーをapp.pharにパックします。通るのは、コンパイル済みで、自身に書き込まないビルドだけです。",
+  },
+  {
+    step: "php app.phar",
+    text: "1ファイルをコピーして起動します。ホストでも、docker run --read-onlyのコンテナでも、php-fpmの後ろでも。ロールバックは1つ前のファイルです。PHPのインストールも要りません。ライブラリに依存しない1つのバイナリに静的ビルドしたPHPを、アーカイブの隣に置くだけです。コマンドラインのツールなら、その2つを1つの実行ファイルにもできます。",
+  },
+  {
+    step: "service worker + php-cgi-wasm",
+    text: "同じアーカイブをWebAssemblyにコンパイルされたPHPに渡します。静的ホスティングから、ブラウザの中でリクエストに答えます。",
+  },
+];
+
+const artifactPoints = [
+  {
+    title: "Read-only deployment",
+    text: "サーバーレスやイミュータブルコンテナでは、書き込める場所が制限されます。ProdModuleでReadOnlyAppModuleが書き込み先を宣言すれば、プロジェクトのディレクトリは読むだけになります。ビルドと起動で合わせるものはなく、同じ成果物がどのマシンでも、そのマシンの一時ディレクトリで起動します。",
+  },
+  {
+    title: "Phar：アプリケーションを1ファイルに",
+    text: "コード、vendor/、コンパイル済みDIスクリプトが、変更されない1つのアーカイブに収まります。何を入れるかを決めるのはパッキングスクリプトではなくフレームワークです。コンパイルされていないビルドや、アーカイブの中に書き込むビルドは、アーカイブになる前に止まります。vendor/配下にインポートしたアプリケーションも、それぞれのコンパイル済みスクリプトごと同じアーカイブに入ります。独立した複数のアプリケーションが、1つのオブジェクトグラフ、1つのファイルになります。",
+  },
+  {
+    title: "Wasm：同じファイルが、ブラウザで動く",
+    text: "service workerがphp-cgi-wasmを起動し、すべてのリクエストをapp.pharに渡します。PHPランタイムもアプリケーションサーバーも要りません。リソースはHTMLで答え、リンクは<a>と<form>になり、状態はIndexedDBが保持するSQLiteに書かれます。",
+  },
+];
+
 const bridgeDirectionPoints = [
   {
     title: "API / CLI / Homebrewを別実装にしない",
@@ -894,6 +928,86 @@ $post = $this->resource->get('app://blog/post', ['id' => 42]);
               </ol>
             </div>
             {portableResourcePoints.map((item) => (
+              <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
+                <h3 className="text-2xl font-black">{item.title}</h3>
+                <p className="mt-4 leading-7 text-[#465148]">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Deployment
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              一度コンパイルして、1ファイルで届ける。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              起動時に自分のディレクトリへ書き込むアプリケーションは、テストしたものと同じとは限りません。
+              前回のリリースが残したキャッシュ、初回リクエストで生成し直されるスクリプト、隣のサーバーと違う答え。
+              BEAR.Sundayでは、コンパイルはビルドの仕事です。オブジェクトグラフはデプロイの前に解決され、
+              起動はビルドが作ったものを読むだけです。
+            </p>
+            <p className="mt-5 text-lg leading-8 text-[#3b463d]">
+              起動がツリーに何も書かないので、ツリーは読み取り専用のまま出荷できます。サーバーレスや
+              イミュータブルコンテナが求めるのはこれで、アプリケーション全体を1つのPharにできるのもこのためです。
+              同じファイルが、サーバーでも、コンテナでも、Wasmでブラウザの中でも動きます。
+            </p>
+            <p className="mt-5 text-base leading-7 text-[#3b463d]">
+              マニュアル:{" "}
+              <a
+                className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+                href="https://bearsunday.github.io/manuals/1.0/ja/production.html#writable-paths"
+              >
+                Read-only deployment
+              </a>
+              {" ・ "}
+              <a
+                className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+                href="https://bearsunday.github.io/manuals/1.0/ja/phar.html"
+              >
+                Phar
+              </a>
+              {" ・ "}
+              <a
+                className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+                href="https://bearsunday.github.io/manuals/1.0/ja/wasm.html"
+              >
+                Wasm
+              </a>
+              {" ／ デモ: "}
+              <a
+                className="text-[#1f7a5a] underline underline-offset-2 transition hover:opacity-70"
+                href="https://koriym.github.io/wasm-todo/"
+              >
+                wasm-todo
+              </a>
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            <div className="rounded-lg border border-black/10 bg-white p-6">
+              <p className="font-mono text-xs uppercase text-[#667068]">
+                build to boot
+              </p>
+              <ol className="mt-5 grid grid-cols-1 gap-3">
+                {artifactFlow.map((item, index) => (
+                  <li className="flex gap-4 rounded-md border border-black/10 bg-[#f4f7f3] p-4" key={item.step}>
+                    <span className="font-mono text-sm font-bold text-[#1f7a5a]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>
+                      <span className="font-mono text-sm font-semibold text-[#111611]">{item.step}</span>
+                      <span className="mt-1 block leading-7 text-[#344036]">{item.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            {artifactPoints.map((item) => (
               <article className="rounded-lg border border-black/10 bg-white p-6" key={item.title}>
                 <h3 className="text-2xl font-black">{item.title}</h3>
                 <p className="mt-4 leading-7 text-[#465148]">{item.text}</p>

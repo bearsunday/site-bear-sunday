@@ -43,7 +43,7 @@ Official site: https://bearsunday.github.io/ ／ Manual (English): https://bears
 - [Business](/en/business) — continuity, predictability, high performance, and flexibility in the language of business
 - [Value](/en/value) — how technical features translate into value for developers, users, and business
 - [Web Principles](/en/rest) — URI, uniform interface, and hypermedia as the backbone of design
-- [Tech](/en/tech) — Read Model generation, event-driven caching, ETag/CDN, parallel execution, SQL as a first-class citizen
+- [Tech](/en/tech) — Read Model generation, event-driven caching, ETag/CDN, parallel execution, SQL as a first-class citizen, one-file deployment (read-only, Phar, Wasm)
 - [Design](/en/architecture) — Resource Oriented Architecture, DI, AOP, Context
 - [AI Era](/en/ai-era) — declarativity, explicitness, traceability, and Tool Use
 - [ALPS](/en/alps) — the SSOT of meaning and the "wasp waist" design
@@ -292,6 +292,26 @@ $post = $this->resource->get('app://blog/post', ['id' => 42]);
 ```
 
 BEAR.Sunday ResourceObjects aren't controller actions tied to a specific web framework. They are application components identified by URI and called from a Resource client—usable for migration and coexistence, integrating microservice-style without the network.
+
+### Compile once, ship one file — read-only deployment, Phar, Wasm
+
+An application that writes into its own directory at boot is never quite the one you tested: a cache left over from the last release, a script regenerated on the first request, one server answering differently from the one beside it. In BEAR.Sunday, compiling is build work. The object graph is resolved before the deploy, a DI configuration error stops the build with exit code 1, and boot only reads what the build produced. Because boot writes nothing into the tree, the tree ships read-only. That is what serverless platforms and immutable containers ask for, and it is what lets the whole application become a single Phar. The same file then runs on a server, in a container, or inside the browser via Wasm. (BEAR.Package 1.24+)
+
+Build to boot:
+```
+01  php bin/compile.php           resolve the object graph for one context ahead of time; a DI error stops the build
+02  Compiler::phar()              pack the compiled tree into app.phar; only a compiled build that never writes into itself is packed
+03  php app.phar                  copy one file and boot it — host, docker run --read-only, or php-fpm; a rollback is the file before it.
+                                  PHP need not be installed: a static PHP binary (static-php-cli) is one more file beside the archive;
+                                  for a CLI tool, micro.sfx + app.phar concatenate into one executable
+04  service worker + php-cgi-wasm hand the same archive to PHP compiled to WebAssembly; it answers inside the browser, from static hosting
+```
+
+- **Read-only deployment** — Serverless platforms and immutable containers restrict where an application may write. Declare the write directories with `ReadOnlyAppModule` in `ProdModule`, and the project directory is only read; `var/tmp` and `var/log` move to the booting machine's temp directory (`sys_get_temp_dir()`), keyed by application, application directory and context. Nothing has to match between build and boot: one artifact boots on any machine.
+- **Phar: the application as one file** — Code, `vendor/`, and the compiled DI scripts fit in a single immutable archive. What goes in is the framework's decision, not a packing script's. A build that was never compiled, or that would write into the archive, stops before the archive is made. A deploy is a copy of one file; the pack, not CI discipline, enforces the artifact's identity. Imported applications (`ImportApp`, under `vendor/`) ship in the same archive, each with its own compiled scripts and its own `ReadOnlyAppModule`: several independent applications, one object graph, one file.
+- **Wasm: the same file, in the browser** — A service worker boots php-cgi-wasm and routes every request to `app.phar`. No PHP runtime, no application server; static hosting is all it takes. Resources answer HTML, `_links` become `<a>` and `<form>`, and state goes to SQLite held by IndexedDB. Demo: https://koriym.github.io/wasm-todo/ (source: https://github.com/koriym/wasm-todo).
+
+Manual: https://bearsunday.github.io/manuals/1.0/en/production.html#writable-paths ／ https://bearsunday.github.io/manuals/1.0/en/phar.html ／ https://bearsunday.github.io/manuals/1.0/en/wasm.html
 
 ### Direction of technology — don't build entry points, make resources the entry point
 
@@ -546,7 +566,7 @@ Early warning signs: even small changes take time to confirm the scope of impact
 
 Features aren't confined to specific screens or controllers. A resource built once can be deployed with the same meaning to web screens, APIs, CLIs, operational tools, and documentation. This is reuse of development investment.
 
-As business-critical technology: CDN-centric Read Model / Resource Oriented Architecture / Dependency Injection / SQL-centric data access / SQL quality gate / POST {URI} action log / Portable resources / Application as Documentation.
+As business-critical technology: CDN-centric Read Model / Resource Oriented Architecture / Dependency Injection / SQL-centric data access / SQL quality gate / POST {URI} action log / Portable resources / Read-only deployment ・ Phar (one immutable file: a release is a copy, a rollback is the previous file) / Application as Documentation.
 
 The reason to adopt is continuity, not trends.
 
@@ -688,4 +708,8 @@ What to read next: [Understand the design](/en/architecture) / [Value in the AI 
 - Official site: https://bearsunday.github.io/
 - Manual (English): https://bearsunday.github.io/manuals/1.0/en/
 - GitHub: https://github.com/bearsunday/BEAR.Sunday
+- Manual — Read-only deployment: https://bearsunday.github.io/manuals/1.0/en/production.html#writable-paths
+- Manual — Phar: https://bearsunday.github.io/manuals/1.0/en/phar.html
+- Manual — Wasm: https://bearsunday.github.io/manuals/1.0/en/wasm.html
+- Wasm demo (wasm-todo): https://koriym.github.io/wasm-todo/
 - llms-full.txt (full): https://bearsunday.github.io/llms-full.txt
