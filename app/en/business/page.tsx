@@ -99,6 +99,11 @@ const translations = [
   },
   {
     label: "In technical terms",
+    tech: "Read-only deployment / Phar",
+    plain: "A mechanism that ships the whole application as one immutable file, so a release is a copy, a rollback is the previous file, and every server answers the same.",
+  },
+  {
+    label: "In technical terms",
     tech: "Application as Documentation",
     plain: "A mechanism that generates IDL, API documentation, and AI-readable context from implementation and verifies in CI that specification and implementation are aligned.",
   },

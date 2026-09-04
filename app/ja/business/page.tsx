@@ -99,6 +99,11 @@ const translations = [
   },
   {
     label: "専門的には",
+    tech: "Read-only deployment / Phar",
+    plain: "アプリケーション全体を変更されない1ファイルとして出荷し、リリースはコピー、ロールバックは1つ前のファイル、どのサーバーも同じ答えを返す仕組み",
+  },
+  {
+    label: "専門的には",
     tech: "Application as Documentation",
     plain: "実装からIDL、APIドキュメント、AI向け文脈を生成し、CIで仕様と実装のズレがないことを検証できる仕組み",
   },

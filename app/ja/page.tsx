@@ -78,6 +78,10 @@ const technicalFeatures = [
     title: "Application as Documentation",
     text: "ApiDoc HTML、OpenAPI 3.1、JSON Schema、llms.txtへ接続し、実装から読めるドキュメントを生成できます。",
   },
+  {
+    title: "1ファイルのデプロイ",
+    text: "事前にコンパイルしてPharにパックし、読み取り専用で起動します。デプロイは1ファイルのコピーで、同じファイルがサーバーでもコンテナでも、Wasmでブラウザの中でも動きます。",
+  },
 ];
 
 const valueSignals = [
