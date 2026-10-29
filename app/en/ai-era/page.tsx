@@ -366,6 +366,49 @@ export default function AiEraPage() {
         </div>
       </section>
 
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#245c7a]">
+              Semantic log
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Behavior, too, is readable to AI.
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-[#36434c]">
+              If code and contracts are what an application declares, the semantic log is what actually happened. The resources one request called, and the cache decision at each of them, remain as a single typed tree.
+            </p>
+            <p className="mt-5 text-lg leading-8 text-[#36434c]">
+              AI agents read this tree, check it against the declared intent, and when they disagree, tell whether the app or the library is at fault. Once a change is delegated, checking its result can be delegated too.
+            </p>
+            <a
+              className="mt-4 inline-flex text-sm font-semibold text-[#245c7a] underline"
+              href="/en/tech"
+            >
+              See what the tree looks like →
+            </a>
+          </div>
+          <ol className="grid grid-cols-1 gap-3">
+              <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
+                <span className="font-mono text-sm font-bold text-[#245c7a]">01</span>
+                <span className="leading-7 text-[#36434c]">Ask the agent to read the cache log</span>
+              </li>
+              <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
+                <span className="font-mono text-sm font-bold text-[#245c7a]">02</span>
+                <span className="leading-7 text-[#36434c]">The agent sets up an observation context and proves the wiring</span>
+              </li>
+              <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
+                <span className="font-mono text-sm font-bold text-[#245c7a]">03</span>
+                <span className="leading-7 text-[#36434c]">It runs one request and reads the tree</span>
+              </li>
+              <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
+                <span className="font-mono text-sm font-bold text-[#245c7a]">04</span>
+                <span className="leading-7 text-[#36434c]">It checks the tree against the declared intent, and tells app from library</span>
+              </li>
+          </ol>
+        </div>
+      </section>
+
       <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>

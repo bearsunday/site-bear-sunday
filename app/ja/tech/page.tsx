@@ -428,6 +428,44 @@ export default function TechPage() {
         </div>
       </section>
 
+      <section className="border-y border-black/10 bg-[#f4f7f3] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Semantic log
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              キャッシュが何をしたか、木で読める。
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              1リクエストで、どのリソースが呼ばれ、それぞれでキャッシュが何を判断したか。hit/miss、保存、無効化、CDNに渡したタグまでが、型付きでスキーマ検証可能な1本の木として記録されます。
+            </p>
+            <p className="mt-5 text-lg leading-8 text-[#3b463d]">
+              黙って正しく動くはずのキャッシュを、ログを読むだけで確かめられるものにします。この木は、コメントだけを無効化したあとのページへの再アクセスです。ページは保存済みのテンプレートから作り直され、再実行されたのはコメントだけでした。
+            </p>
+          </div>
+          <div className="min-w-0 rounded-lg border border-black/10 bg-white p-6 shadow-[0_18px_60px_rgba(17,22,17,0.08)]">
+            <p className="font-mono text-xs uppercase text-[#667068]">
+              comment invalidated, page requested again
+            </p>
+            <pre className="mt-4 overflow-x-auto rounded-md bg-[#101820] p-5 font-mono text-xs leading-7 text-[#d9f7e7] sm:text-sm">
+              <code>{`get uri=page://self/html/blog-posting
+├── cache_hit layer=donut
+├── refresh_donut uri=page://self/html/blog-posting
+├── get uri=page://self/html/comment
+│   ├── cache_policy uri=page://self/html/comment expiry=never resolvedTtl=31536000
+│   ├── save_etag uri=page://self/html/comment etag="1889150619" tags=[comment01, _html_comment_]
+│   └── save_value uri=page://self/html/comment saved=true
+├── cdn_headers uri=page://self/html/blog-posting surrogateKeys=[blog-posting-page, _html_blog-posting_ …]
+└── save_donut_view uri=page://self/html/blog-posting saved=true`}</code>
+            </pre>
+            <p className="mt-4 text-sm leading-6 text-[#667068]">
+              vendor/bin/stree の出力から抜粋。値は実際のデモの出力です。
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
