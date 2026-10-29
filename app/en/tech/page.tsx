@@ -442,7 +442,7 @@ export default function TechPage() {
               Read what the cache did, as a tree.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              Which resources one request called, and what the cache decided at each of them: hit or miss, save, invalidation, and the tags handed to the CDN are recorded as a single typed, schema-validated tree.
+              Which resources a request called, and what the cache decided at each of them (hit or miss, save, invalidation, the tags handed to the CDN), can be recorded as one typed, schema-validated tree.
             </p>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               Caching that is supposed to work silently becomes something you can confirm by reading the log. This tree is a page requested again after only its comment was invalidated: the page was rebuilt from its stored template, and only the comment ran again.
@@ -457,14 +457,15 @@ export default function TechPage() {
 ├── cache_hit layer=donut
 ├── refresh_donut uri=page://self/html/blog-posting
 ├── get uri=page://self/html/comment
-│   ├── cache_policy uri=page://self/html/comment expiry=never resolvedTtl=31536000
 │   ├── save_etag uri=page://self/html/comment etag="1889150619" tags=[comment01, _html_comment_]
-│   └── save_value uri=page://self/html/comment saved=true
+│   ├── save_value uri=page://self/html/comment saved=true
+│   └── close cache_miss layer=resource
 ├── cdn_headers uri=page://self/html/blog-posting surrogateKeys=[blog-posting-page, _html_blog-posting_ …]
-└── save_donut_view uri=page://self/html/blog-posting saved=true`}</code>
+├── save_donut_view uri=page://self/html/blog-posting saved=true
+└── close cache_hit layer=donut-view`}</code>
             </pre>
             <p className="mt-4 text-sm leading-6 text-[#667068]">
-              Excerpt from vendor/bin/stree output. The values come from the actual demo run.
+              A summary of vendor/bin/stree output. The values come from the actual demo run.
             </p>
           </div>
         </div>

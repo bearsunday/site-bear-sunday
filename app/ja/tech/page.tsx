@@ -438,7 +438,7 @@ export default function TechPage() {
               キャッシュが何をしたか、木で読める。
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              1リクエストで、どのリソースが呼ばれ、それぞれでキャッシュが何を判断したか。hit/miss、保存、無効化、CDNに渡したタグまでが、型付きでスキーマ検証可能な1本の木として記録されます。
+              1リクエストで、どのリソースが呼ばれ、それぞれでキャッシュが何を判断したか。hit/miss、保存、無効化、CDNに渡したタグまでが、型付きでスキーマ検証可能な1本の木として記録できます。
             </p>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               黙って正しく動くはずのキャッシュを、ログを読むだけで確かめられるものにします。この木は、コメントだけを無効化したあとのページへの再アクセスです。ページは保存済みのテンプレートから作り直され、再実行されたのはコメントだけでした。
@@ -453,14 +453,15 @@ export default function TechPage() {
 ├── cache_hit layer=donut
 ├── refresh_donut uri=page://self/html/blog-posting
 ├── get uri=page://self/html/comment
-│   ├── cache_policy uri=page://self/html/comment expiry=never resolvedTtl=31536000
 │   ├── save_etag uri=page://self/html/comment etag="1889150619" tags=[comment01, _html_comment_]
-│   └── save_value uri=page://self/html/comment saved=true
+│   ├── save_value uri=page://self/html/comment saved=true
+│   └── close cache_miss layer=resource
 ├── cdn_headers uri=page://self/html/blog-posting surrogateKeys=[blog-posting-page, _html_blog-posting_ …]
-└── save_donut_view uri=page://self/html/blog-posting saved=true`}</code>
+├── save_donut_view uri=page://self/html/blog-posting saved=true
+└── close cache_hit layer=donut-view`}</code>
             </pre>
             <p className="mt-4 text-sm leading-6 text-[#667068]">
-              vendor/bin/stree の出力から抜粋。値は実際のデモの出力です。
+              vendor/bin/stree の出力を要約したもの。値は実際のデモの出力です。
             </p>
           </div>
         </div>

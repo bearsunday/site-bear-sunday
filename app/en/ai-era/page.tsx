@@ -395,7 +395,7 @@ export default function AiEraPage() {
               </li>
               <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
                 <span className="font-mono text-sm font-bold text-[#245c7a]">02</span>
-                <span className="leading-7 text-[#36434c]">The agent sets up an observation context and proves the wiring</span>
+                <span className="leading-7 text-[#36434c]">The agent sets up an observation context if it is missing, and proves the wiring</span>
               </li>
               <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
                 <span className="font-mono text-sm font-bold text-[#245c7a]">03</span>
