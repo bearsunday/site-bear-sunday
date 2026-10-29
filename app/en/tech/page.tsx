@@ -432,6 +432,44 @@ export default function TechPage() {
         </div>
       </section>
 
+      <section className="border-y border-black/10 bg-[#f4f7f3] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#1f7a5a]">
+              Semantic log
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Read what the cache did, as a tree.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-[#3b463d]">
+              Which resources one request called, and what the cache decided at each of them: hit or miss, save, invalidation, and the tags handed to the CDN are recorded as a single typed, schema-validated tree.
+            </p>
+            <p className="mt-5 text-lg leading-8 text-[#3b463d]">
+              Caching that is supposed to work silently becomes something you can confirm by reading the log. This tree is a page requested again after only its comment was invalidated: the page was rebuilt from its stored template, and only the comment ran again.
+            </p>
+          </div>
+          <div className="min-w-0 rounded-lg border border-black/10 bg-white p-6 shadow-[0_18px_60px_rgba(17,22,17,0.08)]">
+            <p className="font-mono text-xs uppercase text-[#667068]">
+              comment invalidated, page requested again
+            </p>
+            <pre className="mt-4 overflow-x-auto rounded-md bg-[#101820] p-5 font-mono text-xs leading-7 text-[#d9f7e7] sm:text-sm">
+              <code>{`get uri=page://self/html/blog-posting
+├── cache_hit layer=donut
+├── refresh_donut uri=page://self/html/blog-posting
+├── get uri=page://self/html/comment
+│   ├── cache_policy uri=page://self/html/comment expiry=never resolvedTtl=31536000
+│   ├── save_etag uri=page://self/html/comment etag="1889150619" tags=[comment01, _html_comment_]
+│   └── save_value uri=page://self/html/comment saved=true
+├── cdn_headers uri=page://self/html/blog-posting surrogateKeys=[blog-posting-page, _html_blog-posting_ …]
+└── save_donut_view uri=page://self/html/blog-posting saved=true`}</code>
+            </pre>
+            <p className="mt-4 text-sm leading-6 text-[#667068]">
+              Excerpt from vendor/bin/stree output. The values come from the actual demo run.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">

@@ -362,6 +362,49 @@ export default function AiEraPage() {
         </div>
       </section>
 
+      <section className="border-y border-black/10 bg-[#e8eef4] px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[#245c7a]">
+              Semantic log
+            </p>
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              振る舞いも、AIに読める。
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-[#36434c]">
+              コードと契約が宣言なら、セマンティックログは実際に起きたことです。1リクエストで呼ばれたリソースと、それぞれでのキャッシュの判断が、型付きの1本の木として残ります。
+            </p>
+            <p className="mt-5 text-lg leading-8 text-[#36434c]">
+              AIエージェントはこの木を読み、宣言した意図と照合し、食い違えばアプリとライブラリのどちらの問題かを切り分けます。変更を任せたあと、その結果の確認まで任せられます。
+            </p>
+            <a
+              className="mt-4 inline-flex text-sm font-semibold text-[#245c7a] underline"
+              href="/ja/tech"
+            >
+              どんな木が出るかを見る →
+            </a>
+          </div>
+          <ol className="grid grid-cols-1 gap-3">
+              <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
+                <span className="font-mono text-sm font-bold text-[#245c7a]">01</span>
+                <span className="leading-7 text-[#36434c]">「キャッシュログを見て」と頼む</span>
+              </li>
+              <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
+                <span className="font-mono text-sm font-bold text-[#245c7a]">02</span>
+                <span className="leading-7 text-[#36434c]">エージェントが観測用の文脈を設置し、配線を確かめる</span>
+              </li>
+              <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
+                <span className="font-mono text-sm font-bold text-[#245c7a]">03</span>
+                <span className="leading-7 text-[#36434c]">リクエストを1本流し、木を読む</span>
+              </li>
+              <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
+                <span className="font-mono text-sm font-bold text-[#245c7a]">04</span>
+                <span className="leading-7 text-[#36434c]">宣言した意図と照合し、アプリかライブラリかを切り分ける</span>
+              </li>
+          </ol>
+        </div>
+      </section>
+
       <section className="bg-white px-5 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
