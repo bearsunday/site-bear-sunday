@@ -439,33 +439,33 @@ export default function TechPage() {
               Semantic log
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Read what the cache did, as a tree.
+              Read how a request ran, as a tree.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              Which resources a request called, and what the cache decided at each of them (hit or miss, save, invalidation, the tags handed to the CDN), can be recorded as one typed, schema-validated tree.
+              Which resources a request called, in what order, and what was decided at each of them: from the nested resource requests to cache hit or miss, save, invalidation, and the tags handed to the CDN, it can all be recorded as one tree. The meaning of every node is defined by a JSON Schema, so neither a person nor an AI has to guess what an entry means. An agent learns not only the code and its output, but how that output came about.
             </p>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
-              Caching that is supposed to work silently becomes something you can confirm by reading the log. This tree is a page requested again after only its comment was invalidated: the page was rebuilt from its stored template, and only the comment ran again.
+              For example, caching that is supposed to work silently becomes something you can confirm by reading the log. This tree is the first request to a page: the page cache missed and stored the result, and inside it the app resource app://self/orders was called.
             </p>
           </div>
           <div className="min-w-0 rounded-lg border border-black/10 bg-white p-6 shadow-[0_18px_60px_rgba(17,22,17,0.08)]">
             <p className="font-mono text-xs uppercase text-[#667068]">
-              comment invalidated, page requested again
+              first request to a page
             </p>
-            <pre className="mt-4 overflow-x-auto rounded-md bg-[#101820] p-5 font-mono text-xs leading-7 text-[#d9f7e7] sm:text-sm">
-              <code>{`get uri=page://self/html/blog-posting
-├── cache_hit layer=donut
-├── refresh_donut uri=page://self/html/blog-posting
-├── get uri=page://self/html/comment
-│   ├── save_etag uri=page://self/html/comment etag="1889150619" tags=[comment01, _html_comment_]
-│   ├── save_value uri=page://self/html/comment saved=true
-│   └── close cache_miss layer=resource
-├── cdn_headers uri=page://self/html/blog-posting surrogateKeys=[blog-posting-page, _html_blog-posting_ …]
-├── save_donut_view uri=page://self/html/blog-posting saved=true
-└── close cache_hit layer=donut-view`}</code>
+            <pre className="mt-4 overflow-x-auto rounded-md bg-[#101820] p-5 font-mono text-xs leading-[1.2] text-[#d9f7e7] sm:text-sm">
+              <code>{`resource_request uri=page://self/orders method=GET params=[order_id]
+├── get uri=page://self/orders?order_id=O-1
+│   ├── save_etag uri=page://self/orders?order_id=O-1 etag="3620929378" tags=[_orders_order_id=O-1]
+│   ├── save_value uri=page://self/orders?order_id=O-1 saved=true
+│   ├── resource_request uri=app://self/orders method=GET params=[orderId]
+│   │   ├── get uri=app://self/orders?orderId=O-1
+│   │   │   └── cache_miss layer=resource
+│   │   └── resource_response code=200
+│   └── cache_miss layer=resource
+└── resource_response code=200`}</code>
             </pre>
             <p className="mt-4 text-sm leading-6 text-[#667068]">
-              A summary of vendor/bin/stree output. The values come from the actual demo run.
+              A summary of vendor/bin/stree output. The values come from an actual run.
             </p>
           </div>
         </div>
