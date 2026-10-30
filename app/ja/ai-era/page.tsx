@@ -372,10 +372,10 @@ export default function AiEraPage() {
               振る舞いも、AIに読める。
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#36434c]">
-              コードと契約が宣言なら、セマンティックログは実際に起きたことです。1リクエストで呼ばれたリソースと、それぞれでのキャッシュの判断が、型付きの1本の木として残ります。
+              コードと契約が宣言なら、セマンティックログは実際に起きたことです。1リクエストで呼ばれたリソースの入れ子と、それぞれでキャッシュが下した判断が、型付きの1本の木として残ります。
             </p>
             <p className="mt-5 text-lg leading-8 text-[#36434c]">
-              AIエージェントはこの木を読み、宣言した意図と照合し、食い違えばアプリとライブラリのどちらの問題かを切り分けます。変更を任せたあと、その結果の確認まで任せられます。
+              AIエージェントはこの木を読み、コードが宣言した意図と照合し、食い違えばアプリとライブラリのどちらの問題かを切り分けます。変更を任せたあと、その結果の確認まで任せられます。
             </p>
             <a
               className="mt-4 inline-flex text-sm font-semibold text-[#245c7a] underline"
@@ -391,7 +391,7 @@ export default function AiEraPage() {
               </li>
               <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
                 <span className="font-mono text-sm font-bold text-[#245c7a]">02</span>
-                <span className="leading-7 text-[#36434c]">エージェントが必要なら観測用の文脈を設置し、配線を確かめる</span>
+                <span className="leading-7 text-[#36434c]">必要ならエージェントが観測用の文脈を設置し、配線を確かめる</span>
               </li>
               <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
                 <span className="font-mono text-sm font-bold text-[#245c7a]">03</span>
@@ -399,7 +399,7 @@ export default function AiEraPage() {
               </li>
               <li className="flex gap-4 rounded-lg border border-black/10 bg-white p-5">
                 <span className="font-mono text-sm font-bold text-[#245c7a]">04</span>
-                <span className="leading-7 text-[#36434c]">宣言した意図と照合し、アプリかライブラリかを切り分ける</span>
+                <span className="leading-7 text-[#36434c]">コードの意図と照合し、アプリかライブラリかを切り分ける</span>
               </li>
           </ol>
         </div>
