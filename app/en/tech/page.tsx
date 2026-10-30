@@ -442,7 +442,7 @@ export default function TechPage() {
               Read how a request ran, as a tree.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              Which resources a request called, in what order, and what was decided at each of them: from the nested resource requests to cache hit or miss, save, invalidation, and the tags handed to the CDN, it can all be recorded as one tree. The meaning of every node is defined by a JSON Schema, so neither a person nor an AI has to guess what an entry means.
+              Which resources a request called, in what order, and what was decided at each of them: from the nested resource requests to cache hit or miss, save, invalidation, and the tags handed to the CDN, it can all be recorded as one tree. The meaning of every node is defined by a JSON Schema, so neither a person nor an AI has to guess what an entry means. An agent learns not only the code and its output, but how that output came about.
             </p>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
               For example, caching that is supposed to work silently becomes something you can confirm by reading the log. This tree is a page requested again after only its comment was invalidated: the page was rebuilt from its stored template, and only the comment ran again.
