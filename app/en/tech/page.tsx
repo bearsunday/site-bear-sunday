@@ -439,13 +439,13 @@ export default function TechPage() {
               Semantic log
             </p>
             <h2 className="mt-4 text-4xl font-black sm:text-5xl">
-              Read what the cache did, as a tree.
+              Read how a request ran, as a tree.
             </h2>
             <p className="mt-6 text-lg leading-8 text-[#3b463d]">
-              Which resources a request called, and what the cache decided at each of them (hit or miss, save, invalidation, the tags handed to the CDN), can be recorded as one typed, schema-validated tree.
+              Which resources a request called, in what order, and what was decided at each of them: from the nested resource requests to cache hit or miss, save, invalidation, and the tags handed to the CDN, it can all be recorded as one tree. The meaning of every node is defined by a JSON Schema, so neither a person nor an AI has to guess what an entry means.
             </p>
             <p className="mt-5 text-lg leading-8 text-[#3b463d]">
-              Caching that is supposed to work silently becomes something you can confirm by reading the log. This tree is a page requested again after only its comment was invalidated: the page was rebuilt from its stored template, and only the comment ran again.
+              For example, caching that is supposed to work silently becomes something you can confirm by reading the log. This tree is a page requested again after only its comment was invalidated: the page was rebuilt from its stored template, and only the comment ran again.
             </p>
           </div>
           <div className="min-w-0 rounded-lg border border-black/10 bg-white p-6 shadow-[0_18px_60px_rgba(17,22,17,0.08)]">
