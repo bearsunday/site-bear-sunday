@@ -452,7 +452,7 @@ export default function TechPage() {
             <p className="font-mono text-xs uppercase text-[#667068]">
               comment invalidated, page requested again
             </p>
-            <pre className="mt-4 overflow-x-auto rounded-md bg-[#101820] p-5 font-mono text-xs leading-7 text-[#d9f7e7] sm:text-sm">
+            <pre className="mt-4 overflow-x-auto rounded-md bg-[#101820] p-5 font-mono text-xs leading-[1.2] text-[#d9f7e7] sm:text-sm">
               <code>{`get uri=page://self/html/blog-posting
 ├── cache_hit layer=donut
 ├── refresh_donut uri=page://self/html/blog-posting
